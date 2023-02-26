@@ -10,8 +10,9 @@ function Nav() {
   return (
     <div className="nav">
       <Link to="/home">
-        <h2 className="nav-title">Prime Solo Project</h2>
+        <h2 className="nav-title">THE RUNDOWN</h2>
       </Link>
+      <h4 className="subtitle">Artist's Paint Inventory</h4>
       <div>
         {/* If no user is logged in, show these links */}
         {!user.id && (
