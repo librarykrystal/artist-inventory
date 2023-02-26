@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import { useDispatch, useSelector } from 'react-redux';
 import {useHistory} from 'react-router-dom';
+import './UserHome.css';
 
   // this component will show MAIN INVENTORY LIST
 
@@ -17,16 +18,31 @@ function UserHome() {
   }, []);
 
 
-
   return (
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
-      <p>This is where your inventory list will be!</p>
+      <p>This is your inventory!</p>
 
-      <p>DATA TEST: {JSON.stringify(inventory)}</p>
+      {inventory.length > 0 &&
+        <>
+          {inventory.map(item => {
+              return(
+                <div className="listItemContainer" key={item.id}>
+                  <h3 className="listItemName">{item.name}</h3>
+                  <p className="listItemDetails">{item.brand}</p>
+                  <p className="listItemDetails">{item.medium}</p>
+                  {item.favorite == true &&
+                    <p>♥</p>
+                  }
+                </div>
+              );
+          })}
+        </>
+      }
 
 
+    <p>DATA TEST: {JSON.stringify(inventory)}</p>
       {/* <LogOutButton className="btn" /> */}
     </div>
   );
