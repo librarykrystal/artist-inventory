@@ -3,7 +3,7 @@ const rejectUnauthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
     // They were authenticated! User may do the next thing
     // Note! They may not be Authorized to do all things
-    next();
+    next();   // available to us, says "do the next thing" kind of like a return
   } else {
     // failure best handled on the server. do redirect here.
     res.sendStatus(403);
