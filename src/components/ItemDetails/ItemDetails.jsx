@@ -23,17 +23,31 @@ function ItemDetails() {
     });
 }, []);
 
+const goBack = (event) => {
+  event.preventDefault();
+  // clearing out item reducer:
+  dispatch({ 
+      type: 'CLEAR_ITEM'
+  });
+  history.push("/");
+}
+
 
   return (
     <div className="container">
+      { item &&
+      <>
       <h2>Welcome, {user.username}!</h2>
       <p>Item ID is: {id}</p>
-      <p>This is where the details will be!</p>
+      <p>This is where the details live!</p>
 
       <p>DATA TEST: {JSON.stringify(item)}</p>
+      </>
+}
 
       {/* <LogOutButton className="btn" /> */}
-      <Link to={`/`}>HOME</Link>
+      {/* <Link to={`/`}>HOME</Link> */}
+      <button onClick={goBack}>HOME</button>
     </div>
   );
 }
