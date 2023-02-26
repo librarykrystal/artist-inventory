@@ -24,8 +24,19 @@ router.get('/', (req, res) => {
 
 // GET (DETAILS of ONE by ID)
 router.get('/:id', (req, res) => {
-    // GET route code here
-})
+    console.log('Get ITEM by ID req.params.id:', req.params.id);
+    let id = req.params.id;
+    const queryText = `SELECT * FROM inventory WHERE id = $1;`;
+    pool.query(queryText, [id])
+    .then((result) => {
+        console.log('GET ITEM by ID RESULTS:', result);
+        res.send(result.rows);
+    })
+    .catch((error) => {
+        console.log('Get ITEM by ID ERROR:', error);
+        res.sendStatus(500);
+    })
+  });
 
 // POST
 router.post('/', (req, res) => {
