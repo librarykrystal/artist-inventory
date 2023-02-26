@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import { useDispatch, useSelector } from 'react-redux';
 import {useHistory} from 'react-router-dom';
@@ -10,6 +10,7 @@ function UserHome() {
 
   const user = useSelector((store) => store.user);
   const inventory = useSelector(store => store.inventory);
+  const history = useHistory();
   const dispatch = useDispatch();
   // const history = useHistory();
 
@@ -17,6 +18,15 @@ function UserHome() {
     dispatch({ type: 'FETCH_USER_INVENTORY' });
   }, []);
 
+  const goToDetails = (itemId) => {
+    console.log('goToDetails CLICKED, ID:', itemId);
+    // set reducer to this movie's ID (dispatch)
+    dispatch({
+        type: 'SET_ITEM_ID',
+        payload: itemId
+      });
+    history.push(`/details/${itemId}`);
+}
 
   return (
     <div className="container">
@@ -28,7 +38,7 @@ function UserHome() {
         <>
           {inventory.map(item => {
               return(
-                <div className="listItemContainer" key={item.id}>
+                <div className="listItemContainer" key={item.id} onClick={() => goToDetails(item.id)}>
                   <h3 className="listItemName">{item.name}</h3>
                   <p className="listItemDetails">{item.brand}</p>
                   <p className="listItemDetails">{item.medium}</p>
