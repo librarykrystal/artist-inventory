@@ -11,7 +11,11 @@ function UserHome() {
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
       <p>This is where your inventory list will be!</p>
-      <LogOutButton className="btn" />
+
+
+
+
+      {/* <LogOutButton className="btn" /> */}
     </div>
   );
 }
