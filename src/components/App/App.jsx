@@ -20,6 +20,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import ItemDetailsPage from '../ItemDetails/ItemDetails';
+import AddPage from '../AddPage/AddPage';
 
 import './App.css';
 
@@ -67,6 +68,14 @@ function App() {
             path="/details/:id"
           >
             <ItemDetailsPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows AddPage else shows LoginPage
+            exact
+            path="/add"
+          >
+            <AddPage />
           </ProtectedRoute>
 
           <ProtectedRoute
