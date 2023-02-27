@@ -11,7 +11,7 @@ function* fetchIt(action) {
     try {
         const item = yield axios.get(`/api/inventory/${action.payload}`);
         console.log('get item result:', item.data);
-        yield put({ type: 'SET_ITEM', payload: item.data });
+        yield put({ type: 'SET_ITEM', payload: item.data[0] });
     } catch (error) {
       console.log('ERROR GETTING ITEM:', error);
     //   yield put({ type: 'NO_INVENTORY' });

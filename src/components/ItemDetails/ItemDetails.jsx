@@ -37,9 +37,31 @@ const goBack = (event) => {
     <div className="container">
       { item &&
       <>
-      <h2>Welcome, {user.username}!</h2>
-      <p>Item ID is: {id}</p>
-      <p>This is where the details live!</p>
+      {/* <p>Welcome, {user.username}!</p>
+      <p>Item ID is: {id}</p> */}
+      {/* <p>This is where the details live!</p> */}
+
+      <h2>{item.name}</h2>
+      <p>{item.body} {item.medium}</p>
+
+      {/* <p style={{ backgroundColor:`${item.colorhex}` }}>COLOR</p> */}
+      <div 
+        style={{ 
+          backgroundImage: `linear-gradient(to bottom right, ${item.colorhex}, black)`,
+          border: `2px solid black`,
+          height: `80px`,
+          width: `80px`
+        }}>
+      </div>
+
+      <p>{item.brand}</p>
+      <p>{item.size} {item.container}</p>
+      <p>FAMILY: {item.family}</p>
+      <p>NOTES: {item.notes}</p>
+
+      {item.favorite == true &&
+        <p>♥</p>
+      }
 
       <p>DATA TEST: {JSON.stringify(item)}</p>
       </>
