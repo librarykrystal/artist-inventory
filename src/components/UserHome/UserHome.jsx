@@ -28,10 +28,16 @@ function UserHome() {
     history.push(`/details/${itemId}`);
 }
 
+  const goAdd = () => {
+    console.log('goAdd CLICKED');
+    history.push('/add');
+  }
+
   return (
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
+      <button onClick={goAdd}>ADD NEW ITEM</button>
       <p>This is your inventory!</p>
 
       {inventory.length > 0 &&

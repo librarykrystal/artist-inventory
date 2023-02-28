@@ -45,9 +45,11 @@ const goBack = (event) => {
       <p>{item.body} {item.medium}</p>
 
       {/* <p style={{ backgroundColor:`${item.colorhex}` }}>COLOR</p> */}
+
+      {/* ADD A CONDITIONAL RENDER so color box doesn't show for mediums, varnishes */}
       <div 
         style={{ 
-          backgroundImage: `linear-gradient(to bottom right, ${item.colorhex}, black)`,
+          backgroundImage: `linear-gradient(to bottom right, ${item.hex}, black)`,
           border: `2px solid black`,
           height: `80px`,
           width: `80px`
