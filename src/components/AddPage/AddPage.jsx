@@ -42,7 +42,8 @@ function Add() {
         type: 'ADD_ITEM',
         payload: {type, user, name, hex, medium, brand, body, container, size, notes, favorite}
     });
-    history.push("/");   // should this go home or to newly added item's page?
+    history.push("/");
+    // should this go home or to newly added item's page?
   }
 
   // Going back home without submitting anything
