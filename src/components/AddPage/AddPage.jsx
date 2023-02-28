@@ -5,11 +5,10 @@ import { useParams, Link } from 'react-router-dom';
 
 function Add() {
 
-  // get current user's ID to send into database?  If so, add to dispatch.
+  // if any drop-down options are in database later, grab from store here
+  // get current user's ID to send in dispatch:
+  const user = useSelector((store) => store.user.id);
 
-  // should initial states be set to top options in drop-downs?
-
-  // const [userId, setUserId] = useState('');   // only if not done directly in router
   const [type, setType] = useState('');
   const [name, setName] = useState('');
   const [hex, setHex] = useState('');
@@ -22,42 +21,36 @@ function Add() {
   const [notes, setNotes] = useState('');
   const [favorite, setFavorite] = useState(false);
 
-  // if any drop-down options are in database, get from store here
-
   const dispatch = useDispatch();
   const history = useHistory();
 
   useEffect(() => {
-    // dispatch any fetches for drop-down options
+    // dispatch any fetches for drop-down options held in database
   }, []);
 
-  console.log('SELECTIONS...', [
-    "type:", type,
-    "name:", name,
-    // "family:", family,
-    "medium:", medium,
-    "brand:", brand,
-    "body:", body,
-    "container:", container,
-    "size:", size,
-    "favorite", favorite,
-    "notes:", notes]);
+  console.log('SELECTIONS...', ["type:", type, "name:", name, "medium:", medium, "hex:", hex, "brand:", brand, "body:", body, "container:", container, "size:", size, "favorite", favorite, "notes:", notes]);
 
-    const handleCheckboxFave = () => {
-      setFavorite(!favorite);
-    };
+  // Toggle for favoriting checkbox:
+  const handleCheckboxFave = () => {
+    setFavorite(!favorite);
+  };
 
+  // onSubmit
   const submitForm = (e) => {
     e.preventDefault();
-    // dispatch({ 
-    //     type: 'ADD_ITEM',
-    //     payload: {type, name, hex, medium, brand, body, container, size, notes, favorite}
-    // });
+    dispatch({ 
+        type: 'ADD_ITEM',
+        payload: {type, user, name, hex, medium, brand, body, container, size, notes, favorite}
+    });
     history.push("/");   // should this go home or to newly added item's page?
   }
 
+  // Going back home without submitting anything
   const goBack = (event) => {
     event.preventDefault();
+  //   dispatch({ 
+  //     type: 'CLEAR_ADD_INPUTS'
+  // });
     history.push("/");
   }
 
@@ -68,11 +61,11 @@ function Add() {
 
       <div className="addForm">
         <form onSubmit={submitForm}>
+
           <p>Type: 
             <select
               defaultValue="Choose"
               onChange={(e) => setType(e.target.value)}>
-                  {/* <option disabled selected >Choose</option>    // First workaround */}
                   <option disabled >Choose</option>
                   {/* <option value="Additive">Additive</option> */}
                   <option value="Color">Color</option>
@@ -81,8 +74,6 @@ function Add() {
                   <option value="Varnish">Varnish</option>
             </select>
           </p>
-
-          <p>Name: <input value={name} onChange={(e) => setName(e.target.value)} /></p>
 
           { type == 'Color' &&
             <>
@@ -99,7 +90,8 @@ function Add() {
                 </select>
               </p>
 
-              <p>COLOR PICKER GOES HERE</p>
+              <p>Color: 
+              <input type="color" defaultValue="#ffffff" onChange={(e) => setHex(e.target.value)}></input></p>
 
               {/* <p>Family: 
                 <select
@@ -121,6 +113,8 @@ function Add() {
               </p> */}
             </>
           }
+
+          <p>Name: <input value={name} onChange={(e) => setName(e.target.value)} /></p>
 
           <p>Body: 
             <select
@@ -182,7 +176,6 @@ function Add() {
           <p>Favorite?
             <input
               type="checkbox"
-              // checked={favorite}
               onChange={handleCheckboxFave}
             ></input></p>
 
