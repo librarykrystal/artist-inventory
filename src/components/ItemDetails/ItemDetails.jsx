@@ -6,43 +6,61 @@ import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from "react";
 
 
-  // this component will show INDIVIDUAL LIST ITEM DETAILS
-
 function ItemDetails() {
 
-  const user = useSelector((store) => store.user);
+  // const user = useSelector((store) => store.user);
   const item = useSelector((store) => store.item);
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
+  // const [favorite, setFavorite] = useState(false);
 
   useEffect(() => {
     dispatch({ 
         type: 'FETCH_ITEM',
         payload: id
     });
-}, []);
+  }, []);
 
-const deleteMe = (event) => {
-  event.preventDefault();
-  dispatch({ 
-    type: 'DELETE_ITEM',
-    payload: id
+  const faveIt = () => {
+    dispatch({ 
+      type: 'FAVE_IT',
+      payload: {id, favorite: true}
+    });
+    dispatch({ 
+      type: 'FETCH_ITEM',
+      payload: id
   });
-  // dispatch({ 
-  //   type: 'CLEAR_ITEM'
-  // });
-  // history.push("/");
-}
+  }
 
-const goBack = (event) => {
-  event.preventDefault();
-  // clearing out item reducer:
-  dispatch({ 
-      type: 'CLEAR_ITEM'
+  const unfaveIt = () => {
+    dispatch({ 
+      type: 'UNFAVE_IT',
+      payload: {id, favorite: false}
+    });
+    dispatch({ 
+      type: 'FETCH_ITEM',
+      payload: id
   });
-  history.push("/");
-}
+  }
+
+  const deleteMe = (event) => {
+    event.preventDefault();
+    dispatch({ 
+      type: 'DELETE_ITEM',
+      payload: id
+    });
+    history.push("/");
+  }
+
+  const goBack = (event) => {
+    event.preventDefault();
+    // clearing out item reducer:
+    dispatch({ 
+        type: 'CLEAR_ITEM'
+    });
+    history.push("/");
+  }
 
 
   return (
@@ -56,8 +74,6 @@ const goBack = (event) => {
       <h2>{item.name}</h2>
       <p>{item.body} {item.medium}</p>
 
-      {/* <p style={{ backgroundColor:`${item.colorhex}` }}>COLOR</p> */}
-
       {/* ADD A CONDITIONAL RENDER so color box doesn't show for mediums, varnishes */}
       <div 
         style={{ 
@@ -70,12 +86,27 @@ const goBack = (event) => {
 
       <p>{item.brand}</p>
       <p>{item.size} {item.container}</p>
-      <p>FAMILY: {item.family}</p>
+      {/* <p>FAMILY: {item.family}</p> */}
       <p>NOTES: {item.notes}</p>
 
-      {item.favorite == true &&
-        <p>♥</p>
+
+
+      {/* START LIKE KERFUFFLE */}
+
+      { item.favorite == true && <p>♥</p> }
+      { item.favorite == false && <p>♡</p> }
+
+      { item.favorite == true &&
+        <button onClick={unfaveIt}>UNFAVORITE ♡</button>
       }
+
+      { item.favorite == false &&
+        <button onClick={faveIt}>FAVORITE ♥</button>
+      }
+
+      {/* END LIKE KERFUFFLE */}
+
+
 
       <p>DATA TEST: {JSON.stringify(item)}</p>
       </>

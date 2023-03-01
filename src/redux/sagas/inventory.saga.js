@@ -7,6 +7,8 @@ function* inventorySaga() {
     yield takeEvery('FETCH_ITEM', fetchIt);
     yield takeEvery('ADD_ITEM', addIt);
     yield takeEvery('DELETE_ITEM', deleteIt);
+    yield takeEvery('FAVE_IT', faveHandler);
+    yield takeEvery('UNFAVE_IT', faveHandler);
   }
 
 // WORKER SAGA for GET ALL
@@ -53,6 +55,19 @@ function* deleteIt(action) {
   }
 }
 
-// TO DO - put saga for favorite updating
+// WORKER SAGA for PUT FAVE/UNFAVE
+function* faveHandler(action) {
+  try {
+    if(action.type === 'FAVE_IT'){
+      console.log('faveHandler SAGA: FAVE IT payload:', action.payload);
+      yield axios.put(`/api/inventory`, action.payload);
+    } else if (action.type === 'UNFAVE_IT'){
+      console.log('faveHandler SAGA: UNFAVE IT payload:', action.payload);
+      yield axios.put(`/api/inventory`, action.payload);
+    }
+  } catch (error) {
+    console.log('ERROR PUTTING ITEM:', error);
+  }
+}
   
 export default inventorySaga;
