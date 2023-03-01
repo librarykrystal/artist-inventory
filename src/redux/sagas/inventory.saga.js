@@ -1,13 +1,15 @@
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
 
-// watcher Saga
-function* fetchInventorySaga() {
+// WATCHER SAGA
+function* inventorySaga() {
     yield takeEvery('FETCH_USER_INVENTORY', fetchEm);
+    yield takeEvery('FETCH_ITEM', fetchIt);
     yield takeEvery('ADD_ITEM', addIt);
+    yield takeEvery('DELETE_ITEM', deleteIt);
   }
 
-// worker Saga: will be fired on "FETCH INVENTORY" actions
+// WORKER SAGA for GET ALL
 function* fetchEm(action) {
     try {
       const inventory = yield axios.get('/api/inventory');
@@ -19,15 +21,38 @@ function* fetchEm(action) {
     }
   }
 
-  function* addIt(action) {
-    // code to kick off axios post for adding an item
-    console.log('POST action:', action.payload);
-    try {
-      const newItem = yield axios.post('/api/inventory', action.payload);
-      console.log('POST SAGA SUCCESS:', newItem.data);
-    } catch (error) {
-    console.log('ERROR ADDING ITEM:', error);
+// WORKER SAGA for GET ITEM
+function* fetchIt(action) {
+  try {
+      const item = yield axios.get(`/api/inventory/${action.payload}`);
+      console.log('get item result:', item.data);
+      yield put({ type: 'SET_ITEM', payload: item.data[0] });
+  } catch (error) {
+    console.log('ERROR GETTING ITEM:', error);
   }
+}
+
+// WORKER SAGA for ADD ITEM
+function* addIt(action) {
+  console.log('POST action:', action.payload);
+  try {
+    const newItem = yield axios.post('/api/inventory', action.payload);
+    console.log('POST SAGA SUCCESS:', newItem.data);
+  } catch (error) {
+  console.log('ERROR ADDING ITEM:', error);
+}
+}
+
+// WORKER SAGA for DELETE ITEM
+function* deleteIt(action) {
+  try {
+      const itemToDelete = yield axios.delete(`/api/inventory/${action.payload}`);
+      console.log('DELETE item * payload:', itemToDelete.data);
+  } catch (error) {
+    console.log('ERROR DELETING ITEM:', error);
   }
+}
+
+// TO DO - put saga for favorite updating
   
-  export default fetchInventorySaga;
+export default inventorySaga;
