@@ -25,6 +25,7 @@ function* fetchEm(action) {
 
 // WORKER SAGA for GET ITEM
 function* fetchIt(action) {
+  console.log('fetchIt action:', action);
   try {
       const item = yield axios.get(`/api/inventory/${action.payload}`);
       console.log('get item result:', item.data);
@@ -65,6 +66,7 @@ function* faveHandler(action) {
       console.log('faveHandler SAGA: UNFAVE IT payload:', action.payload);
       yield axios.put(`/api/inventory`, action.payload);
     }
+    yield fetchIt({type: 'FETCH_ITEM', payload: `${action.payload.id}`});
   } catch (error) {
     console.log('ERROR PUTTING ITEM:', error);
   }

@@ -27,10 +27,10 @@ function ItemDetails() {
       type: 'FAVE_IT',
       payload: {id, favorite: true}
     });
-    dispatch({ 
-      type: 'FETCH_ITEM',
-      payload: id
-  });
+  //   dispatch({ 
+  //     type: 'FETCH_ITEM',
+  //     payload: id
+  // });
   }
 
   const unfaveIt = () => {
@@ -38,10 +38,10 @@ function ItemDetails() {
       type: 'UNFAVE_IT',
       payload: {id, favorite: false}
     });
-    dispatch({ 
-      type: 'FETCH_ITEM',
-      payload: id
-  });
+  //   dispatch({ 
+  //     type: 'FETCH_ITEM',
+  //     payload: id
+  // });
   }
 
   const deleteMe = (event) => {
