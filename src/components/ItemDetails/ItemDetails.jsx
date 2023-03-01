@@ -23,6 +23,18 @@ function ItemDetails() {
     });
 }, []);
 
+const deleteMe = (event) => {
+  event.preventDefault();
+  dispatch({ 
+    type: 'DELETE_ITEM',
+    payload: id
+  });
+  // dispatch({ 
+  //   type: 'CLEAR_ITEM'
+  // });
+  // history.push("/");
+}
+
 const goBack = (event) => {
   event.preventDefault();
   // clearing out item reducer:
@@ -71,6 +83,8 @@ const goBack = (event) => {
 
       {/* <LogOutButton className="btn" /> */}
       {/* <Link to={`/`}>HOME</Link> */}
+      <button onClick={deleteMe}>DELETE THIS ITEM</button>
+      <br />
       <button onClick={goBack}>HOME</button>
     </div>
   );

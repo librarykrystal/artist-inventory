@@ -28,6 +28,7 @@ router.get('/:id', (req, res) => {
   console.log('is authenticated?', req.isAuthenticated());
   console.log('user', req.user);
   console.log('Get ITEM by ID req.params.id:', req.params.id);
+    // only do GET if authenticated:
   if (req.isAuthenticated()){
     let id = req.params.id;
     const queryText = `SELECT * FROM inventory WHERE id = $1;`;
@@ -50,32 +51,36 @@ router.post('/', (req, res) => {
   console.log('inventory POST route');
   console.log('is authenticated?', req.isAuthenticated());
   console.log('user', req.user);
-  const addQuery = `
-  INSERT INTO "inventory" ("user_id", "type", "name", "hex", "medium", "brand", "body", "container", "size", "notes", "favorite")
-  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
-  RETURNING "id";`
-  pool.query(addQuery, [
-    req.body.user,
-    req.body.type,
-    req.body.name,
-    req.body.hex,
-    req.body.medium,
-    req.body.brand,
-    req.body.body,
-    req.body.container,
-    req.body.size,
-    req.body.notes,
-    req.body.favorite
-  ])
-  .then(result => {
-    console.log('New item ID:', result.rows[0].id);
-    // const newItemId = result.rows[0].id
-  }).catch(err => {
-    console.log('first query ERROR:', err);
-    res.sendStatus(500)
-  })
+  // only do POST if authenticated:
+  if (req.isAuthenticated()){
+    const addQuery = `
+    INSERT INTO "inventory" ("user_id", "type", "name", "hex", "medium", "brand", "body", "container", "size", "notes", "favorite")
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+    RETURNING "id";`
+    pool.query(addQuery, [
+      req.body.user,
+      req.body.type,
+      req.body.name,
+      req.body.hex,
+      req.body.medium,
+      req.body.brand,
+      req.body.body,
+      req.body.container,
+      req.body.size,
+      req.body.notes,
+      req.body.favorite
+    ])
+    .then(result => {
+      console.log('New item ID:', result.rows[0].id);
+      // const newItemId = result.rows[0].id
+    }).catch(err => {
+      console.log('first query ERROR:', err);
+      res.sendStatus(500)
+    })
+  } else {
+    res.sendStatus(403);
+  }
 });
-
 
 
 // PUT to mark favorite
@@ -84,8 +89,24 @@ router.put('/', (req, res) => {
 });
 
 // DELETE
-router.delete('/', (req, res) => {
-    // DELETE route code here
+router.delete('/:id', (req, res) => {
+  console.log('router.delete ID:', req.params.id);
+  // only do DELETE if authenticated:
+  if (req.isAuthenticated()){
+    let id = req.params.id;
+    const queryText = `DELETE FROM inventory WHERE id = $1;`;
+    pool.query(queryText, [id])
+    .then((result) => {
+        console.log('DELETE result:', result);
+        res.sendStatus(204);
+    })
+    .catch((error) => {
+        console.log('DELETE ERROR:', error);
+        res.sendStatus(500);
+    })
+  } else {
+    res.sendStatus(403);
+  }
 });
 
 module.exports = router;
