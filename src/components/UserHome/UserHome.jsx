@@ -56,7 +56,9 @@ function UserHome() {
                   <div className="listingColorContainer">
                     <div 
                       style={{ 
-                        backgroundImage: `linear-gradient(to bottom right, ${item.hex}, black)`,
+                        // backgroundImage: `linear-gradient(to bottom right, ${item.hex}, black)`,
+                        backgroundColor: `${item.hex}`,
+                        // backgroundImage: `linear-gradient(to bottom right, ${item.glazehex}, ${item.masstonehex})`,
                         border: `2px solid black`,
                         height: `80px`,
                         width: `80px`

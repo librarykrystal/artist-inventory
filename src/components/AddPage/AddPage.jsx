@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import { useParams, Link } from 'react-router-dom';
 import Modal from '../AddModal/AddModal';
+import './AddPage.css';
 
 function Add() {
 
@@ -27,6 +28,9 @@ function Add() {
   const history = useHistory();
 
   const [showModal, setShowModal] = useState(false);
+  const [noTypeWarning, setNoTypeWarning] = useState(false);
+  const [noNameWarning, setNoNameWarning] = useState(false);
+  const [noTypeNoNameWarning, setNoTypeNoNameWarning] = useState(false);
 
   useEffect(() => {
     // dispatch any fetches for drop-down options held in database
@@ -42,13 +46,31 @@ function Add() {
   // onSubmit
   const submitForm = (e) => {
     e.preventDefault();
-    dispatch({ 
-        type: 'ADD_ITEM',
-        payload: {type, user, name, hex, medium, brand, body, container, size, notes, favorite}
-    });
-    // history.push(`/`);
-    setShowModal(true);
-    // showModal set to true will trigger AddModal message with nav options
+    // Checking for type and name values & showing only the appropriate warning:
+    if(!type && name){
+      console.log('UH OH, TYPE IS EMPTY!')
+      setNoTypeWarning(true);
+      setNoTypeNoNameWarning(false);
+      setNoNameWarning(false);
+    } else if(!name && type){
+      console.log('UH OH, NAME IS EMPTY!')
+      setNoNameWarning(true);
+      setNoTypeNoNameWarning(false);
+      setNoTypeWarning(false);
+    } else if(!name && !type){
+      console.log('UH OH, TYPE AND NAME ARE EMPTY!')
+      setNoTypeNoNameWarning(true);
+      setNoTypeWarning(false);
+      setNoNameWarning(false);
+    } else {
+      dispatch({ 
+          type: 'ADD_ITEM',
+          payload: {type, user, name, hex, medium, brand, body, container, size, notes, favorite}
+      });
+      // history.push(`/`);
+      setShowModal(true);
+      // showModal set to true will trigger AddModal message with nav options
+    }
   }
 
   // Going back home without submitting anything:
@@ -194,6 +216,12 @@ function Add() {
           <br />
           <input type="submit" />
         </form>
+
+        {/* Conditionally render messages about blank type and name fields: */}
+        { noTypeWarning && !noNameWarning && <p className="noEntry">Please choose a type to continue.</p>}
+        { noNameWarning && !noTypeWarning && <p className="noEntry">Please enter a name to continue.</p>}
+        { noTypeNoNameWarning && <p className="noEntry">Please enter type and name to continue.</p>}
+
       </div>
     
       <button onClick={goBack}>HOME</button>
