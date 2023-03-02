@@ -40,7 +40,8 @@ function* addIt(action) {
   console.log('POST action:', action.payload);
   try {
     const newItem = yield axios.post('/api/inventory', action.payload);
-    console.log('POST SAGA SUCCESS:', newItem.data);
+    console.log('POST SAGA SUCCESS:', newItem.data.id);
+    yield fetchIt({type: 'FETCH_ITEM', payload: newItem.data.id });
   } catch (error) {
   console.log('ERROR ADDING ITEM:', error);
 }

@@ -73,6 +73,7 @@ router.post('/', (req, res) => {
     .then(result => {
       console.log('New item ID:', result.rows[0].id);
       // const newItemId = result.rows[0].id
+      res.send({ id: result.rows[0].id });
     }).catch(err => {
       console.log('first query ERROR:', err);
       res.sendStatus(500)

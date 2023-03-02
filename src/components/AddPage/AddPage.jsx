@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import { useParams, Link } from 'react-router-dom';
+import Modal from '../AddModal/AddModal';
 
 function Add() {
 
   // if any drop-down options are in database later, grab from store here
   // get current user's ID to send in dispatch:
   const user = useSelector((store) => store.user.id);
+  const item = useSelector((store) => store.item);
 
   const [type, setType] = useState('');
   const [name, setName] = useState('');
@@ -23,6 +25,8 @@ function Add() {
 
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     // dispatch any fetches for drop-down options held in database
@@ -42,16 +46,14 @@ function Add() {
         type: 'ADD_ITEM',
         payload: {type, user, name, hex, medium, brand, body, container, size, notes, favorite}
     });
-    history.push("/");
-    // should this go home or to newly added item's page?
+    // history.push(`/`);
+    setShowModal(true);
+    // showModal set to true will trigger AddModal message with nav options
   }
 
-  // Going back home without submitting anything
+  // Going back home without submitting anything:
   const goBack = (event) => {
     event.preventDefault();
-  //   dispatch({ 
-  //     type: 'CLEAR_ADD_INPUTS'
-  // });
     history.push("/");
   }
 
@@ -195,6 +197,9 @@ function Add() {
       </div>
     
       <button onClick={goBack}>HOME</button>
+
+      {/* <button onClick={modalGo}>SHOW MODAL</button> */}
+      <Modal  show={showModal}/>
     </>
   )
 }
