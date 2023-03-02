@@ -74,7 +74,7 @@ function ItemDetails() {
       <h2>{item.name}</h2>
       <p>{item.body} {item.medium}</p>
 
-      {/* ADD A CONDITIONAL RENDER so color box doesn't show for mediums, varnishes */}
+      {/* TO DO: ADD A CONDITIONAL RENDER so color box doesn't show for mediums, varnishes */}
       <div 
         style={{ 
           backgroundImage: `linear-gradient(to bottom right, ${item.hex}, black)`,

@@ -45,12 +45,25 @@ function UserHome() {
           {inventory.map(item => {
               return(
                 <div className="listItemContainer" key={item.id} onClick={() => goToDetails(item.id)}>
-                  <h3 className="listItemName">{item.name}</h3>
-                  <p className="listItemDetails">{item.brand}</p>
-                  <p className="listItemDetails">{item.medium}</p>
-                  {item.favorite == true &&
-                    <p>♥</p>
-                  }
+                  <div className="listingInfoContainer">
+                    <h3 className="listItemName">{item.name}</h3>
+                    <p className="listItemDetails">{item.brand}</p>
+                    <p className="listItemDetails">{item.medium}</p>
+                    {item.favorite == true &&
+                      <p>♥</p>
+                    }
+                  </div>
+                  <div className="listingColorContainer">
+                    <div 
+                      style={{ 
+                        backgroundImage: `linear-gradient(to bottom right, ${item.hex}, black)`,
+                        border: `2px solid black`,
+                        height: `80px`,
+                        width: `80px`
+                      }}>
+                    </div>
+                  </div>
+
                 </div>
               );
           })}

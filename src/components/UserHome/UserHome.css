@@ -2,6 +2,8 @@
     border: 1px solid gray;
     box-shadow: 1px 1px 3px;
     /* display: inline-block; */
+    display: grid;
+    grid-template-columns: 75% 25%;
     width: 500px;
     height: 150px;
     margin: 10px;
@@ -15,4 +17,15 @@
 .listItemDetails {
     margin-top: 0px;
     margin-bottom: 5px;
+}
+
+.listingInfoContainer {
+background-color: white;
+grid-column-start: 1;
+}
+
+.listingColorContainer {
+  background-color: white;
+  grid-column-start: 2;
+  margin: auto;
 }
