@@ -99,23 +99,24 @@ function ItemDetails() {
       { item.favorite == false && <p>♡</p> }
 
       { item.favorite == true &&
-        <button onClick={unfaveIt}>UNFAVORITE ♡</button>
+        <button onClick={unfaveIt}>UNFAVORITE</button>
       }
 
       { item.favorite == false &&
-        <button onClick={faveIt}>FAVORITE ♥</button>
+        <button onClick={faveIt}>FAVORITE</button>
       }
 
       {/* END LIKE KERFUFFLE */}
 
 
 
-      <p>DATA TEST: {JSON.stringify(item)}</p>
+      {/* <p>DATA TEST: {JSON.stringify(item)}</p> */}
       </>
 }
 
       {/* <LogOutButton className="btn" /> */}
       {/* <Link to={`/`}>HOME</Link> */}
+      <br />
       <button onClick={deleteMe}>DELETE THIS ITEM</button>
       <br />
       <button onClick={goBack}>HOME</button>

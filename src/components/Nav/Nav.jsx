@@ -8,6 +8,7 @@ function Nav() {
   const user = useSelector((store) => store.user);
 
   return (
+    <div className="navOuterContainer">
     <div className="nav">
       <Link to="/home">
         <h2 className="nav-title">THE RUNDOWN</h2>
@@ -41,6 +42,7 @@ function Nav() {
           About
         </Link>
       </div>
+    </div>
     </div>
   );
 }

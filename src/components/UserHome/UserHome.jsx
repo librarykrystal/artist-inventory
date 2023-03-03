@@ -35,11 +35,14 @@ function UserHome() {
 
   return (
     <div className="container">
+      <div className="homeHeader">
       <h2>Welcome, {user.username}!</h2>
-      <p>Your ID is: {user.id}</p>
+      {/* <p>Your ID is: {user.id}</p> */}
       <button onClick={goAdd}>ADD NEW ITEM</button>
-      <p>This is your inventory!</p>
 
+      </div>
+
+      <div className="invList">
       {inventory.length > 0 &&
         <>
           {inventory.map(item => {
@@ -67,13 +70,15 @@ function UserHome() {
                   </div>
 
                 </div>
+                
               );
           })}
         </>
       }
+      </div>
 
 
-    <p>DATA TEST: {JSON.stringify(inventory)}</p>
+    {/* <p>DATA TEST: {JSON.stringify(inventory)}</p> */}
       {/* <LogOutButton className="btn" /> */}
     </div>
   );

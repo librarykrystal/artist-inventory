@@ -7,6 +7,7 @@ body,
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
+  background-color: #f2f2f2;
 }
 
 img {
@@ -20,10 +21,61 @@ Container
 
 .container {
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.homeHeader {
+  text-align: center;
 }
 
 /* --------------------------------------------------------------------------------
-Button
+Inventory List
+-------------------------------------------------------------------------------- */
+
+.invList {
+  /* background-color: aqua; */
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.listItemContainer {
+  background-color: white;
+  border: 1px solid gray;
+  box-shadow: 1px 1px 3px;
+  display: grid;
+  grid-template-columns: 75% 25%;
+  width: 500px;
+  height: 150px;
+  margin: 10px;
+  padding-left: 20px;
+}
+
+.listItemName {
+  margin-bottom: 5px;
+}
+
+.listItemDetails {
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+
+.listingInfoContainer {
+background-color: white;
+grid-column-start: 1;
+}
+
+.listingColorContainer {
+background-color: white;
+grid-column-start: 2;
+margin: auto;
+}
+
+/* --------------------------------------------------------------------------------
+Buttons
 -------------------------------------------------------------------------------- */
 
 .btn {
