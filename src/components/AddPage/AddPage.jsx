@@ -81,7 +81,7 @@ function Add() {
 
 
   return(
-    <>
+    <div className="container">
       <h3>ADD ITEM</h3>
 
       <div className="addForm">
@@ -100,6 +100,7 @@ function Add() {
             </select>
           </p>
 
+          {/* Conditional render shows only if type is "color" */}
           { type == 'Color' &&
             <>
               <p>Medium: 
@@ -114,9 +115,6 @@ function Add() {
                     <option value="Watercolor">Watercolor</option>
                 </select>
               </p>
-
-              <p>Color: 
-              <input type="color" defaultValue="#ffffff" onChange={(e) => setHex(e.target.value)}></input></p>
 
               {/* <p>Family: 
                 <select
@@ -136,6 +134,16 @@ function Add() {
                     <option value="Clear">Clear</option>
                 </select>
               </p> */}
+            </>
+          }
+
+          {/* Conditional render shows color picker only for types "color" and "gesso" */}
+          { type != "" &&
+            type != "Medium" &&
+            type != "Varnish" &&
+            <>
+              <p>Color: 
+              <input type="color" defaultValue="#ffffff" onChange={(e) => setHex(e.target.value)}></input></p>
             </>
           }
 
@@ -228,7 +236,7 @@ function Add() {
 
       {/* <button onClick={modalGo}>SHOW MODAL</button> */}
       <Modal  show={showModal}/>
-    </>
+    </div>
   )
 }
 

@@ -74,7 +74,7 @@ function ItemDetails() {
       <h2>{item.name}</h2>
       <p>{item.body} {item.medium}</p>
 
-      {/* TO DO: ADD A CONDITIONAL RENDER so color box doesn't show for mediums, varnishes */}
+      {item.type == 'Color' &&
       <div 
         style={{ 
           // backgroundImage: `linear-gradient(to bottom right, ${item.hex}, black)`,
@@ -85,6 +85,20 @@ function ItemDetails() {
           width: `80px`
         }}>
       </div>
+      }
+
+{item.type == 'Gesso' &&
+      <div 
+        style={{ 
+          // backgroundImage: `linear-gradient(to bottom right, ${item.hex}, black)`,
+          backgroundColor: `${item.hex}`,
+          // backgroundImage: `linear-gradient(to bottom right, ${item.glazehex}, ${item.masstonehex})`,
+          border: `2px solid black`,
+          height: `80px`,
+          width: `80px`
+        }}>
+      </div>
+      }
 
       <p>{item.brand}</p>
       <p>{item.size} {item.container}</p>

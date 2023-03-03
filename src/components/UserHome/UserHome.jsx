@@ -57,6 +57,8 @@ function UserHome() {
                     }
                   </div>
                   <div className="listingColorContainer">
+
+                  {item.type == 'Color' &&
                     <div 
                       style={{ 
                         // backgroundImage: `linear-gradient(to bottom right, ${item.hex}, black)`,
@@ -67,6 +69,21 @@ function UserHome() {
                         width: `80px`
                       }}>
                     </div>
+                  }
+
+                  {item.type == 'Gesso' &&
+                    <div 
+                      style={{ 
+                        // backgroundImage: `linear-gradient(to bottom right, ${item.hex}, black)`,
+                        backgroundColor: `${item.hex}`,
+                        // backgroundImage: `linear-gradient(to bottom right, ${item.glazehex}, ${item.masstonehex})`,
+                        border: `2px solid black`,
+                        height: `80px`,
+                        width: `80px`
+                      }}>
+                    </div>
+                  }
+
                   </div>
 
                 </div>
