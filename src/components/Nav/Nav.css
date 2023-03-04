@@ -1,23 +1,34 @@
 .navOuterContainer{
   position: sticky;
   top: 0px;
+  overflow: visible;
 }
 
 .nav {
   /* flex box layout */
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  /* align-items: center; */
+  height: 74px;
+  overflow: visible;
 
   margin: 0 0 0px;
   /* background-color: #3baa74; */
   /* background-color: #8c8c8c; */
-  background-image: linear-gradient(to top, grey, black);
-  overflow: hidden;
+  /* background-color: lightgray; */
+  /* background-color: #f2f2f2; */
+  background-image: linear-gradient(to top, #f2f2f2, grey);
+  background-image: linear-gradient(to top, lightgrey, #f2f2f2);
+  /* overflow: hidden; */
 }
 
 .nav a {
   text-decoration: none;
+}
+
+.logoImage {
+margin-top: 3px;
+height: 87px;
 }
 
 .nav-title {
@@ -35,7 +46,7 @@
   /* background-color:  #666666; */
   background-color: black;
   text-align: center;
-  padding: 30px 10px;
+  padding: 28px 10px;
   text-decoration: none;
   font-size: 15px;
 
