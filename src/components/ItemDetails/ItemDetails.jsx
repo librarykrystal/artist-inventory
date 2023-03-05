@@ -44,6 +44,11 @@ function ItemDetails() {
   // });
   }
 
+  const goEdit = () => {
+    console.log('goEdit CLICKED');
+    history.push('/edit');
+  }
+
   const deleteMe = (event) => {
     event.preventDefault();
     dispatch({ 
@@ -130,6 +135,8 @@ function ItemDetails() {
 
       {/* <LogOutButton className="btn" /> */}
       {/* <Link to={`/`}>HOME</Link> */}
+      <br />
+      <button onClick={goEdit}>EDIT THIS ITEM</button>
       <br />
       <button onClick={deleteMe}>DELETE THIS ITEM</button>
       <br />

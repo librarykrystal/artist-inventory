@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import { useParams, Link } from 'react-router-dom';
-import Modal from '../AddModal/AddModal';
-import './AddPage.css';
+import Modal from '../EditModal/EditModal';
+// import './EditPage.css';
 
-function Add() {
+function Edit() {
 
   // if any drop-down options are in database later, grab from store here
   // get current user's ID to send in dispatch:
@@ -14,15 +14,15 @@ function Add() {
 
   const [type, setType] = useState(item.type);
   const [name, setName] = useState(item.name);
-  const [hex, setHex] = useState('');
+  const [hex, setHex] = useState(item.hex);
   // const [family, setFamily] = useState('');
-  const [medium, setMedium] = useState('');
-  const [brand, setBrand] = useState('');
-  const [body, setBody] = useState('');
-  const [container, setContainer] = useState('');
-  const [size, setSize] = useState('');
-  const [notes, setNotes] = useState('');
-  const [favorite, setFavorite] = useState(false);
+  const [medium, setMedium] = useState(item.medium);
+  const [brand, setBrand] = useState(item.brand);
+  const [body, setBody] = useState(item.body);
+  const [container, setContainer] = useState(item.container);
+  const [size, setSize] = useState(item.size);
+  const [notes, setNotes] = useState(item.notes);
+  const [favorite, setFavorite] = useState(false);  // HOW DO I IMPORT THIS BOOLEAN?
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -64,36 +64,35 @@ function Add() {
       setNoNameWarning(false);
     } else {
       dispatch({ 
-          type: 'ADD_ITEM',
+          type: 'EDIT_ITEM',
           payload: {type, name, hex, medium, brand, body, container, size, notes, favorite}
       });
       // history.push(`/`);
       setShowModal(true);
-      // showModal set to true will trigger AddModal message with nav options
+      // showModal set to true will trigger EditModal message with nav options
     }
   }
 
   // Going back home without submitting anything:
   const goBack = (event) => {
     event.preventDefault();
-    dispatch({ 
-      type: 'CLEAR_ITEM'
-     });
-    history.push("/");
+    history.push(`/details/${item.id}`);
   }
 
 
   return(
     <div className="container">
 
-      <h3>ADD ITEM</h3>
+      <h3>EDIT<hr/></h3>
+        
+      <h3>{item.name}</h3>
 
       <div className="addForm">
         <form onSubmit={submitForm}>
 
           <p>Type: 
             <select
-              defaultValue="Choose"
+              defaultValue={item.color}
               onChange={(e) => setType(e.target.value)}>
                   <option disabled >Choose</option>
                   {/* <option value="Additive">Additive</option> */}
@@ -109,7 +108,7 @@ function Add() {
             <>
               <p>Medium: 
                 <select
-                  defaultValue="Choose"
+                  defaultValue={item.medium}
                   onChange={(e) => setMedium(e.target.value)}>
                     <option disabled >Choose</option>
                     <option value="Acrylic">Acrylic</option>
@@ -147,7 +146,7 @@ function Add() {
             type != "Varnish" &&
             <>
               <p>Color: 
-              <input type="color" defaultValue="#ffffff" onChange={(e) => setHex(e.target.value)}></input></p>
+              <input type="color" defaultValue={item.hex} onChange={(e) => setHex(e.target.value)}></input></p>
             </>
           }
 
@@ -155,7 +154,7 @@ function Add() {
 
           <p>Body: 
             <select
-              defaultValue="Choose"
+              defaultValue={item.body}
               onChange={(e) => setBody(e.target.value)}>
                 <option disabled >Choose</option>
                 <option value="Fluid">Fluid</option>
@@ -171,7 +170,7 @@ function Add() {
 
           <p>Brand: 
             <select
-              defaultValue="Choose"
+              defaultValue={item.brand}
               onChange={(e) => setBrand(e.target.value)}>
                 <option disabled >Choose</option>
                 <option value="Golden Artist Colors">Golden Artist Colors</option>
@@ -187,12 +186,12 @@ function Add() {
             brand != "Golden Artist Colors" &&
             brand != "Liquitex" &&
             brand != "Winsor & Newton" &&
-          <p>Enter brand: <input onChange={(e) => setBrand(e.target.value)} /></p>
+          <p>Enter brand: <input defaultValue={item.brand} onChange={(e) => setBrand(e.target.value)} /></p>
           }
 
           <p>Container: 
             <select
-              defaultValue="Choose"
+              defaultValue={item.comtainer}
               onChange={(e) => setContainer(e.target.value)}>
                 <option disabled >Choose</option>
                 <option value="Bottle">Bottle</option>
@@ -219,6 +218,7 @@ function Add() {
           <p>Notes:</p>
           <textarea
             value={notes}
+            // defaultValue={item.notes}
             className="notesInput"
             type="text"
             rows="10" cols="40"
@@ -236,7 +236,7 @@ function Add() {
 
       </div>
     
-      <button onClick={goBack}>HOME</button>
+      <button onClick={goBack}>BACK</button>
 
       {/* <button onClick={modalGo}>SHOW MODAL</button> */}
       <Modal  show={showModal}/>
@@ -244,4 +244,4 @@ function Add() {
   )
 }
 
-export default Add;
+export default Edit;

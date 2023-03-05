@@ -34,6 +34,20 @@ Container
 Inventory List
 -------------------------------------------------------------------------------- */
 
+.filterBar {
+  /* width: 520px; */
+  width: 100%;
+  height: 30px;
+  background-color: black;
+  margin-bottom: 10px;
+}
+
+.filterText {
+  margin: 4px;
+  text-align: center;
+  color: lightgray;
+}
+
 .invList {
   /* background-color: aqua; */
   display: flex;

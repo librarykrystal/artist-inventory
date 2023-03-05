@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import ItemDetailsPage from '../ItemDetails/ItemDetails';
 import AddPage from '../AddPage/AddPage';
+import EditPage from '../EditPage/EditPage';
 
 import './App.css';
 
@@ -76,6 +77,14 @@ function App() {
             path="/add"
           >
             <AddPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows AddPage else shows LoginPage
+            exact
+            path="/edit"
+          >
+            <EditPage />
           </ProtectedRoute>
 
           <ProtectedRoute

@@ -39,7 +39,10 @@ function UserHome() {
       <h4>Welcome, {user.username}!</h4>
       {/* <p>Your ID is: {user.id}</p> */}
       <button onClick={goAdd}>ADD NEW ITEM</button>
-
+      </div>
+      <br />
+      <div className="filterBar">
+        <p className="filterText">(This is where sort/filter options will go.)</p>
       </div>
 
       <div className="invList">

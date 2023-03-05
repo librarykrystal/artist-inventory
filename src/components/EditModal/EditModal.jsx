@@ -1,7 +1,17 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {useHistory} from 'react-router-dom';
-import './AddModal.css';
+// import './AddModal.css';
+
+
+//
+//
+//
+// LOGIC IS CURRENTLY A COPY OF THE ADD MODAL, NEEDS EVAL DUE TO ITEM REDUCER CONTENT
+//
+//
+//
+
 
 function Modal(props) {
 
@@ -41,7 +51,7 @@ function Modal(props) {
           <h4>Success!</h4>
         </div>
         <div className="modal-body">
-          <p>The new item has been added to your inventory.</p>
+          <p>The item has been updated.</p>
           {/* <p>ITEM ID TEST: {JSON.stringify(item.id)}</p> */}
         </div>
         <div className="modal-footer">
@@ -59,10 +69,11 @@ function Modal(props) {
           <h4>Failure!</h4>
         </div>
         <div className="modal-body">
-          <p>Item not added to invenory. Please try again.</p>
+          <p>There was an error updating the item. Please try again.</p>
           {/* <p>ITEM ID TEST: {JSON.stringify(item.id)}</p> */}
         </div>
         <div className="modal-footer">
+          <button className="modal-button" onClick={goToItem}>VIEW ITEM</button>
           <button className="modal-button" onClick={goHome}>HOME</button>
         </div>
       </div>
