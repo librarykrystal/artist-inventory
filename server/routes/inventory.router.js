@@ -58,7 +58,7 @@ router.post('/', (req, res) => {
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
     RETURNING "id";`
     pool.query(addQuery, [
-      req.body.user,
+      req.user.id,
       req.body.type,
       req.body.name,
       req.body.hex,

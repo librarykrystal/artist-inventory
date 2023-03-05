@@ -36,7 +36,7 @@ function UserHome() {
   return (
     <div className="container">
       <div className="homeHeader">
-      <h2>Welcome, {user.username}!</h2>
+      <h4>Welcome, {user.username}!</h4>
       {/* <p>Your ID is: {user.id}</p> */}
       <button onClick={goAdd}>ADD NEW ITEM</button>
 

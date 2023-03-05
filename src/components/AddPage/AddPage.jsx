@@ -65,7 +65,7 @@ function Add() {
     } else {
       dispatch({ 
           type: 'ADD_ITEM',
-          payload: {type, user, name, hex, medium, brand, body, container, size, notes, favorite}
+          payload: {type, name, hex, medium, brand, body, container, size, notes, favorite}
       });
       // history.push(`/`);
       setShowModal(true);
