@@ -74,6 +74,12 @@ Inventory List and Details
   margin-bottom: 4px;
 }
 
+.listItemBrand {
+  margin-top: 0px;
+  margin-bottom: 3px;
+  color: gray;
+}
+
 .listItemDetails {
   margin-top: 0px;
   margin-bottom: 3px;

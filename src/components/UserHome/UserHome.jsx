@@ -53,8 +53,8 @@ function UserHome() {
                 <div className="listItemContainer" key={item.id} onClick={() => goToDetails(item.id)}>
                   <div className="listingInfoContainer">
                     <h3 className="listItemName">{item.name}</h3>
-                    <p className="listItemDetails">{item.brand}</p>
-                    <p className="listItemDetails">{item.medium}</p>
+                    <p className="listItemBrand">{item.brand}</p>
+                    <p className="listItemDetails">{item.line} {item.medium}</p>
                     {item.favorite == true &&
                       <p className="listHeart">♥</p>
                     }

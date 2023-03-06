@@ -106,6 +106,7 @@ function ItemDetails() {
       }
 
       <p>{item.brand}</p>
+      <p>{item.line}</p>
       <p>{item.size} {item.container}</p>
       {/* <p>FAMILY: {item.family}</p> */}
 
