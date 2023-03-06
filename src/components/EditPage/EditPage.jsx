@@ -22,7 +22,7 @@ function Edit() {
   const [container, setContainer] = useState(item.container);
   const [size, setSize] = useState(item.size);
   const [notes, setNotes] = useState(item.notes);
-  const [favorite, setFavorite] = useState(false);  // HOW DO I IMPORT THIS BOOLEAN?
+  const [favorite, setFavorite] = useState(item.favorite);  // HOW DO I IMPORT THIS BOOLEAN?
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -211,6 +211,7 @@ function Edit() {
 
           <p>Favorite?
             <input
+              checked={ favorite ? 'checked' : ''}
               type="checkbox"
               onChange={handleCheckboxFave}
             ></input></p>

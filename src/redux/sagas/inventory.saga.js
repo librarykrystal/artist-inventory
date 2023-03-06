@@ -62,10 +62,10 @@ function* faveHandler(action) {
   try {
     if(action.type === 'FAVE_IT'){
       console.log('faveHandler SAGA: FAVE IT payload:', action.payload);
-      yield axios.put(`/api/inventory`, action.payload);
+      yield axios.put(`/api/favorite`, action.payload);
     } else if (action.type === 'UNFAVE_IT'){
       console.log('faveHandler SAGA: UNFAVE IT payload:', action.payload);
-      yield axios.put(`/api/inventory`, action.payload);
+      yield axios.put(`/api/favorite`, action.payload);
     }
     yield fetchIt({type: 'FETCH_ITEM', payload: `${action.payload.id}`});
   } catch (error) {
