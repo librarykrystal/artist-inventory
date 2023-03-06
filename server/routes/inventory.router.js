@@ -88,7 +88,7 @@ router.put('/', (req, res) => {
   console.log('PUT req.body:', req.body);
   if (req.isAuthenticated()){
     // let id = req.body.id;
-    const editQuery = `UPDATE inventory SET 
+    const editQuery = `UPDATE "inventory" SET 
     "type" = $2, 
     "name" = $3, 
     "hex" = $4, 
@@ -101,7 +101,7 @@ router.put('/', (req, res) => {
     "favorite" = $11 
     WHERE id = $1;`;
     pool.query(editQuery, [
-      req.user.id,
+      req.body.id,
       req.body.type,
       req.body.name,
       req.body.hex,

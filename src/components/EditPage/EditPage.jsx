@@ -12,6 +12,7 @@ function Edit() {
   const user = useSelector((store) => store.user.id);
   const item = useSelector((store) => store.item);
 
+  const id = item.id;
   const [type, setType] = useState(item.type);
   const [name, setName] = useState(item.name);
   const [hex, setHex] = useState(item.hex);
@@ -65,7 +66,7 @@ function Edit() {
     } else {
       dispatch({ 
           type: 'EDIT_ITEM',
-          payload: {type, name, hex, medium, brand, body, container, size, notes, favorite}
+          payload: {id, type, name, hex, medium, brand, body, container, size, notes, favorite}
       });
       // history.push(`/`);
       setShowModal(true);
