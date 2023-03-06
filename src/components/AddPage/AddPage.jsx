@@ -162,7 +162,7 @@ function Add() {
                 <option value="Heavy Body">Heavy Body</option>
                 <option value="High Flow">High Flow</option>
                 <option value="Powder">Powder</option>
-                <option value="Green">Soft Body</option>
+                <option value="Soft Body">Soft Body</option>
                 <option value="Solid">Solid</option>
                 <option value="Spray">Spray</option>
                 <option value="">N/A</option>

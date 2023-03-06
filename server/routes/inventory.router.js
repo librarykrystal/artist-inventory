@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
   console.log('user', req.user);
   // only do GET if authenticated:
   if (req.isAuthenticated()){
-      let queryText = `SELECT * FROM "inventory" WHERE "user_id" = $1`;
+      let queryText = `SELECT * FROM "inventory" WHERE "user_id" = $1 ORDER BY "id" DESC`;
       pool.query(queryText, [req.user.id]).then((result) => {
           res.send(result.rows);
       }).catch((error) => {

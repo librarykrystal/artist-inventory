@@ -79,7 +79,7 @@ function* editIt(action) {
   console.log('editIt SAGA: EDIT IT payload:', action.payload);
   try {
     yield axios.put(`/api/inventory`, action.payload);
-    // yield fetchIt({type: 'FETCH_ITEM', payload: `${action.payload.id}`});
+    yield fetchIt({type: 'FETCH_ITEM', payload: `${action.payload.id}`});
   } catch (error) {
     console.log('ERROR EDITING ITEM:', error);
   }

@@ -35,6 +35,10 @@ function Edit() {
 
   useEffect(() => {
     // dispatch any fetches for drop-down options held in database
+    dispatch({ 
+      type: 'FETCH_ITEM',
+      payload: id
+  });
   }, []);
 
   console.log('SELECTIONS...', ["type:", type, "name:", name, "medium:", medium, "hex:", hex, "brand:", brand, "body:", body, "container:", container, "size:", size, "favorite", favorite, "notes:", notes]);
@@ -93,7 +97,7 @@ function Edit() {
 
           <p>Type: 
             <select
-              defaultValue={item.color}
+              defaultValue={item.type}
               onChange={(e) => setType(e.target.value)}>
                   <option disabled >Choose</option>
                   {/* <option value="Additive">Additive</option> */}
@@ -162,7 +166,7 @@ function Edit() {
                 <option value="Heavy Body">Heavy Body</option>
                 <option value="High Flow">High Flow</option>
                 <option value="Powder">Powder</option>
-                <option value="Green">Soft Body</option>
+                <option value="Soft Body">Soft Body</option>
                 <option value="Solid">Solid</option>
                 <option value="Spray">Spray</option>
                 <option value="">N/A</option>
@@ -192,7 +196,7 @@ function Edit() {
 
           <p>Container: 
             <select
-              defaultValue={item.comtainer}
+              defaultValue={item.container}
               onChange={(e) => setContainer(e.target.value)}>
                 <option disabled >Choose</option>
                 <option value="Bottle">Bottle</option>

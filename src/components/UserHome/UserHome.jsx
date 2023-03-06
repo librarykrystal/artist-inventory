@@ -56,7 +56,7 @@ function UserHome() {
                     <p className="listItemDetails">{item.brand}</p>
                     <p className="listItemDetails">{item.medium}</p>
                     {item.favorite == true &&
-                      <p>♥</p>
+                      <p className="listHeart">♥</p>
                     }
                   </div>
                   <div className="listingColorContainer">
@@ -68,8 +68,8 @@ function UserHome() {
                         backgroundColor: `${item.hex}`,
                         // backgroundImage: `linear-gradient(to bottom right, ${item.glazehex}, ${item.masstonehex})`,
                         border: `2px solid black`,
-                        height: `80px`,
-                        width: `80px`
+                        height: `82px`,
+                        width: `82px`
                       }}>
                     </div>
                   }
