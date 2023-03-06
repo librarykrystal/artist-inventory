@@ -83,14 +83,36 @@ router.post('/', (req, res) => {
   }
 });
 
-// PUT to UPDATE FAVORITE
+// PUT to UPDATE ITEM
 router.put('/', (req, res) => {
-  console.log('PUT req.body.favorite:', req.body.favorite);
+  console.log('PUT req.body:', req.body);
   if (req.isAuthenticated()){
-    let id = req.body.id;
-    let favoriteStatus = req.body.favorite;
-    const queryText = `UPDATE inventory SET "favorite" = $2 WHERE id = $1;`;
-    pool.query(queryText, [id, favoriteStatus])
+    // let id = req.body.id;
+    const editQuery = `UPDATE inventory SET 
+    "type" = $2, 
+    "name" = $3, 
+    "hex" = $4, 
+    "medium" = $5, 
+    "brand" = $6, 
+    "body" = $7, 
+    "container" = $8, 
+    "size" = $9, 
+    "notes" = $10, 
+    "favorite" = $11 
+    WHERE id = $1;`;
+    pool.query(editQuery, [
+      req.user.id,
+      req.body.type,
+      req.body.name,
+      req.body.hex,
+      req.body.medium,
+      req.body.brand,
+      req.body.body,
+      req.body.container,
+      req.body.size,
+      req.body.notes,
+      req.body.favorite
+    ])
     .then((result) => {
         console.log('PUT result:', result);
         res.sendStatus(204);
