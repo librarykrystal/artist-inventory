@@ -122,12 +122,13 @@ function Edit() {
                   <option disabled >Choose</option>
                   <option value="Additive">Additive</option>
                   <option value="Color">Color</option>
-                  <option value="Gel">Gel</option>
+                  {/* <option value="Gel">Gel</option> */}
                   <option value="Gesso">Gesso</option>
                   <option value="Ground">Ground</option>
                   <option value="Medium">Medium</option>
                   <option value="Paste">Paste</option>
                   <option value="Primer">Primer</option>
+                  <option value="Solvent">Solvent</option>
                   <option value="Varnish">Varnish</option>
             </select>
           </p>
@@ -162,10 +163,10 @@ function Edit() {
               onChange={(e) => setMedium(e.target.value)}>
                 <option disabled >Choose</option>
                 <option value="Acrylic">Acrylic</option>
+                <option value="Enamel">Enamel</option>
                 <option value="Gouache">Gouache</option>
                 <option value="Oil">Oil</option>
                 <option value="Pastel">Pastel</option>
-                <option value="Solvent">Solvent</option>
                 <option value="Watercolor">Watercolor</option>
             </select>
           </p>
@@ -176,6 +177,7 @@ function Edit() {
             type != "Gel" &&
             type != "Medium" &&
             type != "Paste" &&
+            type != "Solvent" &&
             type != "Varnish" &&
             <>
               <p>Color: 
@@ -190,13 +192,13 @@ function Edit() {
               defaultValue={item.body}
               onChange={(e) => setBody(e.target.value)}>
                 <option disabled >Choose</option>
+                <option value="Aerosol">Aerosol</option>
                 <option value="Fluid">Fluid</option>
                 <option value="Heavy Body">Heavy Body</option>
                 <option value="High Flow">High Flow</option>
                 <option value="Powder">Powder</option>
                 <option value="Soft Body">Soft Body</option>
                 <option value="Solid">Solid</option>
-                <option value="Spray">Spray</option>
                 <option value="">N/A</option>
             </select>
           </p>
@@ -268,7 +270,6 @@ function Edit() {
                 <option value="Marker">Marker</option>
                 <option value="Pouch">Pouch</option>
                 <option value="Sample">Sample</option>
-                <option value="Spraycan">Spraycan</option>
                 <option value="Tub">Tub</option>
                 <option value="Tube">Tube</option>
             </select>

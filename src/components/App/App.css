@@ -41,6 +41,13 @@ Inventory List and Details
   height: 30px;
   background-color: black;
   margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filterDropDown {
+  background-color: #fcfcfc;
 }
 
 .filterText {
