@@ -7,7 +7,7 @@ body,
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
-  background-color: #f2f2f2;
+  background-color: #F0F0F0;
 }
 
 img {
@@ -58,7 +58,7 @@ Inventory List and Details
 }
 
 .listItemContainer {
-  background-color: white;
+  background-color: #fcfcfc;
   border: 1px solid gray;
   box-shadow: 1px 1px 3px;
   display: grid;
@@ -67,6 +67,12 @@ Inventory List and Details
   height: 120px;
   margin: 10px;
   padding-left: 20px;
+}
+
+.listItemContainer:hover {
+  background-color: white;
+  border: 1px solid black;
+  box-shadow: 1px 1px 1px;
 }
 
 .listItemName {
@@ -86,13 +92,13 @@ Inventory List and Details
 }
 
 .listingInfoContainer {
-background-color: white;
+/* background-color: white; */
 grid-column-start: 1;
 height: 120px;
 }
 
 .listingColorContainer {
-background-color: white;
+/* background-color: white; */
 grid-column-start: 2;
 margin: auto;
 }

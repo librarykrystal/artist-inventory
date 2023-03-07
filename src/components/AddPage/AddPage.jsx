@@ -99,8 +99,12 @@ function Add() {
                   <option disabled >Choose</option>
                   <option value="Additive">Additive</option>
                   <option value="Color">Color</option>
+                  <option value="Gel">Gel</option>
                   <option value="Gesso">Gesso</option>
+                  <option value="Ground">Ground</option>
                   <option value="Medium">Medium</option>
+                  <option value="Paste">Paste</option>
+                  <option value="Primer">Primer</option>
                   <option value="Varnish">Varnish</option>
             </select>
           </p>
@@ -108,20 +112,6 @@ function Add() {
           {/* Conditional render shows only if type is "color" */}
           { type == 'Color' &&
             <>
-              <p>Medium: 
-                <select
-                  defaultValue="Choose"
-                  onChange={(e) => setMedium(e.target.value)}>
-                    <option disabled >Choose</option>
-                    <option value="Acrylic">Acrylic</option>
-                    <option value="Gouache">Gouache</option>
-                    <option value="Oil">Oil</option>
-                    <option value="Pastel">Pastel</option>
-                    <option value="Solvent">Solvent</option>
-                    <option value="Watercolor">Watercolor</option>
-                </select>
-              </p>
-
               {/* <p>Family: 
                 <select
                   defaultValue="Choose"
@@ -143,10 +133,26 @@ function Add() {
             </>
           }
 
-          {/* Conditional render shows color picker only for types "color" and "gesso" */}
+          <p>Medium: 
+            <select
+              defaultValue="Choose"
+              onChange={(e) => setMedium(e.target.value)}>
+                <option disabled >Choose</option>
+                <option value="Acrylic">Acrylic</option>
+                <option value="Gouache">Gouache</option>
+                <option value="Oil">Oil</option>
+                <option value="Pastel">Pastel</option>
+                <option value="Solvent">Solvent</option>
+                <option value="Watercolor">Watercolor</option>
+            </select>
+          </p>
+
+          {/* Conditional render shows color picker only for appropriate types */}
           { type != "" &&
             type != "Additive" &&
+            type != "Gel" &&
             type != "Medium" &&
+            type != "Paste" &&
             type != "Varnish" &&
             <>
               <p>Color: 
