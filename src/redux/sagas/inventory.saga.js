@@ -6,6 +6,7 @@ function* inventorySaga() {
     yield takeEvery('FETCH_USER_INVENTORY', fetchEm);
     yield takeEvery('FETCH_ITEM', fetchIt);
     yield takeEvery('ADD_ITEM', addIt);
+    yield takeEvery('EDIT_ITEM', editIt);
     yield takeEvery('DELETE_ITEM', deleteIt);
     yield takeEvery('FAVE_IT', faveHandler);
     yield takeEvery('UNFAVE_IT', faveHandler);
@@ -69,8 +70,20 @@ function* faveHandler(action) {
     }
     yield fetchIt({type: 'FETCH_ITEM', payload: `${action.payload.id}`});
   } catch (error) {
-    console.log('ERROR PUTTING ITEM:', error);
+    console.log('ERROR FAVE/UNFAVE PUT:', error);
+  }
+}
+
+// WORKER SAGA for PUT ITEM
+function* editIt(action) {
+  console.log('editIt SAGA: EDIT IT payload:', action.payload);
+  try {
+    yield axios.put(`/api/inventory`, action.payload);
+    yield fetchIt({type: 'FETCH_ITEM', payload: `${action.payload.id}`});
+  } catch (error) {
+    console.log('ERROR EDITING ITEM:', error);
   }
 }
   
+
 export default inventorySaga;

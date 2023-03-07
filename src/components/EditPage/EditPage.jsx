@@ -12,12 +12,14 @@ function Edit() {
   const user = useSelector((store) => store.user.id);
   const item = useSelector((store) => store.item);
 
+  const id = item.id;
   const [type, setType] = useState(item.type);
   const [name, setName] = useState(item.name);
   const [hex, setHex] = useState(item.hex);
   // const [family, setFamily] = useState('');
   const [medium, setMedium] = useState(item.medium);
   const [brand, setBrand] = useState(item.brand);
+  const [line, setLine] = useState(item.line);
   const [body, setBody] = useState(item.body);
   const [container, setContainer] = useState(item.container);
   const [size, setSize] = useState(item.size);
@@ -34,9 +36,32 @@ function Edit() {
 
   useEffect(() => {
     // dispatch any fetches for drop-down options held in database
+    dispatch({ 
+      type: 'FETCH_ITEM',
+      payload: id
+  });
   }, []);
 
   console.log('SELECTIONS...', ["type:", type, "name:", name, "medium:", medium, "hex:", hex, "brand:", brand, "body:", body, "container:", container, "size:", size, "favorite", favorite, "notes:", notes]);
+
+  const handleTypeChange = (typeIn) => {
+    console.log('typeIn', typeIn);
+    setType(typeIn);
+    // Clear out hex color data if type is switched to a non-color-picker type:
+    if (typeIn == 'Additive' || 'Gel' || 'Medium' || 'Paste' || 'Varnish' ){
+      setHex('');
+    }
+  }
+
+  // const handleBrandChange = (brandIn) => {
+  //   console.log('brandIn', brandIn);
+  //   // if(brandIn == "Other"){
+  //   //   setBrand('');
+  //   // } else {
+  //   //   setBrand(brandIn);
+  //   // }
+  //   setBrand(brandIn);
+  // }
 
   // Toggle for favoriting checkbox:
   const handleCheckboxFave = () => {
@@ -65,7 +90,7 @@ function Edit() {
     } else {
       dispatch({ 
           type: 'EDIT_ITEM',
-          payload: {type, name, hex, medium, brand, body, container, size, notes, favorite}
+          payload: {id, type, name, hex, medium, brand, body, container, size, notes, favorite, line}
       });
       // history.push(`/`);
       setShowModal(true);
@@ -92,13 +117,17 @@ function Edit() {
 
           <p>Type: 
             <select
-              defaultValue={item.color}
-              onChange={(e) => setType(e.target.value)}>
+              defaultValue={item.type}
+              onChange={(e) => handleTypeChange(e.target.value)}>
                   <option disabled >Choose</option>
-                  {/* <option value="Additive">Additive</option> */}
+                  <option value="Additive">Additive</option>
                   <option value="Color">Color</option>
+                  <option value="Gel">Gel</option>
                   <option value="Gesso">Gesso</option>
+                  <option value="Ground">Ground</option>
                   <option value="Medium">Medium</option>
+                  <option value="Paste">Paste</option>
+                  <option value="Primer">Primer</option>
                   <option value="Varnish">Varnish</option>
             </select>
           </p>
@@ -106,19 +135,6 @@ function Edit() {
           {/* Conditional render shows only if type is "color" */}
           { type == 'Color' &&
             <>
-              <p>Medium: 
-                <select
-                  defaultValue={item.medium}
-                  onChange={(e) => setMedium(e.target.value)}>
-                    <option disabled >Choose</option>
-                    <option value="Acrylic">Acrylic</option>
-                    <option value="Gouache">Gouache</option>
-                    <option value="Oil">Oil</option>
-                    <option value="Pastel">Pastel</option>
-                    <option value="Watercolor">Watercolor</option>
-                </select>
-              </p>
-
               {/* <p>Family: 
                 <select
                   defaultValue="Choose"
@@ -140,13 +156,30 @@ function Edit() {
             </>
           }
 
-          {/* Conditional render shows color picker only for types "color" and "gesso" */}
+          <p>Medium: 
+            <select
+              defaultValue={item.medium}
+              onChange={(e) => setMedium(e.target.value)}>
+                <option disabled >Choose</option>
+                <option value="Acrylic">Acrylic</option>
+                <option value="Gouache">Gouache</option>
+                <option value="Oil">Oil</option>
+                <option value="Pastel">Pastel</option>
+                <option value="Solvent">Solvent</option>
+                <option value="Watercolor">Watercolor</option>
+            </select>
+          </p>
+
+          {/* Conditional render shows color picker only for appropriate types */}
           { type != "" &&
+            type != "Additive" &&
+            type != "Gel" &&
             type != "Medium" &&
+            type != "Paste" &&
             type != "Varnish" &&
             <>
               <p>Color: 
-              <input type="color" defaultValue={item.hex} onChange={(e) => setHex(e.target.value)}></input></p>
+              <input type="color" defaultValue={hex} onChange={(e) => setHex(e.target.value)}></input></p>
             </>
           }
 
@@ -161,7 +194,7 @@ function Edit() {
                 <option value="Heavy Body">Heavy Body</option>
                 <option value="High Flow">High Flow</option>
                 <option value="Powder">Powder</option>
-                <option value="Green">Soft Body</option>
+                <option value="Soft Body">Soft Body</option>
                 <option value="Solid">Solid</option>
                 <option value="Spray">Spray</option>
                 <option value="">N/A</option>
@@ -172,26 +205,60 @@ function Edit() {
             <select
               defaultValue={item.brand}
               onChange={(e) => setBrand(e.target.value)}>
+              {/* onChange={(e) => handleBrandChange(e.target.value)}> */}
                 <option disabled >Choose</option>
+                <option value="Blick">Blick</option>
+                <option value="Gamblin">Gamblin</option>
                 <option value="Golden Artist Colors">Golden Artist Colors</option>
+                <option value="Grumbacher">Grumbacher</option>
+                <option value="Holbein">Holbein</option>
                 <option value="Liquitex">Liquitex</option>
+                <option value="Pebeo">Pebeo</option>
+                <option value="QoR">QoR</option>
+                <option value="Rembrandt">Rembrandt</option>
+                <option value="Sennelier">Sennelier</option>
+                <option value="Speedball">Speedball</option>
+                <option value="Stuart Semple">Stuart Semple</option>
+                <option value="Utrecht">Utrecht</option>
+                <option value="Willaimsburg">Willaimsburg</option>
                 <option value="Winsor & Newton">Winsor & Newton</option>
                 <option value="Other">Other</option>
             </select>
           </p>
 
 {/* Text box for entering a non-listed brand appears only if "Other" is chosen above. */}
-{/* If conditional was based on brand == "Other", it would disappear as soon as user types. */}
+{/* If conditional used brand == "Other", box would disappear as soon as user begins to type. */}
           { brand != "" &&
+            brand != "Blick" &&
+            brand != "Gamblin" &&
             brand != "Golden Artist Colors" &&
+            brand != "Grumbacher" &&
+            brand != "Holbein" &&
             brand != "Liquitex" &&
+            brand != "Pebeo" &&
+            brand != "QoR" &&
+            brand != "Rembrandt" &&
+            brand != "Sennelier" &&
+            brand != "Speedball" &&
+            brand != "Stuart Semple" &&
+            brand != "Utrecht" &&
+            brand != "Willaimsburg" &&
             brand != "Winsor & Newton" &&
-          <p>Enter brand: <input defaultValue={item.brand} onChange={(e) => setBrand(e.target.value)} /></p>
+          <p>Enter brand: 
+            <input 
+              defaultValue={ brand == 'Other' ? '' : `${item.brand}`} 
+              onChange={(e) => setBrand(e.target.value)} 
+            />
+          </p>
           }
+
+          <p>Product Line: <input value={line} onChange={(e) => setLine(e.target.value)} /></p>
+
+          <p>Size: <input value={size} onChange={(e) => setSize(e.target.value)} /></p>
 
           <p>Container: 
             <select
-              defaultValue={item.comtainer}
+              defaultValue={item.container}
               onChange={(e) => setContainer(e.target.value)}>
                 <option disabled >Choose</option>
                 <option value="Bottle">Bottle</option>
@@ -206,8 +273,6 @@ function Edit() {
                 <option value="Tube">Tube</option>
             </select>
           </p>
-
-          <p>Size: <input value={size} onChange={(e) => setSize(e.target.value)} /></p>
 
           <p>Favorite?
             <input

@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
   console.log('user', req.user);
   // only do GET if authenticated:
   if (req.isAuthenticated()){
-      let queryText = `SELECT * FROM "inventory" WHERE "user_id" = $1`;
+      let queryText = `SELECT * FROM "inventory" WHERE "user_id" = $1 ORDER BY "id" DESC`;
       pool.query(queryText, [req.user.id]).then((result) => {
           res.send(result.rows);
       }).catch((error) => {
@@ -54,8 +54,8 @@ router.post('/', (req, res) => {
   // only do POST if authenticated:
   if (req.isAuthenticated()){
     const addQuery = `
-    INSERT INTO "inventory" ("user_id", "type", "name", "hex", "medium", "brand", "body", "container", "size", "notes", "favorite")
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+    INSERT INTO "inventory" ("user_id", "type", "name", "hex", "medium", "brand", "body", "container", "size", "notes", "favorite", "line")
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
     RETURNING "id";`
     pool.query(addQuery, [
       req.user.id,
@@ -68,7 +68,8 @@ router.post('/', (req, res) => {
       req.body.container,
       req.body.size,
       req.body.notes,
-      req.body.favorite
+      req.body.favorite,
+      req.body.line
     ])
     .then(result => {
       console.log('New item ID:', result.rows[0].id);
@@ -83,14 +84,38 @@ router.post('/', (req, res) => {
   }
 });
 
-// PUT to UPDATE FAVORITE
+// PUT to UPDATE ITEM
 router.put('/', (req, res) => {
-  console.log('PUT req.body.favorite:', req.body.favorite);
+  console.log('PUT req.body:', req.body);
   if (req.isAuthenticated()){
-    let id = req.body.id;
-    let favoriteStatus = req.body.favorite;
-    const queryText = `UPDATE inventory SET "favorite" = $2 WHERE id = $1;`;
-    pool.query(queryText, [id, favoriteStatus])
+    // let id = req.body.id;
+    const editQuery = `UPDATE "inventory" SET 
+    "type" = $2, 
+    "name" = $3, 
+    "hex" = $4, 
+    "medium" = $5, 
+    "brand" = $6, 
+    "body" = $7, 
+    "container" = $8, 
+    "size" = $9, 
+    "notes" = $10, 
+    "favorite" = $11, 
+    "line" = $12
+    WHERE id = $1;`;
+    pool.query(editQuery, [
+      req.body.id,
+      req.body.type,
+      req.body.name,
+      req.body.hex,
+      req.body.medium,
+      req.body.brand,
+      req.body.body,
+      req.body.container,
+      req.body.size,
+      req.body.notes,
+      req.body.favorite,
+      req.body.line
+    ])
     .then((result) => {
         console.log('PUT result:', result);
         res.sendStatus(204);

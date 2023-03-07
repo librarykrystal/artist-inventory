@@ -92,7 +92,7 @@ function ItemDetails() {
       </div>
       }
 
-{item.type == 'Gesso' &&
+{ item.type == 'Gesso' &&
       <div 
         style={{ 
           // backgroundImage: `linear-gradient(to bottom right, ${item.hex}, black)`,
@@ -106,10 +106,16 @@ function ItemDetails() {
       }
 
       <p>{item.brand}</p>
+      {item.line && <p>{item.line}</p> }
       <p>{item.size} {item.container}</p>
       {/* <p>FAMILY: {item.family}</p> */}
-      <p>NOTES: {item.notes}</p>
 
+      <p className="notesLabel">NOTES: </p>
+      <div className="notesText" >
+        { item.notes ? ` ${item.notes}` :
+          <p className="notesText" style={{fontStyle: `italic`, color: 'grey'}}> none</p>
+        }
+      </div>
 
 
       {/* START LIKE KERFUFFLE */}
