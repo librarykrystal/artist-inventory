@@ -17,6 +17,7 @@ function UserHome() {
   const [typeFilter, setTypeFilter] = useState('');
   const [mediumFilter, setMediumFilter] = useState('');
   const [brandFilter, setBrandFilter] = useState('');
+  // favorite?  Non-toxic?  Discontinued?
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER_INVENTORY' });
@@ -25,7 +26,7 @@ function UserHome() {
 
   // LIST FILTERING
   const typeFilterHandler = (item) => {
-    if(!typeFilter){
+    if (!typeFilter) {
       return item;
     } else if (item.type == typeFilter) {
       return item;
@@ -33,10 +34,20 @@ function UserHome() {
   }
 
   const mediumFilterHandler = (item) => {
-    if(!mediumFilter){
+    if (!mediumFilter) {
       return item;
     } else if (item.medium == mediumFilter) {
       return item;
+    }
+  }
+
+  const brandFilterHandler = (item) => {
+    if (!brandFilter) {
+      return item;
+    } else if (item.brand == brandFilter) {
+      return item;
+    // } else if (brandFilter == 'Other') {
+    //      IDEA: make an array of brands to loop through, return item if no match?
     }
   }
 
@@ -74,7 +85,6 @@ function UserHome() {
           className="filterDropDown"
           defaultValue=""
           onChange={(e) => setTypeFilter(e.target.value)}>
-            {/* <option disabled >Choose</option> */}
             <option value="">All Types</option>
             <option value="Additive">Additive</option>
             <option value="Color">Color</option>
@@ -92,7 +102,6 @@ function UserHome() {
           className="filterDropDown"
           defaultValue=""
           onChange={(e) => setMediumFilter(e.target.value)}>
-            {/* <option disabled >Choose</option> */}
             <option value="">All Mediums</option>
             <option value="Acrylic">Acrylic</option>
             <option value="Enamel">Enamel</option>
@@ -100,6 +109,29 @@ function UserHome() {
             <option value="Oil">Oil</option>
             <option value="Pastel">Pastel</option>
             <option value="Watercolor">Watercolor</option>
+        </select>
+
+        <select
+          className="filterDropDown"
+          defaultValue=""
+          onChange={(e) => setBrandFilter(e.target.value)}>
+            <option value="">All Brands</option>
+            <option value="Blick">Blick</option>
+            <option value="Gamblin">Gamblin</option>
+            <option value="Golden Artist Colors">Golden Artist Colors</option>
+            <option value="Grumbacher">Grumbacher</option>
+            <option value="Holbein">Holbein</option>
+            <option value="Liquitex">Liquitex</option>
+            <option value="Pebeo">Pebeo</option>
+            <option value="QoR">QoR</option>
+            <option value="Rembrandt">Rembrandt</option>
+            <option value="Sennelier">Sennelier</option>
+            <option value="Speedball">Speedball</option>
+            <option value="Stuart Semple">Stuart Semple</option>
+            <option value="Utrecht">Utrecht</option>
+            <option value="Willaimsburg">Willaimsburg</option>
+            <option value="Winsor & Newton">Winsor & Newton</option>
+            {/* <option value="Other">Other</option> */}
         </select>
 
       </div>
@@ -115,7 +147,11 @@ function UserHome() {
 
       {inventory.length >0 &&
           <div>
-            {inventory.filter(typeFilterHandler).filter(mediumFilterHandler).map(item => {
+            {inventory
+              .filter(typeFilterHandler)
+              .filter(mediumFilterHandler)
+              .filter(brandFilterHandler)
+              .map(item => {
               return(
                 <div className="listItemContainer" key={item.id} onClick={() => goToDetails(item.id)}>
                   <div className="listingInfoContainer">
