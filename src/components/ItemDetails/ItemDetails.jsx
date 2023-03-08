@@ -117,6 +117,7 @@ function ItemDetails() {
         }
       </div>
 
+      { item.toxic == true && <p>☠️</p> }
 
       {/* START LIKE KERFUFFLE */}
 
@@ -142,9 +143,9 @@ function ItemDetails() {
       {/* <LogOutButton className="btn" /> */}
       {/* <Link to={`/`}>HOME</Link> */}
       <br />
-      <button onClick={goEdit}>EDIT THIS ITEM</button>
+      <button onClick={goEdit}>EDIT</button>
       <br />
-      <button onClick={deleteMe}>DELETE THIS ITEM</button>
+      <button onClick={deleteMe}>DELETE</button>
       <br />
       <button onClick={goBack}>HOME</button>
     </div>

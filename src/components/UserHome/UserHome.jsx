@@ -174,7 +174,10 @@ function UserHome() {
                     <h3 className="listItemName">{item.name}</h3>
                     <p className="listItemBrand">{item.brand}</p>
                     <p className="listItemDetails">{item.line} {item.medium}</p>
-                    {item.favorite == true && <p className="listHeart">♥</p>}
+                    <p className="listHeart">
+                    {item.favorite == true && <span>♥</span>}
+                    {item.toxic == true && <span>☠️</span>}
+                    </p>
                   </div>
                   <div className="listingColorContainer">
                     {item.hex &&

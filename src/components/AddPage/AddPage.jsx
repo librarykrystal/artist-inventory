@@ -26,6 +26,7 @@ function Add() {
   const [size, setSize] = useState('');
   const [notes, setNotes] = useState('');
   const [favorite, setFavorite] = useState(false);
+  const [toxic, setToxic] = useState(false);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -39,12 +40,17 @@ function Add() {
     // dispatch any fetches for drop-down options held in database
   }, []);
 
-  console.log('SELECTIONS...', ["type:", type, "name:", name, "medium:", medium, "hex:", hex, "brand:", brand, "body:", body, "container:", container, "size:", size, "favorite", favorite, "notes:", notes]);
+  console.log('SELECTIONS...', ["type:", type, "name:", name, "medium:", medium, "hex:", hex, "brand:", brand, "line:", line, "body:", body, "container:", container, "size:", size, "favorite", favorite, "toxic:", toxic, "notes:", notes]);
 
   // Toggle for favoriting checkbox:
   const handleCheckboxFave = () => {
     setFavorite(!favorite);
   };
+
+    // Toggle for toxicity checkbox:
+    const handleCheckboxTox = () => {
+      setToxic(!toxic);
+    };
 
   // onSubmit
   const submitForm = (e) => {
@@ -68,7 +74,7 @@ function Add() {
     } else {
       dispatch({ 
           type: 'ADD_ITEM',
-          payload: {type, name, hex, medium, brand, body, container, size, notes, favorite, line}
+          payload: {type, name, hex, medium, brand, body, container, size, notes, favorite, line, toxic}
       });
       // history.push(`/`);
       setShowModal(true);
@@ -265,6 +271,12 @@ function Add() {
             <input
               type="checkbox"
               onChange={handleCheckboxFave}
+            ></input></p>
+
+          <p>Toxic?
+            <input
+              type="checkbox"
+              onChange={handleCheckboxTox}
             ></input></p>
 
           <p>Notes:</p>

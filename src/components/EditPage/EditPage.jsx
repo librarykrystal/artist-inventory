@@ -25,7 +25,8 @@ function Edit() {
   const [container, setContainer] = useState(item.container);
   const [size, setSize] = useState(item.size);
   const [notes, setNotes] = useState(item.notes);
-  const [favorite, setFavorite] = useState(item.favorite);  // HOW DO I IMPORT THIS BOOLEAN?
+  const [favorite, setFavorite] = useState(item.favorite);
+  const [toxic, setToxic] = useState(item.toxic);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -69,6 +70,11 @@ function Edit() {
     setFavorite(!favorite);
   };
 
+  // Toggle for toxicity checkbox:
+  const handleCheckboxTox = () => {
+    setToxic(!toxic);
+  };
+
   // onSubmit
   const submitForm = (e) => {
     e.preventDefault();
@@ -91,7 +97,7 @@ function Edit() {
     } else {
       dispatch({ 
           type: 'EDIT_ITEM',
-          payload: {id, type, name, hex, medium, brand, body, container, size, notes, favorite, line}
+          payload: {id, type, name, hex, medium, brand, body, container, size, notes, favorite, line, toxic}
       });
       // history.push(`/`);
       setShowModal(true);
@@ -294,6 +300,13 @@ function Edit() {
               checked={ favorite ? 'checked' : ''}
               type="checkbox"
               onChange={handleCheckboxFave}
+            ></input></p>
+
+          <p>Toxic?
+            <input
+              checked={ toxic ? 'checked' : ''}
+              type="checkbox"
+              onChange={handleCheckboxTox}
             ></input></p>
 
           <p>Notes:</p>
