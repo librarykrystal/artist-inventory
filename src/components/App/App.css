@@ -48,6 +48,8 @@ Inventory List and Details
 
 .filterDropDown {
   background-color: #fcfcfc;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .filterText {

@@ -14,11 +14,32 @@ function UserHome() {
   const dispatch = useDispatch();
   // const history = useHistory();
 
-  const [typeFilter, setTypeFilter] = useState('All Types');
+  const [typeFilter, setTypeFilter] = useState('');
+  const [mediumFilter, setMediumFilter] = useState('');
+  const [brandFilter, setBrandFilter] = useState('');
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER_INVENTORY' });
   }, []);
+
+
+  // LIST FILTERING
+  const typeFilterHandler = (item) => {
+    if(!typeFilter){
+      return item;
+    } else if (item.type == typeFilter) {
+      return item;
+    }
+  }
+
+  const mediumFilterHandler = (item) => {
+    if(!mediumFilter){
+      return item;
+    } else if (item.medium == mediumFilter) {
+      return item;
+    }
+  }
+
 
   const goToDetails = (itemId) => {
     console.log('goToDetails CLICKED, ID:', itemId);
@@ -51,21 +72,36 @@ function UserHome() {
        
         <select
           className="filterDropDown"
-          defaultValue="All Types"
+          defaultValue=""
           onChange={(e) => setTypeFilter(e.target.value)}>
-              {/* <option disabled >Choose</option> */}
-              <option value="All Types">All Types</option>
-              <option value="Additive">Additive</option>
-              <option value="Color">Color</option>
-              {/* <option value="Gel">Gel</option> */}
-              <option value="Gesso">Gesso</option>
-              <option value="Ground">Ground</option>
-              <option value="Medium">Medium</option>
-              <option value="Paste">Paste</option>
-              <option value="Primer">Primer</option>
-              <option value="Solvent">Solvent</option>
-              <option value="Varnish">Varnish</option>
+            {/* <option disabled >Choose</option> */}
+            <option value="">All Types</option>
+            <option value="Additive">Additive</option>
+            <option value="Color">Color</option>
+            {/* <option value="Gel">Gel</option> */}
+            <option value="Gesso">Gesso</option>
+            <option value="Ground">Ground</option>
+            <option value="Medium">Medium</option>
+            <option value="Paste">Paste</option>
+            <option value="Primer">Primer</option>
+            <option value="Solvent">Solvent</option>
+            <option value="Varnish">Varnish</option>
         </select>
+
+        <select
+          className="filterDropDown"
+          defaultValue=""
+          onChange={(e) => setMediumFilter(e.target.value)}>
+            {/* <option disabled >Choose</option> */}
+            <option value="">All Mediums</option>
+            <option value="Acrylic">Acrylic</option>
+            <option value="Enamel">Enamel</option>
+            <option value="Gouache">Gouache</option>
+            <option value="Oil">Oil</option>
+            <option value="Pastel">Pastel</option>
+            <option value="Watercolor">Watercolor</option>
+        </select>
+
       </div>
 
 {/* END FILTERS BAR */}
@@ -74,70 +110,100 @@ function UserHome() {
       <div className="invList">
 
 
-{/* FILTER EXPERIMENTING STARTS HERE */}
+{/* FILTER EXPERIMENT FOR ALL FILTERS IN ONE USING FUNCTIONS */}
 
-      {/* FILTERING FOR TYPE */}
+
       {inventory.length >0 &&
-        <div>
-          {typeFilter != 'All Types' ? 
-            <div>
-              {inventory.filter(item => item.type==`${typeFilter}`).map(item => {
-                return(
-                  <div className="listItemContainer" key={item.id} onClick={() => goToDetails(item.id)}>
-                    <div className="listingInfoContainer">
-                      <h3 className="listItemName">{item.name}</h3>
-                      <p className="listItemBrand">{item.brand}</p>
-                      <p className="listItemDetails">{item.line} {item.medium}</p>
-                      {item.favorite == true && <p className="listHeart">♥</p>}
-                    </div>
-                    <div className="listingColorContainer">
-                      {item.hex &&
-                        <div style={{ 
-                            backgroundColor: `${item.hex}`,
-                            border: `2px solid black`,
-                            height: `82px`,
-                            width: `82px` }}>
-                        </div>
-                      }
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          :
-            <div>
-              {inventory.map(item => {
+          <div>
+            {inventory.filter(typeFilterHandler).filter(mediumFilterHandler).map(item => {
               return(
                 <div className="listItemContainer" key={item.id} onClick={() => goToDetails(item.id)}>
                   <div className="listingInfoContainer">
                     <h3 className="listItemName">{item.name}</h3>
                     <p className="listItemBrand">{item.brand}</p>
                     <p className="listItemDetails">{item.line} {item.medium}</p>
-                    {item.favorite == true &&
-                      <p className="listHeart">♥</p>
-                    }
+                    {item.favorite == true && <p className="listHeart">♥</p>}
                   </div>
                   <div className="listingColorContainer">
                     {item.hex &&
-                      <div 
-                        style={{ 
-                          // backgroundImage: `linear-gradient(to bottom right, ${item.hex}, black)`,
-                          backgroundColor: `${item.hex}`,
-                          // backgroundImage: `linear-gradient(to bottom right, ${item.glazehex}, ${item.masstonehex})`,
-                          border: `2px solid black`,
-                          height: `82px`,
-                          width: `82px`
-                        }}>
+                      <div style={{ 
+                        backgroundColor: `${item.hex}`,
+                        border: `2px solid black`,
+                        height: `82px`,
+                        width: `82px` }}>
                       </div>
                     }
                   </div>
                 </div>
               );
-          })}
-            </div>
-          }
-        </div>
+            })}
+          </div>
       }
+
+
+
+      {/* BELOW IS FILTERING FOR TYPE ONLY — WORKS */}
+      {/* //  {inventory.length >0 && */}
+      {/* //   <div>
+      //     {typeFilter != "" ?  */}
+      {/* //       <div> */}
+      {/* //         {inventory.filter(item => item.type==`${typeFilter}`).map(item => { */}
+      {/* //           return(
+      //             <div className="listItemContainer" key={item.id} onClick={() => goToDetails(item.id)}>
+      //               <div className="listingInfoContainer">
+      //                 <h3 className="listItemName">{item.name}</h3>
+      //                 <p className="listItemBrand">{item.brand}</p>
+      //                 <p className="listItemDetails">{item.line} {item.medium}</p>
+      //                 {item.favorite == true && <p className="listHeart">♥</p>}
+      //               </div>
+      //               <div className="listingColorContainer">
+      //                 {item.hex && */}
+      {/* //                   <div style={{  */}
+      {/* //                       backgroundColor: `${item.hex}`,
+      //                       border: `2px solid black`,
+      //                       height: `82px`,
+      //                       width: `82px` }}>
+      //                   </div>
+      //                 }
+      //               </div> */}
+      {/* //             </div>
+      //           );
+      //         })}
+      //       </div> */}
+      {/* //     :
+      //       <div>
+      //         {inventory.map(item => { */}
+      {/* //         return(
+      //           <div className="listItemContainer" key={item.id} onClick={() => goToDetails(item.id)}>
+      //             <div className="listingInfoContainer">
+      //               <h3 className="listItemName">{item.name}</h3>
+      //               <p className="listItemBrand">{item.brand}</p>
+      //               <p className="listItemDetails">{item.line} {item.medium}</p>
+      //               {item.favorite == true && */}
+      {/* //                 <p className="listHeart">♥</p>
+      //               }
+      //             </div>
+      //             <div className="listingColorContainer">
+      //               {item.hex && */}
+      {/* //                 <div  */}
+      {/* //                   style={{  */}
+      {/* //                     backgroundColor: `${item.hex}`,
+      //                     border: `2px solid black`,
+      //                     height: `82px`,
+      //                     width: `82px`
+      //                   }}>
+      //                 </div>
+      //               }
+      //             </div> */}
+      {/* //           </div>
+      //         );
+      //     })}
+      //       </div> */}
+      {/* //     }
+      //   </div>
+      // } */}
+
+
 
 
 {/* BELOW IS ORIGINAL WORKING LIST WITH NO FILTERING */}
