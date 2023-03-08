@@ -17,6 +17,7 @@ function UserHome() {
   const [typeFilter, setTypeFilter] = useState('');
   const [mediumFilter, setMediumFilter] = useState('');
   const [brandFilter, setBrandFilter] = useState('');
+  const [faveFilter, setFaveFilter] = useState(false);
   // favorite?  Non-toxic?  Discontinued?
 
   useEffect(() => {
@@ -50,6 +51,18 @@ function UserHome() {
     //      IDEA: make an array of brands to loop through, return item if no match?
     }
   }
+
+  const faveFilterHandler = (item) => {
+    if (!faveFilter) {
+      return item;
+    } else if (faveFilter && item.favorite == true) {
+      return item;
+    }
+  }
+
+  const handleCheckboxFave = () => {
+    setFaveFilter(!faveFilter);
+  };
 
 
   const goToDetails = (itemId) => {
@@ -134,6 +147,8 @@ function UserHome() {
             {/* <option value="Other">Other</option> */}
         </select>
 
+        <input className="filterCheckbox" type="checkbox" onChange={handleCheckboxFave} ></input> Favorites Only
+
       </div>
 
 {/* END FILTERS BAR */}
@@ -151,6 +166,7 @@ function UserHome() {
               .filter(typeFilterHandler)
               .filter(mediumFilterHandler)
               .filter(brandFilterHandler)
+              .filter(faveFilterHandler)
               .map(item => {
               return(
                 <div className="listItemContainer" key={item.id} onClick={() => goToDetails(item.id)}>
