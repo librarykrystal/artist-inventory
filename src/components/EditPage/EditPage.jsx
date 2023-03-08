@@ -4,6 +4,7 @@ import {useHistory} from 'react-router-dom';
 import { useParams, Link } from 'react-router-dom';
 import Modal from '../EditModal/EditModal';
 // import './EditPage.css';
+import { HexColorPicker } from "react-colorful";
 
 function Edit() {
 
@@ -180,8 +181,21 @@ function Edit() {
             type != "Solvent" &&
             type != "Varnish" &&
             <>
-              <p>Color: 
-              <input type="color" defaultValue={hex} onChange={(e) => setHex(e.target.value)}></input></p>
+              {/* <p>Color:  */}
+              {/* <input type="color" defaultValue={hex} onChange={(e) => setHex(e.target.value)}></input></p> */}
+              <div className="colorPickerContainer">
+                <HexColorPicker className="colorPicker" color={hex} onChange={(e) => setHex(e)} />
+                { hex &&
+                  <div className="colorSelection"
+                    style={{ 
+                      backgroundColor: `${hex}`,
+                      border: `2px solid black`,
+                      height: `196px`,
+                      width: `60px`
+                    }}>
+                  </div>
+                }
+              </div>
             </>
           }
 

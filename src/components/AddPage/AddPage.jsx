@@ -4,6 +4,8 @@ import {useHistory} from 'react-router-dom';
 import { useParams, Link } from 'react-router-dom';
 import Modal from '../AddModal/AddModal';
 import './AddPage.css';
+import { SketchPicker, HuePicker, PhotoshopPicker } from 'react-color';  // glitchy
+import { HexColorPicker } from "react-colorful";
 
 function Add() {
 
@@ -12,8 +14,8 @@ function Add() {
   const user = useSelector((store) => store.user.id);
   const item = useSelector((store) => store.item);
 
-  const [type, setType] = useState(item.type);
-  const [name, setName] = useState(item.name);
+  const [type, setType] = useState('');
+  const [name, setName] = useState('');
   const [hex, setHex] = useState('');
   // const [family, setFamily] = useState('');
   const [medium, setMedium] = useState('');
@@ -157,8 +159,21 @@ function Add() {
             type != "Solvent" &&
             type != "Varnish" &&
             <>
-              <p>Color: 
-              <input type="color" defaultValue="#ffffff" onChange={(e) => setHex(e.target.value)}></input></p>
+            {/* <p>Color: 
+            <input type="color" defaultValue="#ffffff" onChange={(e) => setHex(e.target.value)}></input></p> */}
+              <div className="colorPickerContainer">
+                <HexColorPicker className="colorPicker" color={hex} onChange={(e) => setHex(e)} />
+                { hex &&
+                  <div className="colorSelection"
+                    style={{ 
+                      backgroundColor: `${hex}`,
+                      border: `2px solid black`,
+                      height: `196px`,
+                      width: `60px`
+                    }}>
+                  </div>
+                }
+              </div>
             </>
           }
 
