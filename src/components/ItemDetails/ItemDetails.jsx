@@ -4,7 +4,29 @@ import { useSelector, useDispatch } from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from "react";
+import Button from '@mui/material/Button';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import grey from '@mui/material/colors/grey';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import HomeIcon from '@mui/icons-material/Home';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import IconButton from '@mui/material/IconButton';
+import WarningIcon from '@mui/icons-material/Warning';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#d9d9d9',
+    },
+    secondary: {
+      main: grey[700],
+      contrastText: "#fff",
+    },
+  },
+});
 
 function ItemDetails() {
 
@@ -69,22 +91,23 @@ function ItemDetails() {
 
 
   return (
+    <ThemeProvider theme={theme}>
+
     <div className="container">
       { item &&
       <>
       {/* <p>Welcome, {user.username}!</p>
       <p>Item ID is: {id}</p> */}
       {/* <p>This is where the details live!</p> */}
-
+      
       <h2>{item.name}</h2>
+      { item.toxic == true && <WarningIcon /> }
       <p>{item.body} {item.medium}</p>
 
       {item.type == 'Color' &&
       <div 
         style={{ 
-          // backgroundImage: `linear-gradient(to bottom right, ${item.hex}, black)`,
           backgroundColor: `${item.hex}`,
-          // backgroundImage: `linear-gradient(to bottom right, ${item.glazehex}, ${item.masstonehex})`,
           border: `2px solid black`,
           height: `80px`,
           width: `80px`
@@ -95,15 +118,15 @@ function ItemDetails() {
 { item.type == 'Gesso' &&
       <div 
         style={{ 
-          // backgroundImage: `linear-gradient(to bottom right, ${item.hex}, black)`,
           backgroundColor: `${item.hex}`,
-          // backgroundImage: `linear-gradient(to bottom right, ${item.glazehex}, ${item.masstonehex})`,
           border: `2px solid black`,
           height: `80px`,
           width: `80px`
         }}>
       </div>
       }
+
+      
 
       <p>{item.brand}</p>
       {item.line && <p>{item.line}</p> }
@@ -117,38 +140,60 @@ function ItemDetails() {
         }
       </div>
 
-      { item.toxic == true && <p>☠️</p> }
+      {/* { item.toxic == true && <p>☠️</p> } */}
 
-      {/* START LIKE KERFUFFLE */}
-
-      { item.favorite == true && <p>♥</p> }
-      { item.favorite == false && <p>♡</p> }
+      {/* { item.favorite == true && <p>♥</p> }
+      { item.favorite == false && <p>♡</p> } */}
 
       { item.favorite == true &&
-        <button onClick={unfaveIt}>UNFAVORITE</button>
+        <IconButton aria-label="unfavorite" onClick={unfaveIt}>
+          <FavoriteIcon />
+        </IconButton>
+        // <button onClick={unfaveIt}>UNFAVORITE</button>
       }
 
       { item.favorite == false &&
-        <button onClick={faveIt}>FAVORITE</button>
+      <IconButton aria-label="favorite" onClick={faveIt}>
+        <FavoriteBorderIcon />
+      </IconButton>
+        // <button onClick={faveIt}>FAVORITE</button>
       }
-
-      {/* END LIKE KERFUFFLE */}
-
-
 
       {/* <p>DATA TEST: {JSON.stringify(item)}</p> */}
       </>
-}
+      }
 
       {/* <LogOutButton className="btn" /> */}
       {/* <Link to={`/`}>HOME</Link> */}
       <br />
-      <button onClick={goEdit}>EDIT</button>
+      <Button
+        variant="contained"
+        color="primary"
+        size="small"
+        startIcon={<EditIcon />}
+        onClick={goEdit}>EDIT
+      </Button>
+      {/* <button onClick={goEdit}>EDIT</button> */}
       <br />
-      <button onClick={deleteMe}>DELETE</button>
+      <Button
+        variant="contained"
+        color="secondary"
+        size="small"
+        startIcon={<DeleteForeverIcon />}
+        onClick={deleteMe}>DELETE
+      </Button>
+      {/* <button onClick={deleteMe}>DELETE</button> */}
       <br />
-      <button onClick={goBack}>HOME</button>
+      <Button
+        variant="contained"
+        color="primary"
+        size="small"
+        startIcon={<HomeIcon />}
+        onClick={goBack}>HOME
+      </Button>
+      {/* <button onClick={goBack}>HOME</button> */}
     </div>
+    </ThemeProvider>
   );
 }
 

@@ -31,7 +31,7 @@ function Edit() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
   const [noTypeWarning, setNoTypeWarning] = useState(false);
   const [noNameWarning, setNoNameWarning] = useState(false);
   const [noTypeNoNameWarning, setNoTypeNoNameWarning] = useState(false);
@@ -172,6 +172,7 @@ function Edit() {
                 <option value="Acrylic">Acrylic</option>
                 <option value="Enamel">Enamel</option>
                 <option value="Gouache">Gouache</option>
+                <option value="Ink">Ink</option>
                 <option value="Oil">Oil</option>
                 <option value="Pastel">Pastel</option>
                 <option value="Watercolor">Watercolor</option>
@@ -288,6 +289,7 @@ function Edit() {
                 <option value="Can">Can</option>
                 <option value="Jar">Jar</option>
                 <option value="Marker">Marker</option>
+                <option value="Pan">Pan</option>
                 <option value="Pouch">Pouch</option>
                 <option value="Sample">Sample</option>
                 <option value="Tub">Tub</option>

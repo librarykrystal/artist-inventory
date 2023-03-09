@@ -3,8 +3,27 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import { useDispatch, useSelector } from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import './UserHome.css';
+import Button from '@mui/material/Button';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import grey from '@mui/material/colors/grey';
+import white from '@mui/material/colors/grey';
+import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import WarningIcon from '@mui/icons-material/Warning';
 
   // this component will show MAIN INVENTORY LIST
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#d9d9d9',
+    },
+    alert: {
+      main: grey[700],
+      contrastText: "#fff",
+    },
+  },
+});
 
 function UserHome() {
 
@@ -67,7 +86,6 @@ function UserHome() {
 
   const goToDetails = (itemId) => {
     console.log('goToDetails CLICKED, ID:', itemId);
-    // set reducer to this movie's ID (dispatch)
     dispatch({
         type: 'SET_ITEM_ID',
         payload: itemId
@@ -81,11 +99,19 @@ function UserHome() {
   }
 
   return (
+    <ThemeProvider theme={theme}>
+
     <div className="container">
       <div className="homeHeader">
       <h4>Welcome, {user.username}!</h4>
       {/* <p>Your ID is: {user.id}</p> */}
-      <button onClick={goAdd}>ADD NEW ITEM</button>
+      <Button
+        variant="contained"
+        color="primary"
+        size="small"
+        startIcon={<AddToPhotosIcon />}
+        onClick={goAdd}>ADD NEW ITEM
+      </Button>
       </div>
       <br />
 
@@ -119,6 +145,7 @@ function UserHome() {
             <option value="Acrylic">Acrylic</option>
             <option value="Enamel">Enamel</option>
             <option value="Gouache">Gouache</option>
+            <option value="Ink">Ink</option>
             <option value="Oil">Oil</option>
             <option value="Pastel">Pastel</option>
             <option value="Watercolor">Watercolor</option>
@@ -173,10 +200,20 @@ function UserHome() {
                   <div className="listingInfoContainer">
                     <h3 className="listItemName">{item.name}</h3>
                     <p className="listItemBrand">{item.brand}</p>
-                    <p className="listItemDetails">{item.line} {item.medium}</p>
+                    <p className="listItemDetails">
+                      {item.line}{' '}
+                      {item.medium}{' '}
+                      {item.container == 'Marker' && `${item.container}`}{' '}
+                      {item.type == 'Additive'
+                        || item.type == 'Ground'
+                        || item.type == 'Medium'
+                        || item.type == 'Paste'
+                        || item.type == 'Primer'
+                        || item.type == 'Varnish' ? `${item.type}` : null}
+                    </p>
                     <p className="listHeart">
-                    {item.favorite == true && <span>♥</span>}
-                    {item.toxic == true && <span>☠️</span>}
+                    {item.favorite == true && <FavoriteIcon />}
+                    {item.toxic == true && <WarningIcon />}
                     </p>
                   </div>
                   <div className="listingColorContainer">
@@ -301,6 +338,7 @@ function UserHome() {
     {/* <p>DATA TEST: {JSON.stringify(inventory)}</p> */}
       {/* <LogOutButton className="btn" /> */}
     </div>
+    </ThemeProvider>
   );
 }
 

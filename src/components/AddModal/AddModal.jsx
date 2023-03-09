@@ -2,6 +2,24 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import './AddModal.css';
+import Button from '@mui/material/Button';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import grey from '@mui/material/colors/grey';
+import HomeIcon from '@mui/icons-material/Home';
+import PaletteIcon from '@mui/icons-material/Palette';
+import FactCheckIcon from '@mui/icons-material/FactCheck';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#d9d9d9',
+    },
+    secondary: {
+      main: grey[700],
+      contrastText: "#fff",
+    },
+  },
+});
 
 function Modal(props) {
 
@@ -28,6 +46,7 @@ function Modal(props) {
   }
 
   return (
+    <ThemeProvider theme={theme}>
     <>
 
     {/* CONDITIONAL RENDER:
@@ -45,8 +64,24 @@ function Modal(props) {
           {/* <p>ITEM ID TEST: {JSON.stringify(item.id)}</p> */}
         </div>
         <div className="modal-footer">
-          <button className="modal-button" onClick={goToItem}>VIEW ITEM</button>
-          <button className="modal-button" onClick={goHome}>HOME</button>
+          {/* <button className="modal-button" onClick={goToItem}>VIEW ITEM</button> */}
+          <Button
+            variant="contained"
+            color="primary"
+            size="small"
+            startIcon={<FactCheckIcon />}
+            onClick={goToItem}>VIEW ITEM
+          </Button>
+          {/* <br /> */}
+          {' '}
+          {/* <button className="modal-button" onClick={goHome}>HOME</button> */}
+          <Button
+            variant="contained"
+            color="primary"
+            size="small"
+            startIcon={<HomeIcon />}
+            onClick={goHome}>HOME
+          </Button>
         </div>
       </div>
     </div>
@@ -63,14 +98,21 @@ function Modal(props) {
           {/* <p>ITEM ID TEST: {JSON.stringify(item.id)}</p> */}
         </div>
         <div className="modal-footer">
-          <button className="modal-button" onClick={goHome}>HOME</button>
+          {/* <button className="modal-button" onClick={goHome}>HOME</button> */}
+          <Button
+            variant="contained"
+            color="primary"
+            size="small"
+            startIcon={<HomeIcon />}
+            onClick={goHome}>HOME
+          </Button>
         </div>
       </div>
     </div>
     }
 
-
     </>
+    </ThemeProvider>
   );
 }
 

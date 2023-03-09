@@ -31,7 +31,7 @@ router.get('/:id', (req, res) => {
     // only do GET if authenticated:
   if (req.isAuthenticated()){
     let id = req.params.id;
-    const queryText = `SELECT * FROM inventory WHERE id = $1;`;
+    const queryText = `SELECT * FROM inventory WHERE "id" = $1 AND "user_id" = ${req.user.id};`;
     pool.query(queryText, [id])
     .then((result) => {
         console.log('GET ITEM by ID RESULTS:', result);

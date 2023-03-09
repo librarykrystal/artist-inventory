@@ -6,6 +6,29 @@ import Modal from '../AddModal/AddModal';
 import './AddPage.css';
 import { SketchPicker, HuePicker, PhotoshopPicker } from 'react-color';  // glitchy
 import { HexColorPicker } from "react-colorful";
+import Button from '@mui/material/Button';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import grey from '@mui/material/colors/grey';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import HomeIcon from '@mui/icons-material/Home';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import IconButton from '@mui/material/IconButton';
+import WarningIcon from '@mui/icons-material/Warning';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#d9d9d9',
+    },
+    secondary: {
+      main: grey[700],
+      contrastText: "#fff",
+    },
+  },
+});
 
 function Add() {
 
@@ -93,6 +116,7 @@ function Add() {
 
 
   return(
+    <ThemeProvider theme={theme}>
     <div className="container">
 
       <h3>ADD ITEM</h3>
@@ -150,6 +174,7 @@ function Add() {
                 <option value="Acrylic">Acrylic</option>
                 <option value="Enamel">Enamel</option>
                 <option value="Gouache">Gouache</option>
+                <option value="Ink">Ink</option>
                 <option value="Oil">Oil</option>
                 <option value="Pastel">Pastel</option>
                 <option value="Watercolor">Watercolor</option>
@@ -260,6 +285,7 @@ function Add() {
                 <option value="Can">Can</option>
                 <option value="Jar">Jar</option>
                 <option value="Marker">Marker</option>
+                <option value="Pan">Pan</option>
                 <option value="Pouch">Pouch</option>
                 <option value="Sample">Sample</option>
                 <option value="Tub">Tub</option>
@@ -267,13 +293,13 @@ function Add() {
             </select>
           </p>
 
-          <p>Favorite?
+          <p><FavoriteIcon />
             <input
               type="checkbox"
               onChange={handleCheckboxFave}
             ></input></p>
 
-          <p>Toxic?
+          <p><WarningIcon />
             <input
               type="checkbox"
               onChange={handleCheckboxTox}
@@ -289,6 +315,14 @@ function Add() {
           />
 
           <br />
+          {/* <Button
+           type="submit"
+            variant="contained"
+            color="primary"
+            size="small"
+            startIcon={<EditIcon />}
+            onClick={goEdit}>EDIT
+          </Button> */}
           <input type="submit" />
         </form>
 
@@ -299,11 +333,18 @@ function Add() {
 
       </div>
     
-      <button onClick={goBack}>HOME</button>
+      <Button
+        variant="contained"
+        color="primary"
+        size="small"
+        startIcon={<HomeIcon />}
+        onClick={goBack}>HOME
+      </Button>
 
       {/* <button onClick={modalGo}>SHOW MODAL</button> */}
       <Modal  show={showModal}/>
     </div>
+    </ThemeProvider>
   )
 }
 
