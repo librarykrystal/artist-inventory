@@ -18,6 +18,13 @@ import IconButton from '@mui/material/IconButton';
 import WarningIcon from '@mui/icons-material/Warning';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -124,62 +131,26 @@ function Add() {
       <div className="addForm">
         <form onSubmit={submitForm}>
 
-          <p>Type: 
-            <select
-              defaultValue="Choose"
-              onChange={(e) => setType(e.target.value)}>
-                  <option disabled >Choose</option>
-                  <option value="Additive">Additive</option>
-                  <option value="Color">Color</option>
-                  {/* <option value="Gel">Gel</option> */}
-                  <option value="Gesso">Gesso</option>
-                  <option value="Ground">Ground</option>
-                  <option value="Medium">Medium</option>
-                  <option value="Paste">Paste</option>
-                  <option value="Primer">Primer</option>
-                  <option value="Solvent">Solvent</option>
-                  <option value="Varnish">Varnish</option>
-            </select>
-          </p>
-        
-          {/* Conditional render shows only if type is "color" */}
-          { type == 'Color' &&
-            <>
-              {/* <p>Family: 
-                <select
-                  defaultValue="Choose"
-                  onChange={(e) => setFamily(e.target.value)}>
-                    <option disabled >Choose</option>
-                    <option value="Red">Red</option>
-                    <option value="Orange">Orange</option>
-                    <option value="Yellow">Yellow</option>
-                    <option value="Green">Green</option>
-                    <option value="Blue">Blue</option>
-                    <option value="Violet">Violet</option>
-                    <option value="Brown">Brown</option>
-                    <option value="Black">Black</option>
-                    <option value="Grey">Grey</option>
-                    <option value="White">White</option>
-                    <option value="Clear">Clear</option>
-                </select>
-              </p> */}
-            </>
-          }
-
-          <p>Medium: 
-            <select
-              defaultValue="Choose"
-              onChange={(e) => setMedium(e.target.value)}>
-                <option disabled >Choose</option>
-                <option value="Acrylic">Acrylic</option>
-                <option value="Enamel">Enamel</option>
-                <option value="Gouache">Gouache</option>
-                <option value="Ink">Ink</option>
-                <option value="Oil">Oil</option>
-                <option value="Pastel">Pastel</option>
-                <option value="Watercolor">Watercolor</option>
-            </select>
-          </p>
+          <FormControl fullWidth>
+            <InputLabel id="type">Type *</InputLabel>
+              <Select
+                required
+                labelId="type"
+                id="type"
+                value={type}
+                label="Type"
+                onChange={(e) => setType(e.target.value)}
+              >
+                <MenuItem value="Additive">Additive</MenuItem>
+                <MenuItem value="Color">Color</MenuItem>
+                <MenuItem value="Gesso">Gesso</MenuItem>
+                <MenuItem value="Medium">Medium</MenuItem>
+                <MenuItem value="Paste">Paste</MenuItem>
+                <MenuItem value="Primer">Primer</MenuItem>
+                <MenuItem value="Solvent">Solvent</MenuItem>
+                <MenuItem value="Varnish">Varnish</MenuItem>
+              </Select>
+          </FormControl>
 
           {/* Conditional render shows color picker only for appropriate types */}
           { type != "" &&
@@ -199,8 +170,8 @@ function Add() {
                     style={{ 
                       backgroundColor: `${hex}`,
                       border: `2px solid black`,
-                      height: `196px`,
-                      width: `60px`
+                      height: `60px`,
+                      width: `196px`
                     }}>
                   </div>
                 }
@@ -208,47 +179,78 @@ function Add() {
             </>
           }
 
-          <p>Name: <input value={name} onChange={(e) => setName(e.target.value)} /></p>
+          <br /><br />
+          <FormControl fullWidth>
+            <InputLabel id="medium">Medium</InputLabel>
+              <Select
+                labelId="medium"
+                id="medium"
+                value={medium}
+                label="Medium"
+                onChange={(e) => setMedium(e.target.value)}
+              >
+                <MenuItem value="Acrylic">Acrylic</MenuItem>
+                <MenuItem value="Enamel">Enamel</MenuItem>
+                <MenuItem value="Gouache">Gouache</MenuItem>
+                <MenuItem value="Ink">Ink</MenuItem>
+                <MenuItem value="Oil">Oil</MenuItem>
+                <MenuItem value="Pastel">Pastel</MenuItem>
+                <MenuItem value="Watercolor">Watercolor</MenuItem>
+              </Select>
+          </FormControl>
 
-          <p>Body: 
-            <select
-              defaultValue="Choose"
-              onChange={(e) => setBody(e.target.value)}>
-                <option disabled >Choose</option>
-                <option value="Aerosol">Aerosol</option>
-                <option value="Fluid">Fluid</option>
-                <option value="Heavy Body">Heavy Body</option>
-                <option value="High Flow">High Flow</option>
-                <option value="Powder">Powder</option>
-                <option value="Soft Body">Soft Body</option>
-                <option value="Solid">Solid</option>
-                <option value="">N/A</option>
-            </select>
-          </p>
+          <br /><br />
+          <TextField id="name" required label="Name" variant="standard" value={name} onChange={(e) => setName(e.target.value)} />
+ 
+          <br /><br />      
+          <FormControl fullWidth>
+            <InputLabel id="body">Body</InputLabel>
+              <Select
+                labelId="body"
+                id="body"
+                value={body}
+                label="Body"
+                onChange={(e) => setBody(e.target.value)}
+              >
+                <MenuItem value="Aerosol">Aerosol</MenuItem>
+                <MenuItem value="Fluid">Fluid</MenuItem>
+                <MenuItem value="Heavy Body">Heavy Body</MenuItem>
+                <MenuItem value="High Flow">High Flow</MenuItem>
+                <MenuItem value="Powder">Powder</MenuItem>
+                <MenuItem value="Soft Body">Soft Body</MenuItem>
+                <MenuItem value="Solid">Solid</MenuItem>
+                <MenuItem value="">N/A</MenuItem>
+              </Select>
+          </FormControl>
 
-          <p>Brand: 
-            <select
-              defaultValue="Choose"
-              onChange={(e) => setBrand(e.target.value)}>
-                <option disabled >Choose</option>
-                <option value="Blick">Blick</option>
-                <option value="Gamblin">Gamblin</option>
-                <option value="Golden Artist Colors">Golden Artist Colors</option>
-                <option value="Grumbacher">Grumbacher</option>
-                <option value="Holbein">Holbein</option>
-                <option value="Liquitex">Liquitex</option>
-                <option value="Pebeo">Pebeo</option>
-                <option value="QoR">QoR</option>
-                <option value="Rembrandt">Rembrandt</option>
-                <option value="Sennelier">Sennelier</option>
-                <option value="Speedball">Speedball</option>
-                <option value="Stuart Semple">Stuart Semple</option>
-                <option value="Utrecht">Utrecht</option>
-                <option value="Willaimsburg">Willaimsburg</option>
-                <option value="Winsor & Newton">Winsor & Newton</option>
-                <option value="Other">Other</option>
-            </select>
-          </p>
+          <br /><br />
+          <FormControl fullWidth>
+            <InputLabel id="brand">Brand</InputLabel>
+              <Select
+                labelId="brand"
+                id="brand"
+                value={brand}
+                label="Brand"
+                onChange={(e) => setBrand(e.target.value)}
+              >
+                <MenuItem value="Blick">Blick</MenuItem>
+                <MenuItem value="Gamblin">Gamblin</MenuItem>
+                <MenuItem value="Golden Artist Colors">Golden Artist Colors</MenuItem>
+                <MenuItem value="Grumbacher">Grumbacher</MenuItem>
+                <MenuItem value="Holbein">Holbein</MenuItem>
+                <MenuItem value="Liquitex">Liquitex</MenuItem>
+                <MenuItem value="Pebeo">Pebeo</MenuItem>
+                <MenuItem value="QoR">QoR</MenuItem>
+                <MenuItem value="Rembrandt">Rembrandt</MenuItem>
+                <MenuItem value="Sennelier">Sennelier</MenuItem>
+                <MenuItem value="Speedball">Speedball</MenuItem>
+                <MenuItem value="Stuart Semple">Stuart Semple</MenuItem>
+                <MenuItem value="Utrecht">Utrecht</MenuItem>
+                <MenuItem value="Willaimsburg">Willaimsburg</MenuItem>
+                <MenuItem value="Winsor & Newton">Winsor & Newton</MenuItem>
+                <MenuItem value="Other">Other</MenuItem>
+              </Select>
+          </FormControl>
 
 {/* Text box for entering a non-listed brand appears only if "Other" is chosen above. */}
 {/* If conditional was based on brand == "Other", it would disappear as soon as user types. */}
@@ -271,27 +273,35 @@ function Add() {
           <p>Enter brand: <input onChange={(e) => setBrand(e.target.value)} /></p>
           }
 
-          <p>Product Line: <input value={line} onChange={(e) => setLine(e.target.value)} /></p>
+          <br /><br />
+          <TextField id="line" label="Product Line" variant="standard" value={line} onChange={(e) => setLine(e.target.value)} />
 
-          <p>Size: <input value={size} onChange={(e) => setSize(e.target.value)} /></p>
+          <br /><br />
+          <TextField id="size" label="Size" variant="standard" value={size} onChange={(e) => setSize(e.target.value)} />
 
-          <p>Container: 
-            <select
-              defaultValue="Choose"
-              onChange={(e) => setContainer(e.target.value)}>
-                <option disabled >Choose</option>
-                <option value="Bottle">Bottle</option>
-                <option value="Bucket">Bucket</option>
-                <option value="Can">Can</option>
-                <option value="Jar">Jar</option>
-                <option value="Marker">Marker</option>
-                <option value="Pan">Pan</option>
-                <option value="Pouch">Pouch</option>
-                <option value="Sample">Sample</option>
-                <option value="Tub">Tub</option>
-                <option value="Tube">Tube</option>
-            </select>
-          </p>
+          <br /><br />
+          <FormControl fullWidth>
+            <InputLabel id="container">Container</InputLabel>
+              <Select
+                labelId="container"
+                id="container"
+                value={container}
+                label="Container"
+                onChange={(e) => setContainer(e.target.value)}
+              >
+                <MenuItem value="Bottle">Bottle</MenuItem>
+                <MenuItem value="Bucket">Bucket</MenuItem>
+                <MenuItem value="Can">Can</MenuItem>
+                <MenuItem value="Jar">Jar</MenuItem>
+                <MenuItem value="Marker">Marker</MenuItem>
+                <MenuItem value="Pan">Pan</MenuItem>
+                <MenuItem value="Pouch">Pouch</MenuItem>
+                <MenuItem value="Sample">Sample</MenuItem>
+                <MenuItem value="Tub">Tub</MenuItem>
+                <MenuItem value="Tube">Tube</MenuItem>
+              </Select>
+          </FormControl>
+
 
           <p><FavoriteIcon />
             <input

@@ -26,6 +26,7 @@ Containers
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* justify-content: center; */
 }
 
 /* .homeHeader {
@@ -62,6 +63,7 @@ Filter Options Bar
   margin-right: 10px;
   /* width: 120px; */
   width: 40px;
+  /* height: 40px; */
 }
 
 .filterText {
@@ -154,20 +156,26 @@ Color Picker
 -------------------------------------------------------------------------------- */
 
 .colorPickerContainer {
+  /* background-color: #e01616; */
   display: grid;
-  grid-template-columns: 70% 30%;
+  grid-template-rows: 70% 30%;
   width: 300px;
-  height: 200px;
-  margin: 10px;
+  height: 290px;
+  margin: auto;
+  padding-top: 20px;
 }
 
 .colorPicker {
-  grid-column-start: 1;
+  grid-row-start: 1;
+  display: flex;
+  justify-self: center;
 }
 
 .colorSelection {
-  grid-column-start: 2;
-  margin-left: 20px;
+  grid-row-start: 2;
+  margin: auto;
+  margin-bottom: 0px;
+  /* margin-left: 20px; */
 }
 
 /* --------------------------------------------------------------------------------
