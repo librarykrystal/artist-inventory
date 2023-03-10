@@ -17,6 +17,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import IconButton from '@mui/material/IconButton';
 import WarningIcon from '@mui/icons-material/Warning';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -24,6 +25,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import Checkbox from '@mui/material/Checkbox';
 
 const theme = createTheme({
   palette: {
@@ -126,10 +128,10 @@ function Add() {
     <ThemeProvider theme={theme}>
     <div className="container">
 
-      <h3>ADD ITEM</h3>
+      <br/><h2>ADD ITEM</h2><br/>
 
       <div className="addForm">
-        <form onSubmit={submitForm}>
+        {/* <form onSubmit={submitForm}> */}
 
           <FormControl fullWidth>
             <InputLabel id="type">Type *</InputLabel>
@@ -302,39 +304,54 @@ function Add() {
               </Select>
           </FormControl>
 
+      <br /><br />
+      <div className="faveAndToxContainer">
+      <span className="addFaveAndTox">
 
-          <p><FavoriteIcon />
-            <input
-              type="checkbox"
-              onChange={handleCheckboxFave}
-            ></input></p>
+        {/* FAVORITE selection conditional/toggle */}
+        { favorite == true &&
+          <IconButton aria-label="unfavorite" onClick={handleCheckboxFave}>
+            <FavoriteIcon fontSize="large"/>
+          </IconButton>
+        }
+        { favorite == false &&
+        <IconButton aria-label="favorite" onClick={handleCheckboxFave}>
+          <FavoriteBorderIcon fontSize="large"/>
+        </IconButton>
+        }
+        </span>
+        <span className="addFaveAndTox">
 
-          <p><WarningIcon />
-            <input
-              type="checkbox"
-              onChange={handleCheckboxTox}
-            ></input></p>
+        {/* TOXIC selection conditional/toggle */}
+        { toxic == true &&
+          <IconButton aria-label="untoxic" onClick={handleCheckboxTox}>
+            <WarningIcon fontSize="large"/>
+          </IconButton>
+        }
+        { toxic == false &&
+        <IconButton aria-label="toxic" onClick={handleCheckboxTox}>
+          <WarningAmberIcon fontSize="large"/>
+        </IconButton>
+        }
+      </span>
+      </div>
 
-          <p>Notes:</p>
+
+      <br />
+      <TextField id="notes" label="Notes" multiline rows={4} variant="outlined" value={notes} onChange={(e) => setNotes(e.target.value)} />
+
+          {/* <p>Notes:</p>
           <textarea
             value={notes}
             className="notesInput"
             type="text"
             rows="10" cols="40"
             onChange={(event) => setNotes(event.target.value)}
-          />
+          /> */}
 
-          <br />
-          {/* <Button
-           type="submit"
-            variant="contained"
-            color="primary"
-            size="small"
-            startIcon={<EditIcon />}
-            onClick={goEdit}>EDIT
-          </Button> */}
-          <input type="submit" />
-        </form>
+          
+          {/* <input type="submit" /> */}
+        {/* </form> */}
 
         {/* Conditionally render messages about blank type and name fields: */}
         { noTypeWarning && !noNameWarning && <p className="noEntry">Please choose a type to continue.</p>}
@@ -342,13 +359,24 @@ function Add() {
         { noTypeNoNameWarning && <p className="noEntry">Please enter type and name to continue.</p>}
 
       </div>
+
+      <br /><br />
+          <Button
+           type="submit"
+            variant="contained"
+            color="primary"
+            size="large"
+            startIcon={<EditIcon />}
+            onClick={submitForm}>SUBMIT
+          </Button>
     
+          <br /><br />
       <Button
         variant="contained"
-        color="primary"
-        size="small"
-        startIcon={<HomeIcon />}
-        onClick={goBack}>HOME
+        color="secondary"
+        size="large"
+        startIcon={<CancelIcon />}
+        onClick={goBack}>CANCEL
       </Button>
 
       {/* <button onClick={modalGo}>SHOW MODAL</button> */}

@@ -32,7 +32,7 @@
   height: 78px;
   width: 100%;
   overflow: visible;
-  grid-template-rows: 75px 35px 40px;
+  grid-template-rows: 75px 38px 40px;
   /* grid-template-columns: 1; */
   overflow: visible;
   /* background-color: greenyellow; */
@@ -68,7 +68,8 @@
 }
 
 .welcomeName {
-  margin-top: 8px;
+  margin-top: 11px;
+  color: dimgray;
   font-weight: bold;
 }
 

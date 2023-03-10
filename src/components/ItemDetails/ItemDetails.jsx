@@ -93,6 +93,7 @@ function ItemDetails() {
   return (
     <ThemeProvider theme={theme}>
 
+    <br/>
     <div className="container">
       { item &&
       <>
@@ -144,17 +145,18 @@ function ItemDetails() {
 
       {/* { item.favorite == true && <p>♥</p> }
       { item.favorite == false && <p>♡</p> } */}
+      <br/>
 
       { item.favorite == true &&
         <IconButton aria-label="unfavorite" onClick={unfaveIt}>
-          <FavoriteIcon />
+          <FavoriteIcon fontSize="large" />
         </IconButton>
         // <button onClick={unfaveIt}>UNFAVORITE</button>
       }
 
       { item.favorite == false &&
       <IconButton aria-label="favorite" onClick={faveIt}>
-        <FavoriteBorderIcon />
+        <FavoriteBorderIcon fontSize="large" />
       </IconButton>
         // <button onClick={faveIt}>FAVORITE</button>
       }
