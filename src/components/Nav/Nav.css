@@ -1,44 +1,99 @@
 .navOuterContainer{
-  position: sticky;
+  position: fixed;
   top: 0px;
   overflow: visible;
+  width: 100%;
+  z-index: 5000;
 }
 
-.nav {
-  /* flex box layout */
-  display: flex;
-  justify-content: space-between;
+/* .nav { */
+  /* flex box layout   */
+      /* display: flex;
+      justify-content: space-between; */
   /* align-items: center; */
-  height: 74px;
-  overflow: visible;
+      /* height: 74px;
+      overflow: visible; */
 
-  margin: 0 0 0px;
-  margin-bottom: 15px;
+      /* margin: 0 0 0px;
+      margin-bottom: 15px; */
   /* background-color: #3baa74; */
   /* background-color: #8c8c8c; */
   /* background-color: lightgray; */
   /* background-color: #f2f2f2; */
   /* background-image: linear-gradient(to top, #f2f2f2, grey); */
-  background-image: linear-gradient(to top, #c8c8c8, #f2f2f2);
+      /* background-image: linear-gradient(to top, #c8c8c8, #f2f2f2); */
   /* overflow: hidden; */
+/* } */
+
+.navMobile {
+  /* display: flex;
+  justify-content: space-between; */
+  display: grid;
+  height: 78px;
+  width: 100%;
+  overflow: visible;
+  grid-template-rows: 75px 35px 40px;
+  /* grid-template-columns: 1; */
+  overflow: visible;
+  /* background-color: greenyellow; */
+  /* background-image: linear-gradient(to top, #c8c8c8, #f2f2f2); */
 }
 
-.nav a {
+.navMobile a {
   text-decoration: none;
 }
 
-.logoImage {
-margin-top: 3px;
-height: 87px;
+.navMobileUpper {
+  /* background-color: aquamarine; */
+  background-image: linear-gradient(to top, #c8c8c8, #f2f2f2);
+  grid-row-start: 1;
+  display: flex;
+  justify-content: center;
+  overflow: visible;
 }
 
-.nav-title {
+.logoImage {
+  width: 393px;
+  position:relative
+}
+
+.navMobileMid {
+  background-color: white;
+  grid-row-start: 2;
+  /* display: flex;
+  justify-content: center;
+  align-content: flex-start; */
+  /* overflow: visible; */
+  text-align: center;
+}
+
+.welcomeName {
+  margin-top: 8px;
+  font-weight: bold;
+}
+
+.navMobileLower {
+  background-color: black;
+  grid-row-start: 3;
+  display: flex;
+  justify-content: center;
+  justify-content: space-around;
+  /* overflow: visible; */
+  /* text-align: center; */
+}
+
+.navLinkMobile {
+  grid-row-start: 2 / span 1;
+  margin-right: 25px;
+}
+
+/* .nav-title {
   font-size: 24px;
   font-weight: 700;
   color: #f2f2f2;
   padding-left: 10px;
   margin: 0;
-}
+} */
 
 .navLink {
   display: inline-block;
@@ -56,7 +111,7 @@ height: 87px;
   border: none;
   cursor: pointer;
   outline: solid black 2px;
-}
+} 
 
 .navLink:hover {
   /* background-color: #3baa74; */

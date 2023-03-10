@@ -31,7 +31,7 @@ function Edit() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const [noTypeWarning, setNoTypeWarning] = useState(false);
   const [noNameWarning, setNoNameWarning] = useState(false);
   const [noTypeNoNameWarning, setNoTypeNoNameWarning] = useState(false);

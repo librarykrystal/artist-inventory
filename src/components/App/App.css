@@ -16,10 +16,11 @@ img {
 }
 
 /* --------------------------------------------------------------------------------
-Container
+Containers
 -------------------------------------------------------------------------------- */
 
 .container {
+  margin-top: 150px;
   padding: 0px;
   padding-bottom: 20px;
   display: flex;
@@ -27,8 +28,16 @@ Container
   align-items: center;
 }
 
-.homeHeader {
+/* .homeHeader {
   text-align: center;
+} */
+
+.loginContainer {
+  margin-top: 200px;
+}
+
+.regContainer {
+  margin-top: 200px;
 }
 
 /* --------------------------------------------------------------------------------
@@ -51,7 +60,8 @@ Filter Options Bar
   background-color: #fcfcfc;
   margin-left: 10px;
   margin-right: 10px;
-  width: 120px;
+  /* width: 120px; */
+  width: 40px;
 }
 
 .filterText {
@@ -81,9 +91,9 @@ Inventory List on Home
   border: 1px solid gray;
   box-shadow: 1px 1px 3px;
   display: grid;
-  grid-template-columns: 75% 25%;
-  width: 500px;
-  height: 120px;
+  grid-template-columns: 72% 28%;
+  max-width: 500px;
+  min-height: 120px;
   margin: 10px;
   padding-left: 20px;
 }
@@ -113,13 +123,14 @@ Inventory List on Home
 .listingInfoContainer {
 /* background-color: white; */
 grid-column-start: 1;
-height: 120px;
+/* height: 120px; */
 }
 
 .listingColorContainer {
-/* background-color: white; */
+/* background-color: greenyellow; */
 grid-column-start: 2;
 margin: auto;
+padding-right: 25px;
 }
 
 .listHeart {

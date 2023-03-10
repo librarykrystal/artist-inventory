@@ -93,25 +93,25 @@ function UserHome() {
     history.push(`/details/${itemId}`);
 }
 
-  const goAdd = () => {
-    console.log('goAdd CLICKED');
-    history.push('/add');
-  }
+  // const goAdd = () => {
+  //   console.log('goAdd CLICKED');
+  //   history.push('/add');
+  // }
 
   return (
     <ThemeProvider theme={theme}>
 
     <div className="container">
       <div className="homeHeader">
-      <h4>Welcome, {user.username}!</h4>
+      {/* <h4>Welcome, {user.username}!</h4> */}
       {/* <p>Your ID is: {user.id}</p> */}
-      <Button
+      {/* <Button
         variant="contained"
         color="primary"
         size="small"
         startIcon={<AddToPhotosIcon />}
         onClick={goAdd}>ADD NEW ITEM
-      </Button>
+      </Button> */}
       </div>
       <br />
 
@@ -174,7 +174,7 @@ function UserHome() {
             {/* <option value="Other">Other</option> */}
         </select>
 
-        <input className="filterCheckbox" type="checkbox" onChange={handleCheckboxFave} ></input> Favorites Only
+        <input className="filterCheckbox" type="checkbox" onChange={handleCheckboxFave} ></input> Faves Only
 
       </div>
 
