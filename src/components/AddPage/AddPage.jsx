@@ -84,6 +84,18 @@ function Add() {
       setToxic(!toxic);
     };
 
+    const sneakyFormFiller = () => {
+      // setType('Color');
+      setName('C.P. Cadmium Orange');
+      setMedium('Acrylic');
+      setBody('Heavy Body');
+      setBrand('Golden Artist Colors');
+      setLine('');
+      setSize('2 oz');
+      setContainer('Tube');
+      setNotes('Test notes, yay!');
+    }
+
   // onSubmit
   const submitForm = (e) => {
     e.preventDefault();
@@ -128,7 +140,7 @@ function Add() {
     <ThemeProvider theme={theme}>
     <div className="container">
 
-      <br/><h2>ADD ITEM</h2><br/>
+      <br/><h2 onClick={sneakyFormFiller}>ADD ITEM</h2><br/>
 
       <div className="addForm">
         {/* <form onSubmit={submitForm}> */}
