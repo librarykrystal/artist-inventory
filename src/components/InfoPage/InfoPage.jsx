@@ -33,7 +33,7 @@ function InfoPage() {
 
   return (
     <ThemeProvider theme={theme}>
-    <div className="infoOrAboutContainer">
+    <div className="noFilterBarContainer">
 
     <HelpCenterIcon sx={{ fontSize: 42 }} />
 

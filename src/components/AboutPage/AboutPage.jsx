@@ -33,7 +33,7 @@ function AboutPage() {
 
 return (
   <ThemeProvider theme={theme}>
-  <div className="infoOrAboutContainer">
+  <div className="noFilterBarContainer">
 
   <InfoIcon sx={{ fontSize: 42 }} />
 

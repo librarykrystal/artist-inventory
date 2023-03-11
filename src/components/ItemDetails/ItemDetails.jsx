@@ -105,10 +105,10 @@ function ItemDetails() {
     <ThemeProvider theme={theme}>
 
     <br/>
-    <div className="addOrEditContainer">
+    <div className="noFilterBarContainer">
       { item &&
         <>
-          <Typography variant="h5" sx={{ fontWeight: 700 }} mt={4} mb={2}  gutterBottom>{item.name}</Typography>
+          <Typography variant="h5" sx={{ fontWeight: 700 }} mt={-2} mb={2} gutterBottom>{item.name}</Typography>
 
           { item.toxic == true && <WarningIcon /> }
 

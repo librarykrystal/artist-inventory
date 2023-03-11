@@ -15,6 +15,7 @@ import Typography from '@mui/material/Typography';
 import '@fontsource/cabin/400.css';
 import '@fontsource/cabin/700.css';
 
+import AddBoxIcon from '@mui/icons-material/AddBox';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import IconButton from '@mui/material/IconButton';
@@ -146,9 +147,12 @@ function Add() {
 
   return(
     <ThemeProvider theme={theme}>
-    <div className="addOrEditContainer">
+    <div className="noFilterBarContainer">
 
-      <Typography variant="h5" mt={5} mb={3} gutterBottom onClick={sneakyFormFiller} >ADD ITEM</Typography>
+      {/* <Typography variant="h5" mt={5} mb={3} gutterBottom onClick={sneakyFormFiller} >ADD ITEM</Typography> */}
+
+      <AddBoxIcon sx={{ fontSize: 42 }} />
+      <br/>
 
       <div className="addForm">
         <div className="sizer"></div>

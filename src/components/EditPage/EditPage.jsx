@@ -10,10 +10,12 @@ import { HexColorPicker } from "react-colorful";
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import grey from '@mui/material/colors/grey';
+import white from '@mui/material/colors/grey';
 import Typography from '@mui/material/Typography';
 import '@fontsource/cabin/400.css';
 import '@fontsource/cabin/700.css';
 
+import EditIcon from '@mui/icons-material/Edit';
 import HomeIcon from '@mui/icons-material/Home';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -42,6 +44,10 @@ const theme = createTheme({
     },
     secondary: {
       main: grey[700],
+      contrastText: "#fff",
+    },
+    info: {
+      main: "#fff",
       contrastText: "#fff",
     },
   },
@@ -145,9 +151,10 @@ function Edit() {
 
   return(
     <ThemeProvider theme={theme}>
-    <div className="addOrEditContainer">
+    <div className="noFilterBarContainer">
 
-    <Typography variant="h5" mt={5} mb={0} gutterBottom>EDIT</Typography>
+    {/* <Typography variant="h5" mt={-1} mb={0} gutterBottom>EDIT</Typography> */}
+    <EditIcon sx={{ fontSize: 28 }} color="info" className="editIcon" />
         
     <Typography variant="h5" sx={{ fontWeight: 700 }} mt={3} mb={4} gutterBottom>{item.name}</Typography>
 
