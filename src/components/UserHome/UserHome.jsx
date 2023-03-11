@@ -12,10 +12,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import WarningIcon from '@mui/icons-material/Warning';
 
 import Typography from '@mui/material/Typography';
-// import '@fontsource/roboto/300.css';
-// import '@fontsource/roboto/400.css';
-// import '@fontsource/roboto/500.css';
-// import '@fontsource/roboto/700.css';
 import '@fontsource/cabin/400.css';
 import '@fontsource/cabin/700.css';
 

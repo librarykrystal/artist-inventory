@@ -4,9 +4,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from "react";
+
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import grey from '@mui/material/colors/grey';
+import Typography from '@mui/material/Typography';
+import '@fontsource/cabin/400.css';
+import '@fontsource/cabin/700.css';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import HomeIcon from '@mui/icons-material/Home';
@@ -16,7 +20,14 @@ import IconButton from '@mui/material/IconButton';
 import WarningIcon from '@mui/icons-material/Warning';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 
+
+
 const theme = createTheme({
+  typography: {
+    fontFamily: [
+      'Cabin',
+    ],
+  },
   palette: {
     primary: {
       main: '#d9d9d9',
@@ -97,9 +108,11 @@ function ItemDetails() {
     <div className="addOrEditContainer">
       { item &&
         <>
-          <h2>{item.name}</h2>
+          <Typography variant="h5" sx={{ fontWeight: 700 }} mt={4} mb={2}  gutterBottom>{item.name}</Typography>
+
           { item.toxic == true && <WarningIcon /> }
-          <p>{item.body} {item.medium}</p>
+
+          <Typography variant="body1" margin={1.5} gutterBottom>{item.body} {item.medium}</Typography>
 
           {item.hex &&
             <div 
@@ -112,17 +125,23 @@ function ItemDetails() {
             </div>
           }
 
-          <p>{item.brand}</p>
-          {item.line && <p>{item.line}</p> }
-          <p>{item.size} {item.container}</p>
+          <Typography variant="body1" margin={1.5} gutterBottom>{item.brand}</Typography>
+
+          {item.line &&
+            <Typography variant="body1" margin={1} gutterBottom>{item.line}</Typography>
+          }
+
+          <Typography variant="body1" margin={0} gutterBottom>{item.size} {item.container}</Typography>
           {/* <p>FAMILY: {item.family}</p> */}
 
-          <p className="notesLabel">NOTES: </p>
-          <div className="notesText" >
-            { item.notes ? ` ${item.notes}` :
-              <p className="notesText" style={{fontStyle: `italic`, color: 'grey'}}> none</p>
-            }
-          </div>
+          <Typography variant="body1" mt={4} fontWeight="bold" gutterBottom>NOTES:</Typography>
+
+          { item.notes ? 
+            <Typography variant="body1" mb={1} gutterBottom>{item.notes}</Typography>
+          :
+            <Typography variant="body1" mb={1} fontStyle="italic" color="gray" gutterBottom> none</Typography>
+            // <p className="notesText" style={{fontStyle: `italic`, color: 'grey'}}> none</p>
+          }
 
           <br/>
 
