@@ -11,9 +11,23 @@ import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import WarningIcon from '@mui/icons-material/Warning';
 
+import Typography from '@mui/material/Typography';
+// import '@fontsource/roboto/300.css';
+// import '@fontsource/roboto/400.css';
+// import '@fontsource/roboto/500.css';
+// import '@fontsource/roboto/700.css';
+import '@fontsource/cabin/400.css';
+import '@fontsource/cabin/700.css';
+
+
   // this component will show MAIN INVENTORY LIST
 
 const theme = createTheme({
+  typography: {
+    fontFamily: [
+      'Cabin',
+    ],
+  },
   palette: {
     primary: {
       main: '#d9d9d9',
@@ -198,9 +212,13 @@ function UserHome() {
               return(
                 <div className="listItemContainer" key={item.id} onClick={() => goToDetails(item.id)}>
                   <div className="listingInfoContainer">
-                    <h3 className="listItemName">{item.name}</h3>
-                    <p className="listItemBrand">{item.brand}</p>
-                    <p className="listItemDetails">
+                    {/* <h3 className="listItemName">{item.name}</h3> */}
+                    <Typography variant="h5" sx={{ fontWeight: 700 }} margin={0}  gutterBottom>{item.name}</Typography>
+                    {/* <p className="listItemBrand">{item.brand}</p> */}
+                    <Typography variant="body1" color="gray" margin={0} gutterBottom>{item.brand}</Typography>
+
+                    {/* <p className="listItemDetails"> */}
+                    <Typography variant="body1" margin={0} gutterBottom>
                       {item.line}{' '}
                       {item.medium}{' '}
                       {item.container == 'Marker' && `${item.container}`}{' '}
@@ -210,7 +228,8 @@ function UserHome() {
                         || item.type == 'Paste'
                         || item.type == 'Primer'
                         || item.type == 'Varnish' ? `${item.type}` : null}
-                    </p>
+                    </Typography>
+
                     <p className="listHeart">
                     {item.favorite == true && <FavoriteIcon />}
                     {item.toxic == true && <WarningIcon />}
@@ -221,7 +240,7 @@ function UserHome() {
                       <div className="listColorBlock" style={{ 
                         backgroundColor: `${item.hex}` }}>
                       </div>
-                    }
+                    }  
                   </div>
                 </div>
               );

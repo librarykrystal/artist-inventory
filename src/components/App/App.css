@@ -26,6 +26,7 @@ Containers
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
   /* justify-content: center; */
 }
 
@@ -60,8 +61,8 @@ Filter Options Bar
 -------------------------------------------------------------------------------- */
 
 .filterBar {
-  /* position: fixed; */
-  /* top: 153px; */
+  position: fixed;
+  top: 153px;
   width: 100%;
   height: 40px;
   background-color: dimgray;
@@ -101,7 +102,9 @@ Inventory List on Home
   flex-direction: column;
   /* justify-content: center; */
   align-items: center;
-  /* margin-top: 50px; */
+  margin-top: 50px;
+  width: 100%;
+  /* width: 100%; */
 }
 
 .listItemContainer {
@@ -111,12 +114,13 @@ Inventory List on Home
   display: grid;
   grid-template-columns: 2;
   /* max-width: 500px; */
-  max-width: 100%;
-  /* min-width: 300px; */
-  min-width: fit-content;
+  /* min-width: 100%; */
+  /* min-width: 500px; */
+  /* min-width: fit-content; */
   min-height: 110px;
-  margin: 10px;
-  padding-left: 20px;
+  margin: 15px 10px 15px 10px;
+  padding-left: 15px;
+  /* padding-top: 13px; */
 }
 
 .listItemContainer:hover {
@@ -125,27 +129,32 @@ Inventory List on Home
   box-shadow: 1px 1px 1px;
 }
 
-.listItemName {
-  margin-top: 14px;
-  margin-bottom: 4px;
-}
+/* .listItemName {
+  margin: 0;
+} */
 
-.listItemBrand {
-  margin-top: 0px;
-  margin-bottom: 3px;
+/* .listItemBrand {
+  margin-top: -5px;
+  margin-bottom: 0px;
   color: gray;
-}
+} */
 
-.listItemDetails {
-  margin-top: 0px;
-  margin-bottom: 3px;
-}
+/* .listItemDetails {
+  margin-top: -5px;
+  margin-bottom: 0px;
+}  */
+
+/* h5 {
+ margin: 0px;
+ padding: 0px;
+}  */
 
 .listingInfoContainer {
-/* background-color: white; */
+/* background-color: yellowgreen; */
 grid-column-start: 1;
-min-width: 150px;
+min-width: 200px;
 padding-right: 15px;
+margin-top: 12px;
 /* height: 120px; */
 }
 
@@ -153,7 +162,7 @@ padding-right: 15px;
 /* background-color: greenyellow; */
 grid-column-start: 2;
 /* margin: auto; */
-/* min-width: 100px; */
+min-width: 92px;
 display: flex;
 align-items: center;
 justify-content: flex-end
@@ -162,14 +171,15 @@ justify-content: flex-end
 }
 
 .listColorBlock {
-  height: 82px;
-  width: 82px;
+  height: 80px;
+  width: 80px;
   border: 2px solid black;
   margin-right: 10px;
 }
 
 .listHeart {
-  margin-top: 4px;
+  margin-top: 3px;
+  margin-bottom: 8px;
 }
 
 /* --------------------------------------------------------------------------------

@@ -7,8 +7,12 @@ import {useHistory} from 'react-router-dom';
 import logo from './logo.png';
 import logoC from './logoCentered.png';
 
-import Button from '@mui/material/Button';
+
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
+import '@fontsource/cabin/400.css';
+import '@fontsource/cabin/700.css';
+import Button from '@mui/material/Button';
 import grey from '@mui/material/colors/grey';
 import HomeIcon from '@mui/icons-material/Home';
 import IconButton from '@mui/material/IconButton';
@@ -19,6 +23,11 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 
 
 const theme = createTheme({
+  typography: {
+    fontFamily: [
+      'Cabin',
+    ],
+  },
   palette: {
     primary: {
       main: '#d9d9d9',
@@ -72,7 +81,8 @@ function Nav() {
 
       {user.id &&
       <div className="navMobileMid">
-        <p className="welcomeName">Welcome, {user.username}!</p>
+        {/* <p className="welcomeName">Welcome, {user.username}!</p> */}
+        <Typography variant="body1" color="gray" mt={1} gutterBottom>Welcome, {user.username}!</Typography>
       </div>
       }
 

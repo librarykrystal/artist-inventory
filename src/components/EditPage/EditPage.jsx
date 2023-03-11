@@ -25,6 +25,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
+import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
 const theme = createTheme({
   palette: {
@@ -393,7 +395,7 @@ function Edit() {
             variant="contained"
             color="primary"
             size="large"
-            startIcon={<EditIcon />}
+            startIcon={<CheckBoxIcon />}
             onClick={submitForm}>SUBMIT
           </Button>
     
@@ -402,7 +404,7 @@ function Edit() {
         variant="contained"
         color="secondary"
         size="large"
-        startIcon={<CancelIcon />}
+        startIcon={<DisabledByDefaultIcon />}
         onClick={goBack}>CANCEL
       </Button>
 
