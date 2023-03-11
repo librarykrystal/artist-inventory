@@ -141,7 +141,7 @@ function Add() {
 
   return(
     <ThemeProvider theme={theme}>
-    <div className="addOrEditcontainer">
+    <div className="addOrEditContainer">
       
       <br/><h2 onClick={sneakyFormFiller}>ADD ITEM</h2><br/>
 

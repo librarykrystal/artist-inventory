@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import logo from './logo.png';
 import logoC from './logoCentered.png';
+import logoV from './logoVert.png';
 
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -75,14 +76,14 @@ function Nav() {
 
       <div className="navMobileUpper">
         <Link to="/home">
-          <img className="logoImage" src={logoC} alt='logo'/>
+          <img className="logoImage" src={logoV} alt='logo'/>
         </Link>
       </div>
 
       {user.id &&
       <div className="navMobileMid">
         {/* <p className="welcomeName">Welcome, {user.username}!</p> */}
-        <Typography variant="body1" color="gray" mt={1} gutterBottom>Welcome, {user.username}!</Typography>
+        <Typography variant="body1" color="gray" mt={1.1} gutterBottom>Welcome, {user.username}!</Typography>
       </div>
       }
 

@@ -20,7 +20,7 @@ Containers
 -------------------------------------------------------------------------------- */
 
 .container {
-  margin-top: 133px;
+  margin-top: 135px;
   padding: 0px;
   padding-bottom: 20px;
   display: flex;
@@ -42,8 +42,8 @@ Containers
   margin-top: 200px;
 }
 
-.addOrEditcontainer {
-  margin-top: 133px;
+.addOrEditContainer {
+  margin-top: 150px;
   padding: 0px;
   padding-bottom: 20px;
   display: flex;
@@ -62,7 +62,7 @@ Filter Options Bar
 
 .filterBar {
   position: fixed;
-  top: 153px;
+  top: 165px;
   width: 100%;
   height: 40px;
   background-color: dimgray;

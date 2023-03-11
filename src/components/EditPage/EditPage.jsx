@@ -138,7 +138,7 @@ function Edit() {
 
   return(
     <ThemeProvider theme={theme}>
-    <div className="addOrEditcontainer">
+    <div className="addOrEditContainer">
 
     <br/><h2>EDIT</h2>
         

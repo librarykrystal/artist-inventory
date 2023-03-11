@@ -32,7 +32,7 @@
   height: 78px;
   width: 100%;
   overflow: visible;
-  grid-template-rows: 76px 37px 40px;
+  grid-template-rows: 90px 40px 40px;
   /* grid-template-columns: 1; */
   overflow: visible;
   /* background-color: greenyellow; */
@@ -54,7 +54,12 @@
 
 .logoImage {
   width: 393px;
-  position:relative
+  min-width: 393px;
+  position: fixed;
+  /* justify-self: center; */
+  top: 0;
+  left: 50%;
+  transform: translate(-50%);
 }
 
 .navMobileMid {
@@ -67,11 +72,10 @@
   text-align: center;
 }
 
-.welcomeName {
-  margin-top: 10px;
+/* .welcomeName {
+  margin-top: 12px;
   color: dimgray;
-  /* font-weight: bold; */
-}
+} */
 
 .navMobileLower {
   background-color: black;

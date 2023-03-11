@@ -94,7 +94,7 @@ function ItemDetails() {
     <ThemeProvider theme={theme}>
 
     <br/>
-    <div className="container">
+    <div className="addOrEditContainer">
       { item &&
         <>
           <h2>{item.name}</h2>
