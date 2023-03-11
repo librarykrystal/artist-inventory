@@ -4,19 +4,22 @@ import {useHistory} from 'react-router-dom';
 import { useParams, Link } from 'react-router-dom';
 import Modal from '../EditModal/EditModal';
 import '../AddPage/AddPage.css';
+
 import { HexColorPicker } from "react-colorful";
+
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import grey from '@mui/material/colors/grey';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import Typography from '@mui/material/Typography';
+import '@fontsource/cabin/400.css';
+import '@fontsource/cabin/700.css';
+
 import HomeIcon from '@mui/icons-material/Home';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import IconButton from '@mui/material/IconButton';
 import WarningIcon from '@mui/icons-material/Warning';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
-import CancelIcon from '@mui/icons-material/Cancel';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -24,11 +27,15 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import Checkbox from '@mui/material/Checkbox';
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
 const theme = createTheme({
+  typography: {
+    fontFamily: [
+      'Cabin',
+    ],
+  },
   palette: {
     primary: {
       main: '#d9d9d9',
@@ -140,9 +147,9 @@ function Edit() {
     <ThemeProvider theme={theme}>
     <div className="addOrEditContainer">
 
-    <br/><h2>EDIT</h2>
+    <Typography variant="h5" mt={5} mb={0} gutterBottom>EDIT</Typography>
         
-      <h3>{name}</h3>
+    <Typography variant="h5" sx={{ fontWeight: 700 }} mt={3} mb={4} gutterBottom>{item.name}</Typography>
 
       <div className="addForm">
         <div className="sizer"></div>
