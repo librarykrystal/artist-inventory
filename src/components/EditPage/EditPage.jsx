@@ -3,8 +3,40 @@ import { useSelector, useDispatch } from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import { useParams, Link } from 'react-router-dom';
 import Modal from '../EditModal/EditModal';
-// import './EditPage.css';
+import '../AddPage/AddPage.css';
 import { HexColorPicker } from "react-colorful";
+import Button from '@mui/material/Button';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import grey from '@mui/material/colors/grey';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import HomeIcon from '@mui/icons-material/Home';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import IconButton from '@mui/material/IconButton';
+import WarningIcon from '@mui/icons-material/Warning';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import CancelIcon from '@mui/icons-material/Cancel';
+
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Checkbox from '@mui/material/Checkbox';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#d9d9d9',
+    },
+    secondary: {
+      main: grey[700],
+      contrastText: "#fff",
+    },
+  },
+});
 
 function Edit() {
 
@@ -17,7 +49,7 @@ function Edit() {
   const [type, setType] = useState(item.type);
   const [name, setName] = useState(item.name);
   const [hex, setHex] = useState(item.hex);
-  // const [family, setFamily] = useState('');
+  // const [family, setFamily] = useState('item.family');
   const [medium, setMedium] = useState(item.medium);
   const [brand, setBrand] = useState(item.brand);
   const [line, setLine] = useState(item.line);
@@ -44,7 +76,7 @@ function Edit() {
   });
   }, []);
 
-  console.log('SELECTIONS...', ["type:", type, "name:", name, "medium:", medium, "hex:", hex, "brand:", brand, "body:", body, "container:", container, "size:", size, "favorite", favorite, "notes:", notes]);
+  console.log('SELECTIONS...', ["type:", type, "name:", name, "medium:", medium, "hex:", hex, "brand:", brand, "body:", body, "container:", container, "size:", size, "favorite", favorite, "toxic", toxic, "notes:", notes]);
 
   const handleTypeChange = (typeIn) => {
     console.log('typeIn', typeIn);
@@ -54,16 +86,6 @@ function Edit() {
       setHex('');
     }
   }
-
-  // const handleBrandChange = (brandIn) => {
-  //   console.log('brandIn', brandIn);
-  //   // if(brandIn == "Other"){
-  //   //   setBrand('');
-  //   // } else {
-  //   //   setBrand(brandIn);
-  //   // }
-  //   setBrand(brandIn);
-  // }
 
   // Toggle for favoriting checkbox:
   const handleCheckboxFave = () => {
@@ -105,7 +127,7 @@ function Edit() {
     }
   }
 
-  // Going back home without submitting anything:
+  // Going back to item without submitting anything:
   const goBack = (event) => {
     event.preventDefault();
     history.push(`/details/${item.id}`);
@@ -113,217 +135,250 @@ function Edit() {
 
 
   return(
-    <div className="container">
+    <ThemeProvider theme={theme}>
+    <div className="addOrEditcontainer">
 
-      <h3>EDIT<hr/></h3>
+    <br/><h2>EDIT</h2>
         
-      <h3>{item.name}</h3>
+      <h3>{name}</h3>
 
       <div className="addForm">
-        <form onSubmit={submitForm}>
+        <div className="sizer"></div>
 
-          <p>Type: 
-            <select
-              defaultValue={item.type}
-              onChange={(e) => handleTypeChange(e.target.value)}>
-                  <option disabled >Choose</option>
-                  <option value="Additive">Additive</option>
-                  <option value="Color">Color</option>
-                  {/* <option value="Gel">Gel</option> */}
-                  <option value="Gesso">Gesso</option>
-                  <option value="Ground">Ground</option>
-                  <option value="Medium">Medium</option>
-                  <option value="Paste">Paste</option>
-                  <option value="Primer">Primer</option>
-                  <option value="Solvent">Solvent</option>
-                  <option value="Varnish">Varnish</option>
-            </select>
-          </p>
+        <FormControl fullWidth>
+          <InputLabel id="type">Type *</InputLabel>
+            <Select
+              required
+              labelId="type"
+              id="type"
+              value={type}
+              label="Type"
+              onChange={(e) => setType(e.target.value)}
+            >
+            <MenuItem value="Additive">Additive</MenuItem>
+            <MenuItem value="Color">Color</MenuItem>
+            <MenuItem value="Gesso">Gesso</MenuItem>
+            <MenuItem value="Medium">Medium</MenuItem>
+            <MenuItem value="Paste">Paste</MenuItem>
+            <MenuItem value="Primer">Primer</MenuItem>
+            <MenuItem value="Solvent">Solvent</MenuItem>
+            <MenuItem value="Varnish">Varnish</MenuItem>
+          </Select>
+        </FormControl>
         
-          {/* Conditional render shows only if type is "color" */}
-          { type == 'Color' &&
-            <>
-              {/* <p>Family: 
-                <select
-                  defaultValue="Choose"
-                  onChange={(e) => setFamily(e.target.value)}>
-                    <option disabled >Choose</option>
-                    <option value="Red">Red</option>
-                    <option value="Orange">Orange</option>
-                    <option value="Yellow">Yellow</option>
-                    <option value="Green">Green</option>
-                    <option value="Blue">Blue</option>
-                    <option value="Violet">Violet</option>
-                    <option value="Brown">Brown</option>
-                    <option value="Black">Black</option>
-                    <option value="Grey">Grey</option>
-                    <option value="White">White</option>
-                    <option value="Clear">Clear</option>
-                </select>
-              </p> */}
-            </>
-          }
+        {/* COLOR FAMILY — FUTURE FEATURE — 
+        Conditional render shows only if type is "color" */}
+        { type == 'Color' &&
+          <>
+            {/* <p>Family: 
+              <select
+                defaultValue="Choose"
+                onChange={(e) => setFamily(e.target.value)}>
+                  <option disabled >Choose</option>
+                  <option value="Red">Red</option>
+                  <option value="Orange">Orange</option>
+                  <option value="Yellow">Yellow</option>
+                  <option value="Green">Green</option>
+                  <option value="Blue">Blue</option>
+                  <option value="Violet">Violet</option>
+                  <option value="Brown">Brown</option>
+                  <option value="Black">Black</option>
+                  <option value="Grey">Grey</option>
+                  <option value="White">White</option>
+                  <option value="Clear">Clear</option>
+                  <option value="Metallic">Metallic</option>
+              </select>
+            </p> */}
+          </>
+        }
 
-          <p>Medium: 
-            <select
-              defaultValue={item.medium}
-              onChange={(e) => setMedium(e.target.value)}>
-                <option disabled >Choose</option>
-                <option value="Acrylic">Acrylic</option>
-                <option value="Enamel">Enamel</option>
-                <option value="Gouache">Gouache</option>
-                <option value="Ink">Ink</option>
-                <option value="Oil">Oil</option>
-                <option value="Pastel">Pastel</option>
-                <option value="Watercolor">Watercolor</option>
-            </select>
-          </p>
+        {/* Conditional render shows color picker only for appropriate types */}
+        { type != "" &&
+        type != "Additive" &&
+        type != "Gel" &&
+        type != "Medium" &&
+        type != "Paste" &&
+        type != "Solvent" &&
+        type != "Varnish" &&
+          <>
+            {/* <p>Color:  */}
+            {/* <input type="color" defaultValue={hex} onChange={(e) => setHex(e.target.value)}></input></p> */}
+            <div className="colorPickerContainer">
+              <HexColorPicker className="colorPicker" color={hex} onChange={(e) => setHex(e)} />
+              { hex &&
+                <div className="colorSelection"
+                  style={{ 
+                    backgroundColor: `${hex}`,
+                    border: `2px solid black`,
+                    height: `60px`,
+                    width: `196px`
+                  }}>
+                </div>
+              }
+            </div>
+          </>
+        }
 
-          {/* Conditional render shows color picker only for appropriate types */}
-          { type != "" &&
-            type != "Additive" &&
-            type != "Gel" &&
-            type != "Medium" &&
-            type != "Paste" &&
-            type != "Solvent" &&
-            type != "Varnish" &&
-            <>
-              {/* <p>Color:  */}
-              {/* <input type="color" defaultValue={hex} onChange={(e) => setHex(e.target.value)}></input></p> */}
-              <div className="colorPickerContainer">
-                <HexColorPicker className="colorPicker" color={hex} onChange={(e) => setHex(e)} />
-                { hex &&
-                  <div className="colorSelection"
-                    style={{ 
-                      backgroundColor: `${hex}`,
-                      border: `2px solid black`,
-                      height: `196px`,
-                      width: `60px`
-                    }}>
-                  </div>
-                }
-              </div>
-            </>
-          }
+        <br /><br />
+        <FormControl fullWidth>
+          <InputLabel id="medium">Medium</InputLabel>
+            <Select
+              labelId="medium"
+              id="medium"
+              value={medium}
+              label="Medium"
+              onChange={(e) => setMedium(e.target.value)}
+            >
+            <MenuItem value="Acrylic">Acrylic</MenuItem>
+            <MenuItem value="Enamel">Enamel</MenuItem>
+            <MenuItem value="Gouache">Gouache</MenuItem>
+            <MenuItem value="Ink">Ink</MenuItem>
+            <MenuItem value="Oil">Oil</MenuItem>
+            <MenuItem value="Pastel">Pastel</MenuItem>
+            <MenuItem value="Watercolor">Watercolor</MenuItem>
+          </Select>
+        </FormControl>
 
-          <p>Name: <input value={name} onChange={(e) => setName(e.target.value)} /></p>
+        <br /><br />
+        <TextField id="name" required label="Name" variant="standard" value={name} onChange={(e) => setName(e.target.value)} />
 
-          <p>Body: 
-            <select
-              defaultValue={item.body}
-              onChange={(e) => setBody(e.target.value)}>
-                <option disabled >Choose</option>
-                <option value="Aerosol">Aerosol</option>
-                <option value="Fluid">Fluid</option>
-                <option value="Heavy Body">Heavy Body</option>
-                <option value="High Flow">High Flow</option>
-                <option value="Powder">Powder</option>
-                <option value="Soft Body">Soft Body</option>
-                <option value="Solid">Solid</option>
-                <option value="">N/A</option>
-            </select>
-          </p>
+        <br /><br />      
+        <FormControl fullWidth>
+          <InputLabel id="body">Body</InputLabel>
+            <Select
+              labelId="body"
+              id="body"
+              value={body}
+              label="Body"
+              onChange={(e) => setBody(e.target.value)}
+            >
+            <MenuItem value="Aerosol">Aerosol</MenuItem>
+            <MenuItem value="Fluid">Fluid</MenuItem>
+            <MenuItem value="Heavy Body">Heavy Body</MenuItem>
+            <MenuItem value="High Flow">High Flow</MenuItem>
+            <MenuItem value="Powder">Powder</MenuItem>
+            <MenuItem value="Soft Body">Soft Body</MenuItem>
+            <MenuItem value="Solid">Solid</MenuItem>
+            <MenuItem value="">N/A</MenuItem>
+          </Select>
+        </FormControl>
 
-          <p>Brand: 
-            <select
-              defaultValue={item.brand}
-              onChange={(e) => setBrand(e.target.value)}>
-              {/* onChange={(e) => handleBrandChange(e.target.value)}> */}
-                <option disabled >Choose</option>
-                <option value="Blick">Blick</option>
-                <option value="Gamblin">Gamblin</option>
-                <option value="Golden Artist Colors">Golden Artist Colors</option>
-                <option value="Grumbacher">Grumbacher</option>
-                <option value="Holbein">Holbein</option>
-                <option value="Liquitex">Liquitex</option>
-                <option value="Pebeo">Pebeo</option>
-                <option value="QoR">QoR</option>
-                <option value="Rembrandt">Rembrandt</option>
-                <option value="Sennelier">Sennelier</option>
-                <option value="Speedball">Speedball</option>
-                <option value="Stuart Semple">Stuart Semple</option>
-                <option value="Utrecht">Utrecht</option>
-                <option value="Willaimsburg">Willaimsburg</option>
-                <option value="Winsor & Newton">Winsor & Newton</option>
-                <option value="Other">Other</option>
-            </select>
-          </p>
+        <br /><br />
+        <FormControl fullWidth>
+          <InputLabel id="brand">Brand</InputLabel>
+            <Select
+              labelId="brand"
+              id="brand"
+              value={brand}
+              label="Brand"
+              onChange={(e) => setBrand(e.target.value)}
+            >
+            <MenuItem value="Blick">Blick</MenuItem>
+            <MenuItem value="Gamblin">Gamblin</MenuItem>
+            <MenuItem value="Golden Artist Colors">Golden Artist Colors</MenuItem>
+            <MenuItem value="Grumbacher">Grumbacher</MenuItem>
+            <MenuItem value="Holbein">Holbein</MenuItem>
+            <MenuItem value="Liquitex">Liquitex</MenuItem>
+            <MenuItem value="Pebeo">Pebeo</MenuItem>
+            <MenuItem value="QoR">QoR</MenuItem>
+            <MenuItem value="Rembrandt">Rembrandt</MenuItem>
+            <MenuItem value="Sennelier">Sennelier</MenuItem>
+            <MenuItem value="Speedball">Speedball</MenuItem>
+            <MenuItem value="Stuart Semple">Stuart Semple</MenuItem>
+            <MenuItem value="Utrecht">Utrecht</MenuItem>
+            <MenuItem value="Willaimsburg">Willaimsburg</MenuItem>
+            <MenuItem value="Winsor & Newton">Winsor & Newton</MenuItem>
+            <MenuItem value="Other">Other</MenuItem>
+          </Select>
+        </FormControl>
 
 {/* Text box for entering a non-listed brand appears only if "Other" is chosen above. */}
 {/* If conditional used brand == "Other", box would disappear as soon as user begins to type. */}
-          { brand != "" &&
-            brand != "Blick" &&
-            brand != "Gamblin" &&
-            brand != "Golden Artist Colors" &&
-            brand != "Grumbacher" &&
-            brand != "Holbein" &&
-            brand != "Liquitex" &&
-            brand != "Pebeo" &&
-            brand != "QoR" &&
-            brand != "Rembrandt" &&
-            brand != "Sennelier" &&
-            brand != "Speedball" &&
-            brand != "Stuart Semple" &&
-            brand != "Utrecht" &&
-            brand != "Willaimsburg" &&
-            brand != "Winsor & Newton" &&
-          <p>Enter brand: 
-            <input 
-              defaultValue={ brand == 'Other' ? '' : `${item.brand}`} 
-              onChange={(e) => setBrand(e.target.value)} 
-            />
-          </p>
-          }
+        { brand != "" &&
+          brand != "Blick" &&
+          brand != "Gamblin" &&
+          brand != "Golden Artist Colors" &&
+          brand != "Grumbacher" &&
+          brand != "Holbein" &&
+          brand != "Liquitex" &&
+          brand != "Pebeo" &&
+          brand != "QoR" &&
+          brand != "Rembrandt" &&
+          brand != "Sennelier" &&
+          brand != "Speedball" &&
+          brand != "Stuart Semple" &&
+          brand != "Utrecht" &&
+          brand != "Willaimsburg" &&
+          brand != "Winsor & Newton" &&
+          <>
+            <br /><br />
+            <TextField id="brand" label="Brand" variant="standard" value={brand} onChange={(e) => setBrand(e.target.value)} />
+          </>
+        }
 
-          <p>Product Line: <input value={line} onChange={(e) => setLine(e.target.value)} /></p>
+        <br /><br />
+        <TextField id="line" label="Product Line" variant="standard" value={line} onChange={(e) => setLine(e.target.value)} />
 
-          <p>Size: <input value={size} onChange={(e) => setSize(e.target.value)} /></p>
+        <br /><br />
+        <TextField id="size" label="Size" variant="standard" value={size} onChange={(e) => setSize(e.target.value)} />
 
-          <p>Container: 
-            <select
-              defaultValue={item.container}
-              onChange={(e) => setContainer(e.target.value)}>
-                <option disabled >Choose</option>
-                <option value="Bottle">Bottle</option>
-                <option value="Bucket">Bucket</option>
-                <option value="Can">Can</option>
-                <option value="Jar">Jar</option>
-                <option value="Marker">Marker</option>
-                <option value="Pan">Pan</option>
-                <option value="Pouch">Pouch</option>
-                <option value="Sample">Sample</option>
-                <option value="Tub">Tub</option>
-                <option value="Tube">Tube</option>
-            </select>
-          </p>
+        <br /><br />
+        <FormControl fullWidth>
+          <InputLabel id="container">Container</InputLabel>
+            <Select
+              labelId="container"
+              id="container"
+              value={container}
+              label="Container"
+              onChange={(e) => setContainer(e.target.value)}
+            >
+              <MenuItem value="Bottle">Bottle</MenuItem>
+              <MenuItem value="Bucket">Bucket</MenuItem>
+              <MenuItem value="Can">Can</MenuItem>
+              <MenuItem value="Jar">Jar</MenuItem>
+              <MenuItem value="Marker">Marker</MenuItem>
+              <MenuItem value="Pan">Pan</MenuItem>
+              <MenuItem value="Pouch">Pouch</MenuItem>
+              <MenuItem value="Sample">Sample</MenuItem>
+              <MenuItem value="Tub">Tub</MenuItem>
+              <MenuItem value="Tube">Tube</MenuItem>
+            </Select>
+        </FormControl>
 
-          <p>Favorite?
-            <input
-              checked={ favorite ? 'checked' : ''}
-              type="checkbox"
-              onChange={handleCheckboxFave}
-            ></input></p>
+        <br /><br />
+        <div className="faveAndToxContainer">
+          {/* FAVORITE selection conditional/toggle */}
+          <span className="addFaveAndTox">
+            { favorite == true ?
+              <IconButton aria-label="unfavorite" onClick={handleCheckboxFave}>
+                <FavoriteIcon fontSize="large"/>
+              </IconButton>
+            :
+              <IconButton aria-label="favorite" onClick={handleCheckboxFave}>
+                <FavoriteBorderIcon fontSize="large"/>
+              </IconButton>
+            }
+          </span>
+          {/* TOXIC selection conditional/toggle */}
+          <span className="addFaveAndTox">
+            { toxic == true ?
+              <IconButton aria-label="untoxic" onClick={handleCheckboxTox}>
+                <WarningIcon fontSize="large"/>
+              </IconButton>
+            :
+            <IconButton aria-label="toxic" onClick={handleCheckboxTox}>
+              <WarningAmberIcon fontSize="large"/>
+            </IconButton>
+            }
+          </span>
+        </div>
 
-          <p>Toxic?
-            <input
-              checked={ toxic ? 'checked' : ''}
-              type="checkbox"
-              onChange={handleCheckboxTox}
-            ></input></p>
+        <br />
+        <TextField id="notes" label="Notes" multiline fullWidth rows={4} variant="outlined" value={notes} onChange={(e) => setNotes(e.target.value)} />
 
-          <p>Notes:</p>
-          <textarea
-            value={notes}
-            // defaultValue={item.notes}
-            className="notesInput"
-            type="text"
-            rows="10" cols="40"
-            onChange={(event) => setNotes(event.target.value)}
-          />
-
-          <br />
-          <input type="submit" />
-        </form>
+          {/* <br /> */}
+          {/* <input type="submit" />
+        </form> */}
 
         {/* Conditionally render messages about blank type and name fields: */}
         { noTypeWarning && !noNameWarning && <p className="noEntry">Please choose a type to continue.</p>}
@@ -332,11 +387,29 @@ function Edit() {
 
       </div>
     
-      <button onClick={goBack}>BACK</button>
+      <br /><br />
+          <Button
+           type="submit"
+            variant="contained"
+            color="primary"
+            size="large"
+            startIcon={<EditIcon />}
+            onClick={submitForm}>SUBMIT
+          </Button>
+    
+          <br /><br />
+      <Button
+        variant="contained"
+        color="secondary"
+        size="large"
+        startIcon={<CancelIcon />}
+        onClick={goBack}>CANCEL
+      </Button>
 
       {/* <button onClick={modalGo}>SHOW MODAL</button> */}
       <Modal  show={showModal}/>
     </div>
+    </ThemeProvider>
   )
 }
 

@@ -218,11 +218,8 @@ function UserHome() {
                   </div>
                   <div className="listingColorContainer">
                     {item.hex &&
-                      <div style={{ 
-                        backgroundColor: `${item.hex}`,
-                        border: `2px solid black`,
-                        height: `82px`,
-                        width: `82px` }}>
+                      <div className="listColorBlock" style={{ 
+                        backgroundColor: `${item.hex}` }}>
                       </div>
                     }
                   </div>
