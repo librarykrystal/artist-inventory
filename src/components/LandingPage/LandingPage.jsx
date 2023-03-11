@@ -5,6 +5,33 @@ import './LandingPage.css';
 // CUSTOM COMPONENTS
 import RegisterForm from '../RegisterForm/RegisterForm';
 
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import grey from '@mui/material/colors/grey';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import '@fontsource/cabin/400.css';
+import '@fontsource/cabin/700.css';
+import InfoIcon from '@mui/icons-material/Info';
+import LoginIcon from '@mui/icons-material/Login';
+
+const theme = createTheme({
+  typography: {
+    fontFamily: [
+      'Cabin',
+    ],
+  },
+  palette: {
+    primary: {
+      main: '#d9d9d9',
+    },
+    secondary: {
+      main: grey[700],
+      contrastText: "#fff",
+    },
+  },
+});
+
+
 function LandingPage() {
   const [heading, setHeading] = useState('Welcome');
   const history = useHistory();
@@ -14,51 +41,35 @@ function LandingPage() {
   };
 
   return (
-    <div className="container">
-      <h2>{heading}</h2>
+    <ThemeProvider theme={theme}>
+      <div className="infoOrAboutContainer">
+        <Typography variant="h4" mt={1} mb={0} gutterBottom>Hello!</Typography>
 
-      <div className="grid">
-        <div className="grid-col grid-col_8">
-        <p>
-            to THE RUNDOWN—your place to inventory painting supplies!
-          </p>
 
-          {/* <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-            id felis metus. Vestibulum et pulvinar tortor. Morbi pharetra lacus
-            ut ex molestie blandit. Etiam et turpis sit amet risus mollis
-            interdum. Suspendisse et justo vitae metus bibendum fringilla sed
-            sed justo. Aliquam sollicitudin dapibus lectus, vitae consequat odio
-            elementum eget. Praesent efficitur eros vitae nunc interdum, eu
-            interdum justo facilisis. Sed pulvinar nulla ac dignissim efficitur.
-            Quisque eget eros metus. Vestibulum bibendum fringilla nibh a
-            luctus. Duis a sapien metus.
-          </p> */}
+          <div className="landingTextContainer">
+            <Typography variant="body1" mt={2} gutterBottom>
+              Welcome to THE RUNDOWN — your place to inventory painting supplies.
+            </Typography>
+          </div>
 
-          {/* <p>
-            Praesent consectetur orci dui, id elementum eros facilisis id. Sed
-            id dolor in augue porttitor faucibus eget sit amet ante. Nunc
-            consectetur placerat pharetra. Aenean gravida ex ut erat commodo, ut
-            finibus metus facilisis. Nullam eget lectus non urna rhoncus
-            accumsan quis id massa. Curabitur sit amet dolor nisl. Proin
-            euismod, augue at condimentum rhoncus, massa lorem semper lacus, sed
-            lobortis augue mi vel felis. Duis ultrices sapien at est convallis
-            congue.
-          </p> */}
+          <div className="landingRegFormContainer">
+            <RegisterForm />
 
+            <center>
+            <Typography variant="h6" mt={3} mb={1} gutterBottom>Already registered?</Typography>
+
+              <Button
+                variant="contained"
+                color="secondary"
+                size="large"
+                startIcon={<LoginIcon />}
+                onClick={onLogin}>LOGIN
+              </Button>
+
+            </center>
+          </div>
         </div>
-        <div className="grid-col grid-col_4">
-          <RegisterForm />
-
-          <center>
-            <h4>Already registered?</h4>
-            <button className="btn btn_sizeSm" onClick={onLogin}>
-              Login
-            </button>
-          </center>
-        </div>
-      </div>
-    </div>
+    </ThemeProvider>
   );
 }
 

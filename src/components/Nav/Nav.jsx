@@ -21,6 +21,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import InfoIcon from '@mui/icons-material/Info';
 import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 import AddBoxIcon from '@mui/icons-material/AddBox';
+import LoginIcon from '@mui/icons-material/Login';
 
 
 const theme = createTheme({
@@ -67,6 +68,11 @@ function Nav() {
     history.push('/add');
   }
 
+  const goLogin = (event) => {
+    event.preventDefault();
+    history.push('/login');
+  }
+
   // console.log('logo:', logo);
 
   return (
@@ -95,42 +101,39 @@ function Nav() {
           // <Link className="navLink" to="/login">
           //   Login / Register
           // </Link>
-          <Link className="navLinkMobile" to="/login">
-            Login / Register
-          </Link>
+          // <Link className="navLinkMobile" to="/login">
+          //   Login / Register
+          // </Link>
+
+          <span className="navLinkMobile">
+          <IconButton aria-label="login or register" className="navLinkMobile" color="secondary" onClick={goLogin}>
+            <LoginIcon />
+          </IconButton>
+          </span>
         )}
 
 
         {/* If a user is logged in, show these links */}
         {user.id && (
           <>
-
-            {/* <Link className="navLink" to="/user">
-              Home
-            </Link> */}
             <span className="navLinkMobile">
               <IconButton aria-label="home" className="navLinkMobile" color="secondary" onClick={goBack}>
                 <HomeIcon />
               </IconButton>
             </span>
 
-            {/* Additional icon link to ADD ITEM */}
             <span className="navLinkMobile">
               <IconButton aria-label="add" className="navLinkMobile" color="secondary" onClick={goAdd}>
                 <AddBoxIcon />
               </IconButton>
             </span>
 
-            {/* <Link className="navLink" to="/info">
-              Info Page
-            </Link> */}
             <span className="navLinkMobile">
               <IconButton aria-label="info" className="navLinkMobile" color="secondary" onClick={goInfo}>
                 <HelpCenterIcon />
               </IconButton>
             </span>
 
-            {/* <LogOutButton className="navLink" /> */}
             <span className="navLinkMobile">
               <IconButton aria-label="logout" className="navLinkMobile" color="secondary" onClick={() => dispatch({ type: 'LOGOUT' })}>
                 <LogoutIcon />
@@ -140,13 +143,9 @@ function Nav() {
           </>
         )}
 
-        {/* <Link className="navLink" to="/about">
-          About
-          </Link> */}
         <IconButton aria-label="about" color="secondary" onClick={goAbout}>
           <InfoIcon />
         </IconButton>
-
 
       </div>
       </div>
