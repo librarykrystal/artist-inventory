@@ -42,12 +42,13 @@ function LandingPage() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="infoOrAboutContainer">
+      <div className="noFilterBarContainer">
         <Typography variant="h4" mt={1} mb={0} gutterBottom>Hello!</Typography>
           <div className="landingTextContainer">
             <Typography variant="body1" mt={2} gutterBottom>
               Welcome to THE RUNDOWN — your place to inventory painting supplies.
             </Typography>
+            <br/>
           </div>
           <div className="landingRegFormContainer">
             <RegisterForm />

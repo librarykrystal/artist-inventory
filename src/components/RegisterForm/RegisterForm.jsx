@@ -61,10 +61,11 @@ function RegisterForm() {
         {/* TEXT input for USERNAME */}
         <TextField id="username" required label="Username" variant="standard" value={username} onChange={(e) => setUsername(e.target.value)} />
       </div>
+      <br/>
 
       <div>
         {/* TEXT input for PASSWORD */}   
-        <TextField id="password" required label="Password" variant="standard" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <TextField id="password" required type="password" label="Password" variant="standard" value={password} onChange={(e) => setPassword(e.target.value)} />
       </div>
       <br />
 

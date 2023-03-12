@@ -226,3 +226,7 @@ input {
   width: 300px;
   margin: auto;
 }
+
+.noEntry {
+  color: firebrick;
+}

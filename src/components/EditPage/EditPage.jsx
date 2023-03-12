@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import { useParams, Link } from 'react-router-dom';
 import Modal from '../EditModal/EditModal';
-import '../AddPage/AddPage.css';
+import '../App/App.css';
 
 import { HexColorPicker } from "react-colorful";
 

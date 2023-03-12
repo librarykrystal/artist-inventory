@@ -18,6 +18,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import LoginIcon from '@mui/icons-material/Login';
+import LoyaltyIcon from '@mui/icons-material/Loyalty';
 
 // Material UI Theming
 const theme = createTheme({
@@ -114,6 +115,12 @@ function Nav() {
                 <span className="navLinkMobile">
                   <IconButton aria-label="add" className="navLinkMobile" color="secondary" onClick={goAdd}>
                     <AddBoxIcon />
+                  </IconButton>
+                </span>
+
+                <span className="navLinkMobile">
+                  <IconButton aria-label="wishlist" className="navLinkMobile" color="secondary" onClick={goBack}>
+                    <LoyaltyIcon />
                   </IconButton>
                 </span>
 

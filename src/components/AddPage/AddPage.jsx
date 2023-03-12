@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import { useParams, Link } from 'react-router-dom';
 import Modal from '../AddModal/AddModal';
-import './AddPage.css';
+import '../App/App.css';
 import { SketchPicker, HuePicker, PhotoshopPicker } from 'react-color';  // glitchy
 import { HexColorPicker } from "react-colorful";
 
