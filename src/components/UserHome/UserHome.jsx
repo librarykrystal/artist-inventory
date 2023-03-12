@@ -10,12 +10,20 @@ import Typography from '@mui/material/Typography';
 import '@fontsource/cabin/400.css';
 import '@fontsource/cabin/700.css';
 
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
 import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import WarningIcon from '@mui/icons-material/Warning';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -32,6 +40,10 @@ const theme = createTheme({
   palette: {
     primary: {
       main: '#d9d9d9',
+    },
+    secondary: {
+      main: grey[700],
+      contrastText: "#fff",
     },
     alert: {
       main: grey[700],
@@ -98,6 +110,13 @@ function UserHome() {
     setFaveFilter(!faveFilter);
   };
 
+  const resetFilters = () => {
+    setTypeFilter('');
+    setMediumFilter('');
+    setBrandFilter('');
+    setFaveFilter(false);
+  }
+
 
   const goToDetails = (itemId) => {
     console.log('goToDetails CLICKED, ID:', itemId);
@@ -133,16 +152,14 @@ function UserHome() {
 {/* BEGIN FILTERS BAR */}
 
       <div className="filterBar">
-        {/* <p className="filterText">(This is where sort/filter options will go.)</p> */}
        
-        <select
+        {/* <select
           className="filterDropDown"
           defaultValue=""
           onChange={(e) => setTypeFilter(e.target.value)}>
             <option value="">All Types</option>
             <option value="Additive">Additive</option>
             <option value="Color">Color</option>
-            {/* <option value="Gel">Gel</option> */}
             <option value="Gesso">Gesso</option>
             <option value="Ground">Ground</option>
             <option value="Medium">Medium</option>
@@ -186,10 +203,156 @@ function UserHome() {
             <option value="Utrecht">Utrecht</option>
             <option value="Willaimsburg">Willaimsburg</option>
             <option value="Winsor & Newton">Winsor & Newton</option>
-            {/* <option value="Other">Other</option> */}
         </select>
 
-        <input className="filterCheckbox" type="checkbox" onChange={handleCheckboxFave} ></input> Faves Only
+        <input className="filterCheckbox" type="checkbox" onChange={handleCheckboxFave} ></input> Faves Only */}
+
+
+{/* NEW ACCORDION: */}
+
+<br/>
+
+        <Accordion sx={{backgroundColor: "black", color: "white", width: "250px"}}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon sx={{color: "white"}} />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>FILTERS</Typography>
+        </AccordionSummary>
+        <AccordionDetails
+        // sx={{backgroundColor: "dimgrey", color: "white"}}
+        sx={{
+          color: "white",
+          '.MuiOutlinedInput-notchedOutline': {
+            borderColor: 'rgba(228, 219, 233, 0.25)',
+          },
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'rgba(228, 219, 233, 0.25)',
+          },
+          '&:hover .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'rgba(228, 219, 233, 0.25)',
+          },
+          '.MuiSvgIcon-root ': {
+            fill: "white !important",
+          }
+        }}
+        >
+
+<center>
+<span className="addFaveAndTox">
+            { faveFilter == true ?
+              <IconButton aria-label="unfavorite" onClick={handleCheckboxFave}>
+                <FavoriteIcon fontSize="large"/>
+              </IconButton>
+            :
+              <IconButton aria-label="favorite" onClick={handleCheckboxFave}>
+                <FavoriteBorderIcon fontSize="large"/>
+              </IconButton>
+            }
+          </span>
+          </center>
+
+
+          {/* <input className="filterCheckbox" type="checkbox" onChange={handleCheckboxFave} ></input> Faves Only */}
+         <br/>
+
+          <FormControl fullWidth>
+          <InputLabel  sx={{color: "white"}} id="type">Type</InputLabel>
+            <Select
+              sx={{width: "220px", color: "white"}}
+              labelId="type"
+              id="type"
+              value={typeFilter}
+              label="Type"
+              onChange={(e) => setTypeFilter(e.target.value)}
+            >
+            <MenuItem value="">All Types</MenuItem>
+            <MenuItem value="Additive">Additive</MenuItem>
+            <MenuItem value="Color">Color</MenuItem>
+            <MenuItem value="Gesso">Gesso</MenuItem>
+            <MenuItem value="Ground">Ground</MenuItem>
+            <MenuItem value="Medium">Medium</MenuItem>
+            <MenuItem value="Paste">Paste</MenuItem>
+            <MenuItem value="Primer">Primer</MenuItem>
+            <MenuItem value="Solvent">Solvent</MenuItem>
+            <MenuItem value="Varnish">Varnish</MenuItem>
+          </Select>
+        </FormControl>
+        
+        <br/><br/>
+
+        <FormControl fullWidth>
+          <InputLabel sx={{color: "white"}} id="medium">Medium</InputLabel>
+            <Select
+              sx={{width: "220px", color: "white"}}
+              labelId="medium"
+              id="medium"
+              value={mediumFilter}
+              label="Medium"
+              onChange={(e) => setMediumFilter(e.target.value)}
+            >
+            <MenuItem value="">All Mediums</MenuItem>
+            <MenuItem value="Acrylic">Acrylic</MenuItem>
+            <MenuItem value="Enamel">Enamel</MenuItem>
+            <MenuItem value="Gouache">Gouache</MenuItem>
+            <MenuItem value="Ink">Ink</MenuItem>
+            <MenuItem value="Oil">Oil</MenuItem>
+            <MenuItem value="Pastel">Pastel</MenuItem>
+            <MenuItem value="Watercolor">Watercolor</MenuItem>
+          </Select>
+        </FormControl>
+        
+        <br/><br/>
+
+        <FormControl fullWidth>
+          <InputLabel sx={{color: "white"}} id="brand">Brand</InputLabel>
+            <Select
+              sx={{width: "220px", color: "white"}}
+              labelId="brand"
+              id="brand"
+              value={brandFilter}
+              label="Brand"
+              onChange={(e) => setBrandFilter(e.target.value)}
+            >
+            <MenuItem value="">All Brands</MenuItem>
+            <MenuItem value="Blick">Blick</MenuItem>
+            <MenuItem value="Gamblin">Gamblin</MenuItem>
+            <MenuItem value="Golden Artist Colors">Golden Artist Colors</MenuItem>
+            <MenuItem value="Grumbacher">Grumbacher</MenuItem>
+            <MenuItem value="Holbein">Holbein</MenuItem>
+            <MenuItem value="Liquitex">Liquitex</MenuItem>
+            <MenuItem value="Rembrandt">Rembrandt</MenuItem>
+            <MenuItem value="Sennelier">Sennelier</MenuItem>
+            <MenuItem value="Stuart Semple">Stuart Semple</MenuItem>
+            <MenuItem value="Utrecht">Utrecht</MenuItem>
+            <MenuItem value="Willaimsburg">Willaimsburg</MenuItem>
+            <MenuItem value="Winsor & Newton">Winsor & Newton</MenuItem>
+
+          </Select>
+        </FormControl>
+
+        <br /><br /><br/>
+        <center>
+      <Button
+        variant="contained"
+        color="secondary"
+        size="large"
+        startIcon={<RestartAltIcon />}
+        onClick={resetFilters}>RESET ALL
+      </Button>
+      </center>
+
+
+          {/* <Typography>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+            malesuada lacus ex, sit amet blandit leo lobortis eget.
+          </Typography> */}
+        </AccordionDetails>
+      </Accordion>
+
+
+
 
       </div>
 

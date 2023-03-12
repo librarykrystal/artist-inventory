@@ -151,7 +151,7 @@ function Add() {
 
       {/* <Typography variant="h5" mt={5} mb={3} gutterBottom onClick={sneakyFormFiller} >ADD ITEM</Typography> */}
 
-      <AddBoxIcon sx={{ fontSize: 42 }} />
+      <AddBoxIcon sx={{ fontSize: 42 }} onClick={sneakyFormFiller} />
       <br/>
 
       <div className="addForm">
@@ -265,11 +265,11 @@ function Add() {
             <MenuItem value="Grumbacher">Grumbacher</MenuItem>
             <MenuItem value="Holbein">Holbein</MenuItem>
             <MenuItem value="Liquitex">Liquitex</MenuItem>
-            <MenuItem value="Pebeo">Pebeo</MenuItem>
-            <MenuItem value="QoR">QoR</MenuItem>
+            {/* <MenuItem value="Pebeo">Pebeo</MenuItem> */}
+            {/* <MenuItem value="QoR">QoR</MenuItem> */}
             <MenuItem value="Rembrandt">Rembrandt</MenuItem>
             <MenuItem value="Sennelier">Sennelier</MenuItem>
-            <MenuItem value="Speedball">Speedball</MenuItem>
+            {/* <MenuItem value="Speedball">Speedball</MenuItem> */}
             <MenuItem value="Stuart Semple">Stuart Semple</MenuItem>
             <MenuItem value="Utrecht">Utrecht</MenuItem>
             <MenuItem value="Willaimsburg">Willaimsburg</MenuItem>
@@ -287,11 +287,11 @@ function Add() {
           brand != "Grumbacher" &&
           brand != "Holbein" &&
           brand != "Liquitex" &&
-          brand != "Pebeo" &&
-          brand != "QoR" &&
+          // brand != "Pebeo" &&
+          // brand != "QoR" &&
           brand != "Rembrandt" &&
           brand != "Sennelier" &&
-          brand != "Speedball" &&
+          // brand != "Speedball" &&
           brand != "Stuart Semple" &&
           brand != "Utrecht" &&
           brand != "Willaimsburg" &&
