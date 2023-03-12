@@ -1,27 +1,24 @@
 import React from 'react';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector, useDispatch } from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from "react";
 
-import Button from '@mui/material/Button';
+// Material UI Imports
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import grey from '@mui/material/colors/grey';
 import Typography from '@mui/material/Typography';
 import '@fontsource/cabin/400.css';
 import '@fontsource/cabin/700.css';
+import Button from '@mui/material/Button';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import HomeIcon from '@mui/icons-material/Home';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import IconButton from '@mui/material/IconButton';
 import WarningIcon from '@mui/icons-material/Warning';
-import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 
-
-
+// Material UI Theming
 const theme = createTheme({
   typography: {
     fontFamily: [
@@ -41,14 +38,14 @@ const theme = createTheme({
 
 function ItemDetails() {
 
-  // const user = useSelector((store) => store.user);
+  const user = useSelector((store) => store.user);
   const item = useSelector((store) => store.item);
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
-  // const [favorite, setFavorite] = useState(false);
 
   useEffect(() => {
+    // Fetches item details on page load
     dispatch({ 
         type: 'FETCH_ITEM',
         payload: id
@@ -60,10 +57,7 @@ function ItemDetails() {
       type: 'FAVE_IT',
       payload: {id, favorite: true}
     });
-  //   dispatch({ 
-  //     type: 'FETCH_ITEM',
-  //     payload: id
-  // });
+    // Updated item details are then immediately fetched within the saga that catches this
   }
 
   const unfaveIt = () => {
@@ -71,17 +65,16 @@ function ItemDetails() {
       type: 'UNFAVE_IT',
       payload: {id, favorite: false}
     });
-  //   dispatch({ 
-  //     type: 'FETCH_ITEM',
-  //     payload: id
-  // });
+    // Updated item details are then immediately fetched within the saga that catches this
   }
 
+  // (triggered by EDIT BUTTON) - goes to edit page for this item:
   const goEdit = () => {
     console.log('goEdit CLICKED');
     history.push('/edit');
   }
 
+  // (triggered by DELETE BUTTON) deletes this item by its ID and goes back HOME:
   const deleteMe = (event) => {
     event.preventDefault();
     dispatch({ 
@@ -91,29 +84,25 @@ function ItemDetails() {
     history.push("/");
   }
 
-  const goBack = (event) => {
-    event.preventDefault();
-    // clearing out item reducer:
-    dispatch({ 
-        type: 'CLEAR_ITEM'
-    });
-    history.push("/");
-  }
-
-
   return (
     <ThemeProvider theme={theme}>
 
     <br/>
     <div className="noFilterBarContainer">
+      {/* ALL housed in CONDITIONAL RENDER
+          to avoid error if page loads before useEffect Redux chain finishes */}
       { item &&
         <>
+          {/* ITEM NAME */}
           <Typography variant="h5" sx={{ fontWeight: 700 }} mt={-2} mb={2} gutterBottom>{item.name}</Typography>
 
+          {/* IF TOXIC, show ICON */}
           { item.toxic == true && <WarningIcon /> }
 
+          {/* ITEM BODY and MEDIUM */}
           <Typography variant="body1" margin={1.5} gutterBottom>{item.body} {item.medium}</Typography>
 
+          {/* CONDITIONAL RENDER — shows block of hex color if there is a hex value entered */}
           {item.hex &&
             <div 
               style={{ 
@@ -125,26 +114,27 @@ function ItemDetails() {
             </div>
           }
 
+          {/* BRAND */}
           <Typography variant="body1" margin={1.5} gutterBottom>{item.brand}</Typography>
 
-          {item.line &&
-            <Typography variant="body1" margin={1} gutterBottom>{item.line}</Typography>
-          }
+          {/* PRODUCT LINE */}
+          <Typography variant="body1" margin={1} gutterBottom>{item.line}</Typography>
 
+          {/* SIZE and CONTAINER */}
           <Typography variant="body1" margin={0} gutterBottom>{item.size} {item.container}</Typography>
-          {/* <p>FAMILY: {item.family}</p> */}
 
+          {/* notes label */}
           <Typography variant="body1" mt={4} fontWeight="bold" gutterBottom>NOTES:</Typography>
 
+          {/* CONDITIONAL RENDER — shows note if there are any, shows italic "none" otherwise */}
           { item.notes ? 
             <Typography variant="body1" mb={1} gutterBottom>{item.notes}</Typography>
           :
             <Typography variant="body1" mb={1} fontStyle="italic" color="gray" gutterBottom> none</Typography>
-            // <p className="notesText" style={{fontStyle: `italic`, color: 'grey'}}> none</p>
           }
-
           <br/>
 
+          {/* CONDITIONAL RENDER — clickable heart icon to FAVORITE/UNFAVORITE */}
           { item.favorite == true ?
             <IconButton aria-label="unfavorite" onClick={unfaveIt}>
               <FavoriteIcon fontSize="large" />
@@ -156,8 +146,9 @@ function ItemDetails() {
           }
         </>
       }
-
       <br />
+
+      {/* EDIT button */}
       <Button
         variant="contained"
         color="primary"
@@ -165,8 +156,9 @@ function ItemDetails() {
         startIcon={<EditIcon />}
         onClick={goEdit}>EDIT
       </Button>
-
       <br /><br />
+
+      {/* DELETE button */}
       <Button
         variant="contained"
         color="secondary"

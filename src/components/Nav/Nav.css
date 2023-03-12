@@ -6,37 +6,13 @@
   z-index: 5000;
 }
 
-/* .nav { */
-  /* flex box layout   */
-      /* display: flex;
-      justify-content: space-between; */
-  /* align-items: center; */
-      /* height: 74px;
-      overflow: visible; */
-
-      /* margin: 0 0 0px;
-      margin-bottom: 15px; */
-  /* background-color: #3baa74; */
-  /* background-color: #8c8c8c; */
-  /* background-color: lightgray; */
-  /* background-color: #f2f2f2; */
-  /* background-image: linear-gradient(to top, #f2f2f2, grey); */
-      /* background-image: linear-gradient(to top, #c8c8c8, #f2f2f2); */
-  /* overflow: hidden; */
-/* } */
-
 .navMobile {
-  /* display: flex;
-  justify-content: space-between; */
   display: grid;
   height: 78px;
   width: 100%;
   overflow: visible;
   grid-template-rows: 90px 40px 40px;
-  /* grid-template-columns: 1; */
   overflow: visible;
-  /* background-color: greenyellow; */
-  /* background-image: linear-gradient(to top, #c8c8c8, #f2f2f2); */
 }
 
 .navMobile a {
@@ -44,7 +20,6 @@
 }
 
 .navMobileUpper {
-  /* background-color: aquamarine; */
   background-image: linear-gradient(to top, #c8c8c8, #f2f2f2);
   grid-row-start: 1;
   display: flex;
@@ -56,7 +31,6 @@
   width: 393px;
   min-width: 393px;
   position: fixed;
-  /* justify-self: center; */
   top: 0;
   left: 50%;
   transform: translate(-50%);
@@ -65,10 +39,6 @@
 .navMobileMid {
   background-color: white;
   grid-row-start: 2;
-  /* display: flex;
-  justify-content: center;
-  align-content: flex-start; */
-  /* overflow: visible; */
   text-align: center;
 }
 
@@ -77,30 +47,16 @@
   grid-row-start: 3;
   display: flex;
   justify-content: center;
-  /* justify-content:space-between; */
-  /* overflow: visible; */
-  /* text-align: center; */
 }
 
 .navLinkMobile {
   grid-row-start: 2 / span 1;
   margin-right: 30px;
-  /* margin: 0 35 0 35; */
 }
-
-/* .nav-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: #f2f2f2;
-  padding-left: 10px;
-  margin: 0;
-} */
 
 .navLink {
   display: inline-block;
   color: #f2f2f2;
-  /* background-color: #2c8d5e; */
-  /* background-color:  #666666; */
   background-color: black;
   text-align: center;
   padding: 27px 17px;
@@ -115,7 +71,6 @@
 } 
 
 .navLink:hover {
-  /* background-color: #3baa74; */
   background-color: #8c8c8c;
 }
 

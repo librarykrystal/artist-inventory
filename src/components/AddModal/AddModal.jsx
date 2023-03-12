@@ -3,18 +3,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import './AddModal.css';
 
-import Button from '@mui/material/Button';
+// Material UI Imports
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import grey from '@mui/material/colors/grey';
 import Typography from '@mui/material/Typography';
 import '@fontsource/cabin/400.css';
 import '@fontsource/cabin/700.css';
-
+import Button from '@mui/material/Button';
 import HomeIcon from '@mui/icons-material/Home';
-import PaletteIcon from '@mui/icons-material/Palette';
 import FactCheckIcon from '@mui/icons-material/FactCheck';
-import AddBoxIcon from '@mui/icons-material/AddBox';
 
+// Material UI Theming
 const theme = createTheme({
   typography: {
     fontFamily: [
@@ -34,6 +33,7 @@ const theme = createTheme({
 
 function Modal(props) {
 
+  // CONDITIONAL RENDER:
   // This modal only shows if triggered by a true prop value from AddPage.jsx
   if(!props.show) {
     return null
@@ -45,6 +45,7 @@ function Modal(props) {
 
   const goHome = (event) => {
     event.preventDefault();
+    // Clearing item reducer when user goes back to home list:
     dispatch({ 
       type: 'CLEAR_ITEM'
      });
@@ -56,95 +57,93 @@ function Modal(props) {
     history.push(`/details/${item.id}`);
   }
 
-  const goAdd = (event) => {
-    event.preventDefault();
-    history.push('/add');
-  }
+  // This function will be used if TRY AGAIN button is included:
+
+  // const goAdd = (event) => {
+  //   event.preventDefault();
+  //   history.push('/add');
+  // }
 
   return (
     <ThemeProvider theme={theme}>
-    <>
-    <center>
+      <center>
 
-    {/* CONDITIONAL RENDER:
-    Show success if an item has been sent to reducer through post saga success,
-    Show failture if item reducer is still empty */}
+      {/* CONDITIONAL RENDER:
+      Shows success if an item has been sent to reducer through post saga success,
+      Shows failture if item reducer is still empty */}
 
-    { item.id &&
-    <div className="modal">
-      <div className="modal-content">
-        <div className="modal-header">
-          {/* <h4>Success!</h4> */}
-          <Typography variant="h5" mt={1} mb={1} gutterBottom >Success!</Typography>
-        </div>
-        <div className="modal-body">
-          {/* <p>The new item has been added to your inventory.</p> */}
-          {/* <p>ITEM ID TEST: {JSON.stringify(item.id)}</p> */}
-          <Typography variant="body1" mt={2} mb={2} gutterBottom>The new item has been added to your inventory.</Typography>
-        </div>
-        <div className="modal-footer">
-          {/* <button className="modal-button" onClick={goToItem}>VIEW ITEM</button> */}
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            startIcon={<FactCheckIcon />}
-            onClick={goToItem}>VIEW ITEM
-          </Button>
-          {/* <br /> */}
-          <br/><br/><br/>
-          {/* <button className="modal-button" onClick={goHome}>HOME</button> */}
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            startIcon={<HomeIcon />}
-            onClick={goHome}>HOME
-          </Button>
-        </div>
-      </div>
-    </div>
-    }
+        {/* SUCCESS MESSAGE */}
+        { item.id &&
+          <div className="modal">
+            <div className="modal-content">
+              <div className="modal-header">
+                <Typography variant="h5" mt={1} mb={1} gutterBottom >Success!</Typography>
+              </div>
+              <div className="modal-body">
+                <Typography variant="body1" mt={2} mb={2} gutterBottom>The new item has been added to your inventory.</Typography>
+              </div>
+              <div className="modal-footer">
 
-    { !item.id &&
-    <div className="modal">
-      <div className="modal-content">
-        <div className="modal-header">
-          {/* <h4>Failure!</h4> */}
-          <Typography variant="h5" mt={1} mb={1} gutterBottom >Oh, no!</Typography>
-        </div>
-        <div className="modal-body">
-          {/* <p>Item not added to invenory. Please try again.</p> */}
-          {/* <p>ITEM ID TEST: {JSON.stringify(item.id)}</p> */}
-          <Typography variant="body1" mt={2} mb={2} gutterBottom>There was an error adding the item. </Typography>
-        </div>
-        <div className="modal-footer">
-          {/* <button className="modal-button" onClick={goHome}>HOME</button> */}
+                {/* VIEW SUBMITTED ITEM button */}
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  startIcon={<FactCheckIcon />}
+                  onClick={goToItem}>VIEW ITEM
+                </Button>
+                <br/><br/><br/>
 
-{/* TRY AGAIN link would need to make showModal on /add false */}
+                {/* HOME button */}
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  startIcon={<HomeIcon />}
+                  onClick={goHome}>HOME
+                </Button>
 
-          {/* <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            startIcon={<AddBoxIcon />}
-            onClick={goAdd}>TRY AGAIN
-          </Button> */}
-          {/* <br/><br/><br/> */}
+              </div>
+            </div>
+          </div>
+        }
 
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            startIcon={<HomeIcon />}
-            onClick={goHome}>HOME
-          </Button>
-        </div>
-      </div>
-    </div>
-    }
-</center>
-    </>
+        {/* FAILURE MESSAGE */}
+        { !item.id &&
+          <div className="modal">
+            <div className="modal-content">
+              <div className="modal-header">
+                <Typography variant="h5" mt={1} mb={1} gutterBottom >Oh, no!</Typography>
+              </div>
+              <div className="modal-body">
+                <Typography variant="body1" mt={2} mb={2} gutterBottom>There was an error adding the item. </Typography>
+              </div>
+              <div className="modal-footer">
+
+      {/* TRY AGAIN link would need to make showModal on /add false */}
+                {/* <Button
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  startIcon={<AddBoxIcon />}
+                  onClick={goAdd}>TRY AGAIN
+                </Button> */}
+                {/* <br/><br/><br/> */}
+
+                {/* HOME button */}
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  startIcon={<HomeIcon />}
+                  onClick={goHome}>HOME
+                </Button>
+
+              </div>
+            </div>
+          </div>
+        }
+      </center>
     </ThemeProvider>
   );
 }
