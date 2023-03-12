@@ -2,14 +2,25 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import './AddModal.css';
+
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import grey from '@mui/material/colors/grey';
+import Typography from '@mui/material/Typography';
+import '@fontsource/cabin/400.css';
+import '@fontsource/cabin/700.css';
+
 import HomeIcon from '@mui/icons-material/Home';
 import PaletteIcon from '@mui/icons-material/Palette';
 import FactCheckIcon from '@mui/icons-material/FactCheck';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 
 const theme = createTheme({
+  typography: {
+    fontFamily: [
+      'Cabin',
+    ],
+  },
   palette: {
     primary: {
       main: '#d9d9d9',
@@ -45,9 +56,15 @@ function Modal(props) {
     history.push(`/details/${item.id}`);
   }
 
+  const goAdd = (event) => {
+    event.preventDefault();
+    history.push('/add');
+  }
+
   return (
     <ThemeProvider theme={theme}>
     <>
+    <center>
 
     {/* CONDITIONAL RENDER:
     Show success if an item has been sent to reducer through post saga success,
@@ -57,28 +74,30 @@ function Modal(props) {
     <div className="modal">
       <div className="modal-content">
         <div className="modal-header">
-          <h4>Success!</h4>
+          {/* <h4>Success!</h4> */}
+          <Typography variant="h5" mt={1} mb={1} gutterBottom >Success!</Typography>
         </div>
         <div className="modal-body">
-          <p>The new item has been added to your inventory.</p>
+          {/* <p>The new item has been added to your inventory.</p> */}
           {/* <p>ITEM ID TEST: {JSON.stringify(item.id)}</p> */}
+          <Typography variant="body1" mt={2} mb={2} gutterBottom>The new item has been added to your inventory.</Typography>
         </div>
         <div className="modal-footer">
           {/* <button className="modal-button" onClick={goToItem}>VIEW ITEM</button> */}
           <Button
             variant="contained"
             color="primary"
-            size="small"
+            size="large"
             startIcon={<FactCheckIcon />}
             onClick={goToItem}>VIEW ITEM
           </Button>
           {/* <br /> */}
-          {' '}
+          <br/><br/><br/>
           {/* <button className="modal-button" onClick={goHome}>HOME</button> */}
           <Button
             variant="contained"
             color="primary"
-            size="small"
+            size="large"
             startIcon={<HomeIcon />}
             onClick={goHome}>HOME
           </Button>
@@ -91,18 +110,32 @@ function Modal(props) {
     <div className="modal">
       <div className="modal-content">
         <div className="modal-header">
-          <h4>Failure!</h4>
+          {/* <h4>Failure!</h4> */}
+          <Typography variant="h5" mt={1} mb={1} gutterBottom >Oh, no!</Typography>
         </div>
         <div className="modal-body">
-          <p>Item not added to invenory. Please try again.</p>
+          {/* <p>Item not added to invenory. Please try again.</p> */}
           {/* <p>ITEM ID TEST: {JSON.stringify(item.id)}</p> */}
+          <Typography variant="body1" mt={2} mb={2} gutterBottom>There was an error adding the item. </Typography>
         </div>
         <div className="modal-footer">
           {/* <button className="modal-button" onClick={goHome}>HOME</button> */}
+
+{/* TRY AGAIN link would need to make showModal on /add false */}
+
+          {/* <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            startIcon={<AddBoxIcon />}
+            onClick={goAdd}>TRY AGAIN
+          </Button> */}
+          {/* <br/><br/><br/> */}
+
           <Button
             variant="contained"
             color="primary"
-            size="small"
+            size="large"
             startIcon={<HomeIcon />}
             onClick={goHome}>HOME
           </Button>
@@ -110,7 +143,7 @@ function Modal(props) {
       </div>
     </div>
     }
-
+</center>
     </>
     </ThemeProvider>
   );

@@ -72,24 +72,20 @@
   text-align: center;
 }
 
-/* .welcomeName {
-  margin-top: 12px;
-  color: dimgray;
-} */
-
 .navMobileLower {
   background-color: black;
   grid-row-start: 3;
   display: flex;
   justify-content: center;
-  justify-content: space-around;
+  /* justify-content:space-between; */
   /* overflow: visible; */
   /* text-align: center; */
 }
 
 .navLinkMobile {
   grid-row-start: 2 / span 1;
-  margin-right: 25px;
+  margin-right: 30px;
+  /* margin: 0 35 0 35; */
 }
 
 /* .nav-title {

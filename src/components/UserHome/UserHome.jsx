@@ -3,17 +3,22 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import { useDispatch, useSelector } from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import './UserHome.css';
-import Button from '@mui/material/Button';
+
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import grey from '@mui/material/colors/grey';
-import white from '@mui/material/colors/grey';
-import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import WarningIcon from '@mui/icons-material/Warning';
-
 import Typography from '@mui/material/Typography';
 import '@fontsource/cabin/400.css';
 import '@fontsource/cabin/700.css';
+
+import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import WarningIcon from '@mui/icons-material/Warning';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+import Button from '@mui/material/Button';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
 
 
   // this component will show MAIN INVENTORY LIST
@@ -192,10 +197,6 @@ function UserHome() {
 
 
       <div className="invList">
-
-
-{/* FILTER EXPERIMENT FOR ALL FILTERS IN ONE USING FUNCTIONS */}
-
 
       {inventory.length >0 &&
           <div>
