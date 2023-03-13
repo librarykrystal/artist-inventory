@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {useHistory} from 'react-router-dom';
 
@@ -17,6 +17,7 @@ import IconButton from '@mui/material/IconButton';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
+import ClickAwayListener from '@mui/base/ClickAwayListener';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import WarningIcon from '@mui/icons-material/Warning';
@@ -60,6 +61,11 @@ function UserHome() {
   useEffect(() => {
     dispatch({ type: 'FETCH_USER_INVENTORY' });
   }, []);
+
+  // Makes each view load scrolled to top
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  });
 
   // LIST FILTERING — by TYPE
   const typeFilterHandler = (item) => {
@@ -127,9 +133,11 @@ function UserHome() {
       <br />
 
       {/* BEGIN FILTERS BAR housed in MUI ACCORDION*/}
+
       <div className="filterBar">
         <br/>
         <Accordion sx={{backgroundColor: "black", color: "white", width: "250px"}}>
+        
         <AccordionSummary
           expandIcon={<ExpandMoreIcon sx={{color: "white"}} />}
           aria-controls="panel1a-content"
@@ -137,6 +145,7 @@ function UserHome() {
         >
           <Typography>FILTERS</Typography>
         </AccordionSummary>
+        <ClickAwayListener>
         <AccordionDetails
           sx={{
             color: "white",
@@ -258,6 +267,7 @@ function UserHome() {
             </Button>
           </center>
         </AccordionDetails>
+        </ClickAwayListener>
       </Accordion>
       </div>
       {/* END of FILTERS BAR housed in MUI ACCORDION*/}

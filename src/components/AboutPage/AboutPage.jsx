@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect } from "react";
 
 // Material UI Imports
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -28,15 +28,20 @@ const theme = createTheme({
 
 function AboutPage() {
 
-return (
-  <ThemeProvider theme={theme}>
-    <div className="noFilterBarContainer">
-      {/* ICON HEADER at top of page: */}
-      <InfoIcon sx={{ fontSize: 42 }} />
-      <Typography variant="body1" mt={5} gutterBottom>This is the public about page.</Typography>
-    </div>
-  </ThemeProvider>
-);
+  // Makes each view load scrolled to top
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  });
+
+  return (
+    <ThemeProvider theme={theme}>
+      <div className="noFilterBarContainer">
+        {/* ICON HEADER at top of page: */}
+        <InfoIcon sx={{ fontSize: 42 }} />
+        <Typography variant="body1" mt={5} gutterBottom>This is the public about page.</Typography>
+      </div>
+    </ThemeProvider>
+  );
 }
 
 export default AboutPage;

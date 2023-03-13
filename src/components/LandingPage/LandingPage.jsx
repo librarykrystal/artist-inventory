@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import './LandingPage.css';
 
@@ -33,6 +33,10 @@ const theme = createTheme({
 });
 
 function LandingPage() {
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  });
 
   const history = useHistory();
 

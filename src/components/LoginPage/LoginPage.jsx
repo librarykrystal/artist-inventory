@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import LoginForm from '../LoginForm/LoginForm';
 import { useHistory } from 'react-router-dom';
 
@@ -29,7 +29,12 @@ const theme = createTheme({
 });
 
 function LoginPage() {
+  
   const history = useHistory();
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  });
 
   return (
     <ThemeProvider theme={theme}>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 
 import { useHistory } from 'react-router-dom';
 import RegisterForm from '../RegisterForm/RegisterForm';
@@ -31,7 +31,13 @@ const theme = createTheme({
 });
 
 function RegisterPage() {
+
   const history = useHistory();
+
+  // Makes each view load scrolled to top
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  });
 
   return (
     <ThemeProvider theme={theme}>

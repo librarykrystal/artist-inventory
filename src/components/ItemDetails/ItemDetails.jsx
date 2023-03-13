@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import { useParams, Link } from 'react-router-dom';
-import { useState, useEffect } from "react";
 
 // Material UI Imports
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -51,6 +50,11 @@ function ItemDetails() {
         payload: id
     });
   }, []);
+
+    // Makes each view load scrolled to top
+    useLayoutEffect(() => {
+      window.scrollTo(0, 0)
+    });
 
   const faveIt = () => {
     dispatch({ 

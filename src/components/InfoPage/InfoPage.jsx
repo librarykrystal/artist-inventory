@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useLayoutEffect } from "react";
 
 // Material UI Imports
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -27,6 +27,10 @@ const theme = createTheme({
 });
 
 function InfoPage() {
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  });
 
   return (
     <ThemeProvider theme={theme}>
