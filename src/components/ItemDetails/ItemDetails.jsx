@@ -78,6 +78,15 @@ function ItemDetails() {
     history.push('/edit');
   }
 
+  // (triggered by MOVE TO INVENTORY BUTTON) — moves item from wishlist to main inventory:
+  const inventoryMe = () => {
+    dispatch({ 
+      type: 'UNWISH_IT',
+      payload: {id, wishlist: false}
+    });
+    // Updated item details are then immediately fetched within the saga that catches this
+  }
+
   // (triggered by DELETE BUTTON) deletes this item by its ID and goes back HOME:
   const deleteMe = (event) => {
     event.preventDefault();
@@ -161,6 +170,21 @@ function ItemDetails() {
         onClick={goEdit}>EDIT
       </Button>
       <br /><br />
+
+      {/* MOVE TO INVENTORY button */}
+      {/* CONDITIONAL RENDER — only shows if item is currently on wishlist */}
+      {item.wishlist == true &&
+      <>
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          startIcon={<EditIcon />}
+          onClick={inventoryMe}>MOVE TO INVENTORY
+        </Button>
+        <br /><br />
+      </>
+      }
 
       {/* DELETE button */}
       <Button

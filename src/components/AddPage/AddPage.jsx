@@ -108,7 +108,7 @@ function Add() {
     setNotes('Test notes, yay!');
   }
 
-  // onSubmit
+  // SUBMIT to INVENTORY
   const submitForm = (e) => {
     e.preventDefault();
     // Checking for type and name values & showing only the appropriate warning:
@@ -137,7 +137,7 @@ function Add() {
     }
   }
 
-
+  // SUBMIT to WISHLIST
   const submitWish = (e) => {
     e.preventDefault();
     // Checking for type and name values & showing only the appropriate warning:
