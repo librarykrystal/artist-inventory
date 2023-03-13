@@ -54,7 +54,7 @@ function ItemDetails() {
     // Makes each view load scrolled to top
     useLayoutEffect(() => {
       window.scrollTo(0, 0)
-    });
+    }, []);
 
   const faveIt = () => {
     dispatch({ 

@@ -34,7 +34,7 @@ function LoginPage() {
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0)
-  });
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>

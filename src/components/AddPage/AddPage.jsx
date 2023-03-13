@@ -79,7 +79,7 @@ function Add() {
   // Makes each view load scrolled to top
   useLayoutEffect(() => {
     window.scrollTo(0, 0)
-  });
+  }, []);
 
   // CONSOLE LOG showing all selections as they happen:
   // console.log('SELECTIONS...', ["type:", type, "name:", name, "medium:", medium, "hex:", hex, "brand:", brand, "line:", line, "body:", body, "container:", container, "size:", size, "favorite", favorite, "toxic:", toxic, "notes:", notes]);

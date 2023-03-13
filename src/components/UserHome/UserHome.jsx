@@ -65,7 +65,7 @@ function UserHome() {
   // Makes each view load scrolled to top
   useLayoutEffect(() => {
     window.scrollTo(0, 0)
-  });
+  }, []);
 
   // LIST FILTERING — by TYPE
   const typeFilterHandler = (item) => {
