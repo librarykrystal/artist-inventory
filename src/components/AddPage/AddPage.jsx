@@ -27,6 +27,7 @@ import WarningIcon from '@mui/icons-material/Warning';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import LoyaltyIcon from '@mui/icons-material/Loyalty';
 
 // Material UI Theming
 const theme = createTheme({
@@ -129,7 +130,36 @@ function Add() {
     } else {
       dispatch({ 
           type: 'ADD_ITEM',
-          payload: {type, name, hex, medium, brand, body, container, size, notes, favorite, line, toxic}
+          payload: {type, name, hex, medium, brand, body, container, size, notes, favorite, line, toxic, wishlist: false}
+      });
+    // showModal set to true will trigger AddModal with success/failure and nav options:
+      setShowModal(true);
+    }
+  }
+
+
+  const submitWish = (e) => {
+    e.preventDefault();
+    // Checking for type and name values & showing only the appropriate warning:
+    if(!type && name){
+      console.log('UH OH, TYPE IS EMPTY!')
+      setNoTypeWarning(true);
+      setNoTypeNoNameWarning(false);
+      setNoNameWarning(false);
+    } else if(!name && type){
+      console.log('UH OH, NAME IS EMPTY!')
+      setNoNameWarning(true);
+      setNoTypeNoNameWarning(false);
+      setNoTypeWarning(false);
+    } else if(!name && !type){
+      console.log('UH OH, TYPE AND NAME ARE EMPTY!')
+      setNoTypeNoNameWarning(true);
+      setNoTypeWarning(false);
+      setNoNameWarning(false);
+    } else {
+      dispatch({ 
+          type: 'ADD_ITEM',
+          payload: {type, name, hex, medium, brand, body, container, size, notes, favorite, line, toxic, wishlist: true}
       });
     // showModal set to true will trigger AddModal with success/failure and nav options:
       setShowModal(true);
@@ -375,14 +405,25 @@ function Add() {
         </div>
         <br /><br />
 
-        {/* SUBMIT button */}
+        {/* SUBMIT to INVENTORY button */}
         <Button
         type="submit"
           variant="contained"
           color="primary"
           size="large"
           startIcon={<CheckBoxIcon />}
-          onClick={submitForm}>SUBMIT
+          onClick={submitForm}>ADD TO INVENTORY
+        </Button>
+        <br /><br />
+
+        {/* SUBMIT to WISHLIST button */}
+        <Button
+        type="submit"
+          variant="contained"
+          color="primary"
+          size="large"
+          startIcon={<LoyaltyIcon />}
+          onClick={submitWish}>ADD TO WISHLIST
         </Button>
         <br /><br />
 

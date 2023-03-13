@@ -51,11 +51,12 @@ router.post('/', (req, res) => {
   console.log('inventory POST route');
   console.log('is authenticated?', req.isAuthenticated());
   console.log('user', req.user);
+  console.log('REQ.BODY for WISHLIST ADD:', req.body);
   // only do POST if authenticated:
   if (req.isAuthenticated()){
     const addQuery = `
-    INSERT INTO "inventory" ("user_id", "type", "name", "hex", "medium", "brand", "body", "container", "size", "notes", "favorite", "line", "toxic")
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
+    INSERT INTO "inventory" ("user_id", "type", "name", "hex", "medium", "brand", "body", "container", "size", "notes", "favorite", "line", "toxic", "wishlist")
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
     RETURNING "id";`
     pool.query(addQuery, [
       req.user.id,
@@ -70,7 +71,8 @@ router.post('/', (req, res) => {
       req.body.notes,
       req.body.favorite,
       req.body.line,
-      req.body.toxic
+      req.body.toxic,
+      req.body.wishlist
     ])
     .then(result => {
       console.log('New item ID:', result.rows[0].id);

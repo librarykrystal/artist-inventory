@@ -92,6 +92,7 @@ Inventory List on Home
   border: 1px solid gray;
   box-shadow: 1px 1px 3px;
   display: grid;
+  width: 394px;
   grid-template-columns: 2;
   min-height: 110px;
   margin: 15px 10px 15px 10px;
