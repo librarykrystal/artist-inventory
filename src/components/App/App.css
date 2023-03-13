@@ -20,7 +20,7 @@ Containers
 -------------------------------------------------------------------------------- */
 
 .container {
-  margin-top: 150px;
+  margin-top: 170px;
   padding: 0px;
   padding-bottom: 20px;
   display: flex;
@@ -38,7 +38,7 @@ Containers
 }
 
 .noFilterBarContainer {
-  margin-top: 200px;
+  margin-top: 190px;
   padding: 0px;
   padding-bottom: 20px;
   display: flex;
@@ -52,13 +52,27 @@ Filter Options on Home
 
 .filterBar {
   position: fixed;
-  top: 175px;
+  top: 247px;
   width: 100%;
   margin-bottom: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
+}
+
+.headerAndFilterBar {
+  background-color: #F0F0F0;
+  border-bottom: 10px solid black;
+  width: 100%;
+  height: 57px;
+  position: fixed;
+  padding: 0px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* --------------------------------------------------------------------------------
@@ -69,7 +83,7 @@ Inventory List on Home
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 125px;
   width: 100%;
 }
 

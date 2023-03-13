@@ -54,24 +54,29 @@ function Nav() {
     history.push("/");
   }
 
-  const goInfo = (event) => {
-    event.preventDefault();
-    history.push("/info");
-  }
-
-  const goAbout = (event) => {
-    event.preventDefault();
-    history.push("/about");
-  }
-
   const goAdd = (event) => {
     event.preventDefault();
     history.push('/add');
   }
 
+  const goWishlist = (event) => {
+    event.preventDefault();
+    history.push('/wishlist');
+  }
+
+  const goInfo = (event) => {
+    event.preventDefault();
+    history.push("/info");
+  }
+
   const goLogin = (event) => {
     event.preventDefault();
     history.push('/login');
+  }
+
+  const goAbout = (event) => {
+    event.preventDefault();
+    history.push("/about");
   }
 
   return (
@@ -119,7 +124,7 @@ function Nav() {
                 </span>
 
                 <span className="navLinkMobile">
-                  <IconButton aria-label="wishlist" className="navLinkMobile" color="secondary" onClick={goBack}>
+                  <IconButton aria-label="wishlist" className="navLinkMobile" color="secondary" onClick={goWishlist}>
                     <LoyaltyIcon />
                   </IconButton>
                 </span>

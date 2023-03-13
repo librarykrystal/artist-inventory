@@ -23,7 +23,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import WarningIcon from '@mui/icons-material/Warning';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
-import HomeIcon from '@mui/icons-material/Home';
+import LoyaltyIcon from '@mui/icons-material/Loyalty';
 
 // Material UI Theming
 const theme = createTheme({
@@ -47,7 +47,7 @@ const theme = createTheme({
   },
 });
 
-function UserHome() {
+function Wishlist() {
 
   const user = useSelector((store) => store.user);
   const inventory = useSelector(store => store.inventory);
@@ -132,7 +132,7 @@ function UserHome() {
     <ThemeProvider theme={theme}>
       <div className="container">
         <div className="headerAndFilterBar">
-        <HomeIcon sx={{ fontSize: 42 }} />
+        <LoyaltyIcon sx={{ fontSize: 42 }} />
 
         {/* BEGIN FILTERS BAR housed in MUI ACCORDION*/}
 
@@ -145,7 +145,7 @@ function UserHome() {
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography>FILTER INVENTORY</Typography>
+            <Typography>FILTER WISHLIST</Typography>
           </AccordionSummary>
           {/* <ClickAwayListener> */}
           <AccordionDetails
@@ -291,9 +291,9 @@ function UserHome() {
               return(
                 <div key={item.id}>
                 {/* CONDITIONAL RENDER — wishlist items only */}
-                {!item.wishlist &&
+                {item.wishlist &&
                 // each item is rendered in a clickable div that routes to item's details page
-                <div className="listItemContainer" key={item.id} onClick={() => goToDetails(item.id)}>
+                <div className="listItemContainer" onClick={() => goToDetails(item.id)}>
                   <div className="listingInfoContainer">
                     {/* ITEM DETAILS: */}
                     <Typography variant="h5" sx={{ fontWeight: 700 }} margin={0}  gutterBottom>{item.name}</Typography>
@@ -325,8 +325,7 @@ function UserHome() {
                       </div>
                     }  
                   </div>
-                </div>
-              }
+                </div>}
                 </div>
               );
             })}
@@ -338,4 +337,4 @@ function UserHome() {
   );
 }
 
-export default UserHome;
+export default Wishlist;
