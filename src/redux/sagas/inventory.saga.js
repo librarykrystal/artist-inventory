@@ -10,6 +10,7 @@ function* inventorySaga() {
     yield takeEvery('DELETE_ITEM', deleteIt);
     yield takeEvery('FAVE_IT', faveHandler);
     yield takeEvery('UNFAVE_IT', faveHandler);
+    yield takeEvery('WISH_IT', wishHandler);
     yield takeEvery('UNWISH_IT', wishHandler);
   }
 
@@ -75,11 +76,14 @@ function* faveHandler(action) {
   }
 }
 
-// WORKER SAGA for PUT UN-WISHLIST
+// WORKER SAGA for PUT WISHLIST
 function* wishHandler(action) {
   try {
-    if(action.type === 'UNWISH_IT'){
-      console.log('wishHandler SAGA: UNWISH_IT payload:', action.payload);
+    if(action.type === 'WISH_IT'){
+      console.log('wishHandler SAGA: WISH_IT payload:', action.payload);
+      yield axios.put(`/api/wishlist`, action.payload);
+    } else if (action.type === 'UNWISH_IT'){
+      console.log('faveHandler SAGA: UNWISH_IT payload:', action.payload);
       yield axios.put(`/api/wishlist`, action.payload);
     }
     yield fetchIt({type: 'FETCH_ITEM', payload: `${action.payload.id}`});

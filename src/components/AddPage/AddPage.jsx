@@ -105,7 +105,7 @@ function Add() {
     setLine('');
     setSize('2 oz');
     setContainer('Tube');
-    setNotes('Test notes, yay!');
+    setNotes('Background orange for the Nina Simone painting');
   }
 
   // SUBMIT to INVENTORY
@@ -219,6 +219,7 @@ function Add() {
               <HexColorPicker className="colorPicker" color={hex} onChange={(e) => setHex(e)} />
               { hex &&
                 <div className="colorSelection"
+                  onClick={sneakyFormFiller}
                   style={{ 
                     backgroundColor: `${hex}`,
                     border: `2px solid black`,

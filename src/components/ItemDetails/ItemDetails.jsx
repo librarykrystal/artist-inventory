@@ -16,6 +16,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import IconButton from '@mui/material/IconButton';
 import WarningIcon from '@mui/icons-material/Warning';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import LoyaltyIcon from '@mui/icons-material/Loyalty';
 
 // Material UI Theming
 const theme = createTheme({
@@ -87,6 +89,15 @@ function ItemDetails() {
     // Updated item details are then immediately fetched within the saga that catches this
   }
 
+    // (triggered by MOVE TO WISHLIST BUTTON) — moves item from main inventory to wishlist:
+    const wishlistMe = () => {
+      dispatch({ 
+        type: 'WISH_IT',
+        payload: {id, wishlist: true}
+      });
+      // Updated item details are then immediately fetched within the saga that catches this
+    }
+
   // (triggered by DELETE BUTTON) deletes this item by its ID and goes back HOME:
   const deleteMe = (event) => {
     event.preventDefault();
@@ -100,12 +111,19 @@ function ItemDetails() {
   return (
     <ThemeProvider theme={theme}>
 
-    <br/>
     <div className="noFilterBarContainer">
       {/* ALL housed in CONDITIONAL RENDER
           to avoid error if page loads before useEffect Redux chain finishes */}
       { item &&
         <>
+          {/* CONDITIONAL RENDER — shows appropriate icon header (inventory or wishlist) */}
+          { item.wishlist ?
+          <LoyaltyIcon sx={{ fontSize: 42 }} />
+          :
+          <CheckBoxIcon sx={{ fontSize: 42 }} />
+          }
+          <br /><br />
+
           {/* ITEM NAME */}
           <Typography variant="h5" sx={{ fontWeight: 700 }} mt={-2} mb={2} gutterBottom>{item.name}</Typography>
 
@@ -173,14 +191,29 @@ function ItemDetails() {
 
       {/* MOVE TO INVENTORY button */}
       {/* CONDITIONAL RENDER — only shows if item is currently on wishlist */}
-      {item.wishlist == true &&
+      {item.wishlist &&
       <>
         <Button
           variant="contained"
           color="primary"
           size="large"
-          startIcon={<EditIcon />}
+          startIcon={<CheckBoxIcon />}
           onClick={inventoryMe}>MOVE TO INVENTORY
+        </Button>
+        <br /><br />
+      </>
+      }
+
+      {/* MOVE TO WISHLIST button */}
+      {/* CONDITIONAL RENDER — only shows if item is currently in inventory */}
+      {!item.wishlist &&
+      <>
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          startIcon={<LoyaltyIcon />}
+          onClick={wishlistMe}>MOVE TO WISHLIST
         </Button>
         <br /><br />
       </>
