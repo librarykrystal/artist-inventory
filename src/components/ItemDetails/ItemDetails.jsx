@@ -131,7 +131,7 @@ function ItemDetails() {
           { item.toxic == true && <WarningIcon /> }
 
           {/* ITEM BODY and MEDIUM */}
-          <Typography variant="body1" margin={1.5} gutterBottom>{item.body} {item.medium}</Typography>
+          <Typography variant="body1" sx={{ fontSize: 18 }} margin={1.5} gutterBottom>{item.body} {item.medium}</Typography>
 
           {/* CONDITIONAL RENDER — shows block of hex color if there is a hex value entered */}
           {item.hex &&
@@ -146,23 +146,25 @@ function ItemDetails() {
           }
 
           {/* BRAND */}
-          <Typography variant="body1" margin={1.5} gutterBottom>{item.brand}</Typography>
+          <Typography variant="body1" sx={{ fontSize: 18 }} margin={1.5} gutterBottom>{item.brand}</Typography>
 
           {/* PRODUCT LINE */}
-          <Typography variant="body1" margin={1} gutterBottom>{item.line}</Typography>
+          <Typography variant="body1" sx={{ fontSize: 18 }} margin={1} gutterBottom>{item.line}</Typography>
 
           {/* SIZE and CONTAINER */}
-          <Typography variant="body1" margin={0} gutterBottom>{item.size} {item.container}</Typography>
+          <Typography variant="body1" sx={{ fontSize: 18 }} margin={0} gutterBottom>{item.size} {item.container}</Typography>
 
           {/* notes label */}
-          <Typography variant="body1" mt={4} fontWeight="bold" gutterBottom>NOTES:</Typography>
+          <Typography variant="body1" sx={{ fontSize: 18 }} mt={4} fontWeight="bold" gutterBottom>NOTES:</Typography>
 
           {/* CONDITIONAL RENDER — shows note if there are any, shows italic "none" otherwise */}
+          <div className="notesText">
           { item.notes ? 
-            <Typography variant="body1" mb={1} gutterBottom>{item.notes}</Typography>
+            <Typography variant="body1" sx={{ fontSize: 18 }} mb={1} gutterBottom>{item.notes}</Typography>
           :
-            <Typography variant="body1" mb={1} fontStyle="italic" color="gray" gutterBottom> none</Typography>
+            <Typography variant="body1" mb={1} sx={{ fontSize: 18 }} fontStyle="italic" color="gray" gutterBottom> none</Typography>
           }
+          </div>
           <br/>
 
           {/* CONDITIONAL RENDER — clickable heart icon to FAVORITE/UNFAVORITE */}

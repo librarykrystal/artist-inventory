@@ -93,7 +93,7 @@ function Nav() {
         {/* CONDITIONAL RENDER — show welcome message when there is a logged-in user */}
         {user.id &&
         <div className="navMobileMid">
-          <Typography variant="body1" color="gray" mt={1.1} gutterBottom>Welcome, {user.username}!</Typography>
+          <Typography variant="body1" color="gray" sx={{ fontSize: 18 }} mt={1.1} gutterBottom>Welcome, {user.username}!</Typography>
         </div>
         }
 

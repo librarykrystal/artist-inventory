@@ -296,9 +296,9 @@ function UserHome() {
                 <div className="listItemContainer" key={item.id} onClick={() => goToDetails(item.id)}>
                   <div className="listingInfoContainer">
                     {/* ITEM DETAILS: */}
-                    <Typography variant="h5" sx={{ fontWeight: 700 }} margin={0}  gutterBottom>{item.name}</Typography>
-                    <Typography variant="body1" color="gray" margin={0} gutterBottom>{item.brand}</Typography>
-                    <Typography variant="body1" margin={0} gutterBottom>
+                    <Typography variant="h5" sx={{ fontWeight: 700, fontSize: 25 }} margin={0}  gutterBottom>{item.name}</Typography>
+                    <Typography variant="body1" color="gray" sx={{ fontSize: 17 }}margin={0} gutterBottom>{item.brand}</Typography>
+                    <Typography variant="body1" sx={{ fontSize: 17 }} margin={0} gutterBottom>
                       {item.line}{' '}
                       {item.medium}{' '}
                       {/* CONDITIONAL RENDER — show "Marker" container info on main listings */}
