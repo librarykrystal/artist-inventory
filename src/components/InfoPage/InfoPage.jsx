@@ -40,42 +40,41 @@ function InfoPage() {
     <ThemeProvider theme={theme}>
       <div className="noFilterBarContainer">
         {/* ICON HEADER at top of page: */}
-        <HelpCenterIcon sx={{ fontSize: 42 }} />
+        {/* <HelpCenterIcon sx={{ fontSize: 42 }} /> */}
         {/* <Typography variant="body1" mt={5} gutterBottom>This is the info page.</Typography> */}
         <br />
 
         {/* TEXT HEADER */}
         <div className="notesText">
-          <Typography variant="h5" mt={1} mb={2.5} gutterBottom>Thanks for checking out my app!</Typography>
+          <Typography variant="h4" mt={0} mb={-1} gutterBottom>Thanks!</Typography>
+          <Typography variant="h5" mt={0} mb={2} sx={{ fontSize: 54 }}gutterBottom>☺︎</Typography>
 
           {/* Technologies */}
-          <Typography variant="body1" sx={{ fontSize: 18 }} mt={4} fontWeight="bold" gutterBottom>This app was made with:</Typography>
+          {/* <Typography variant="body1" sx={{ fontSize: 18 }} mt={4} fontWeight="bold" gutterBottom>This app was made with:</Typography>
           <div className="notesText">
             <Typography variant="body1" mt={-0.5} gutterBottom>React, Redux, Node, Express, Material-UI,</Typography>
             <Typography variant="body1" mt={-1} gutterBottom>and react-colorful color picker.</Typography>
-          </div>
+          </div> */}
         </div>
         <br/>
 
         {/* QR codes and links */}
-        <div className="qrCodesContainer">
+        {/* <div className="qrCodesContainer">
           <div className="qrLinkBoxWebsite">
-            <img src="https://chart.googleapis.com/chart?cht=qr&chl=https%3A%2F%2Fwww.krystalfrost.com%2F&chs=150x150&choe=UTF-8&chld=L|2" rel="nofollow" alt="qr code"/>
+            <img src="https://chart.googleapis.com/chart?cht=qr&chl=https%3A%2F%2Fwww.krystalfrost.com%2F&chs=165x165&choe=UTF-8&chld=L|2" rel="nofollow" alt="qr code"/>
             <br/>
-            {/* <a href='https://www.krystalfrost.com/'>WEBSITE</a> */}
             <Button
               variant="contained"
               color="secondary"
               size="large"
               startIcon={<WebIcon />}
               href="https://www.krystalfrost.com/"
-              >MY WEBSITE
+              >WEBSITE
             </Button>
           </div>
           <div className="qrLinkBoxLinkedIn">
-            <img src="https://chart.googleapis.com/chart?cht=qr&chl=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fkrystal-frost&chs=150x150&choe=UTF-8&chld=L|2" alt="qr code"/>
+            <img src="https://chart.googleapis.com/chart?cht=qr&chl=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fkrystal-frost&chs=165x165&choe=UTF-8&chld=L|2" alt="qr code"/>
             <br/>
-            {/* <a href='https://www.linkedin.com/in/krystal-frost'>LINKEDIN</a> */}
             <Button
               variant="contained"
               color="secondary"
@@ -85,7 +84,22 @@ function InfoPage() {
               >LINKEDIN
             </Button>
           </div>
+        </div> */}
+
+        <div className="qrLinkBoxSingle">
+          <img src="https://chart.googleapis.com/chart?cht=qr&chl=https%3A%2F%2Fwww.krystalfrost.com%2F&chs=180x180&choe=UTF-8&chld=L|2" rel="nofollow" alt="qr code"/>
         </div>
+        <div className="notesText">
+          <Typography variant="h4" mt={0.5} mb={9} sx={{ fontSize: 32, letterSpacing: 4 }} gutterBottom>www.krystalfrost.com</Typography>
+        </div>
+
+        <div className="qrLinkBoxSingle">
+        <img src="https://chart.googleapis.com/chart?cht=qr&chl=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fkrystal-frost&chs=165x165&choe=UTF-8&chld=L|2" alt="qr code"/>
+        </div>
+        <div className="notesText">
+          <Typography variant="h4" mt={0.5} mb={1} sx={{ fontSize: 32, letterSpacing: 4 }} gutterBottom>LinkedIn</Typography>
+        </div>
+
 
         {/* THANKS */}
         <Typography variant="body1" sx={{ fontSize: 18 }} mt={8} fontWeight="bold" gutterBottom>Special Thanks to:</Typography>

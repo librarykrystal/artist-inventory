@@ -230,7 +230,7 @@ Alert
 }
 
 /* --------------------------------------------------------------------------------
-Form Treatment
+Add Page / Form Treatment
 -------------------------------------------------------------------------------- */
 
 .formPanel {
@@ -254,6 +254,12 @@ input {
   border: 1px solid dimgray;
   border-radius: 7px;
   padding: 35px;
+}
+
+.addIconBox {
+width: 330px;
+display: flex;
+justify-content: space-between;
 }
 
 .addFaveAndTox {

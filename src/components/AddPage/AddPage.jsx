@@ -44,6 +44,10 @@ const theme = createTheme({
       main: grey[700],
       contrastText: "#fff",
     },
+    info: {
+      main: "#efefef",
+      contrastText: "#efefef",
+    },
   },
 });
 
@@ -96,7 +100,7 @@ function Add() {
   };
 
   // Auto-filler for presentation use:
-  const sneakyFormFiller = () => {
+  const sneakyFormFillerOrange = () => {
     // setType('Color');
     setName('C.P. Cadmium Orange');
     setMedium('Acrylic');
@@ -107,6 +111,21 @@ function Add() {
     setContainer('Tube');
     setNotes('Background orange for the Nina Simone painting');
   }
+
+    // Auto-filler for presentation use:
+    const sneakyFormFillerBlue = () => {
+      setType('Color');
+      setHex('#267dc5');
+      setName('Cerulean Blue');
+      setMedium('Oil');
+      setBody('Soft Body');
+      setBrand('Gamblin');
+      setLine('');
+      setSize('37 ml');
+      setContainer('Tube');
+      setNotes('Oops! I got two of this color!');
+      setToxic(true);
+    }
 
   // SUBMIT to INVENTORY
   const submitForm = (e) => {
@@ -178,8 +197,14 @@ function Add() {
   return(
     <ThemeProvider theme={theme}>
       <div className="noFilterBarContainer">
+
+        <div className="addIconBox">
         {/* ADD ICON as page header: */}
-        <AddBoxIcon sx={{ fontSize: 42 }} onClick={sneakyFormFiller} />
+        <AddBoxIcon sx={{ fontSize: 42 }} color="info" />
+        <AddBoxIcon sx={{ fontSize: 42 }} onClick={sneakyFormFillerOrange} />
+        <AddBoxIcon sx={{ fontSize: 42 }} color="info" onClick={sneakyFormFillerBlue} />
+        </div>
+
         <br/>
         <div className="addForm">
           <div className="sizer">
@@ -219,7 +244,7 @@ function Add() {
               <HexColorPicker className="colorPicker" color={hex} onChange={(e) => setHex(e)} />
               { hex &&
                 <div className="colorSelection"
-                  onClick={sneakyFormFiller}
+                  onClick={sneakyFormFillerOrange}
                   style={{ 
                     backgroundColor: `${hex}`,
                     border: `2px solid black`,

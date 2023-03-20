@@ -46,11 +46,19 @@ function AboutPage() {
 
         {/* "ME" INTRO */}
         <div className="notesText">
-          <Typography variant="h4" mt={1} mb={0} gutterBottom>Hello!</Typography>
-          <Typography variant="h5" mt={3} gutterBottom>My name is Krystal Frost.</Typography>
-          <Typography variant="body1" mt={2} gutterBottom>I am a full stack developer, designer, and painter</Typography>
-          <Typography variant="body1" mt={-1} gutterBottom>(and a rescue human adopted by a super great cat).</Typography>
-          </div>
+          <Typography variant="h3" mt={3} mb={7} gutterBottom>Hello!</Typography>
+          {/* <Typography variant="h4" mt={5} mb={-0.1} sx={{ fontSize: 22 }} gutterBottom>My name is</Typography>
+          <Typography variant="h4" mt={0} sx={{ fontSize: 32 }} gutterBottom>Krystal Frost.</Typography>
+          <Typography variant="body1" mt={3} mb={8} sx={{ fontSize: 21 }} gutterBottom>I am a software developer, designer, and painter.</Typography> */}
+        </div>
+
+        <div className="qrLinkBoxSingle">
+          <img src="https://chart.googleapis.com/chart?cht=qr&chl=https%3A%2F%2Fwww.krystalfrost.com%2F&chs=180x180&choe=UTF-8&chld=L|2" rel="nofollow" alt="qr code"/>
+        </div>
+
+        <div className="notesText">
+          <Typography variant="h4" mt={3} mb={8} sx={{ fontSize: 32, letterSpacing: 4 }} gutterBottom>www.krystalfrost.com</Typography>
+        </div>
 
       </div>
     </ThemeProvider>
