@@ -15,6 +15,8 @@ import '@fontsource/cabin/400.css';
 import '@fontsource/cabin/700.css';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import Slider from '@mui/material/Slider';
+import Stack from '@mui/material/Stack';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -69,6 +71,7 @@ function Edit() {
   const [notes, setNotes] = useState(item.notes);
   const [favorite, setFavorite] = useState(item.favorite);
   const [toxic, setToxic] = useState(item.toxic);
+  const [opacity, setOpacity] = useState(item.opacity);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -91,7 +94,7 @@ function Edit() {
     }, []);
 
   // CONSOLE LOG showing all selections as they happen:
-  // console.log('SELECTIONS...', ["type:", type, "name:", name, "medium:", medium, "hex:", hex, "brand:", brand, "body:", body, "container:", container, "size:", size, "favorite", favorite, "toxic", toxic, "notes:", notes]);
+  console.log('SELECTIONS...', ["type:", type, "name:", name, "medium:", medium, "hex:", hex, "brand:", brand, "body:", body, "container:", container, "size:", size, "favorite", favorite, "toxic", toxic, "notes:", notes, "opacity:", opacity]);
 
   const handleTypeChange = (typeIn) => {
     console.log('typeIn', typeIn);
@@ -134,7 +137,7 @@ function Edit() {
     } else {
       dispatch({ 
           type: 'EDIT_ITEM',
-          payload: {id, type, name, hex, medium, brand, body, container, size, notes, favorite, line, toxic}
+          payload: {id, type, name, hex, medium, brand, body, container, size, notes, favorite, line, toxic, opacity}
       });
       // showModal set to true will trigger EditModal with success/failure and nav options:
       setShowModal(true);
@@ -252,6 +255,18 @@ function Edit() {
             </Select>
           </FormControl>
           <br /><br />
+
+          {/* SLIDER input for OPACITY */}
+          <Stack spacing={2} direction="row" sx={{ mb: 2, mt: 2 }} alignItems="center">
+            <Typography color="secondary" gutterBottom>Opacity</Typography>
+            <Slider
+              aria-label="Opacity"
+              value={opacity}
+              color="secondary"
+              onChange={(e) => setOpacity(e.target.value)}
+            />
+          </Stack>
+          <br/>
 
           {/* DROPDOWN input for BRAND */}
           <FormControl fullWidth>

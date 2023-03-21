@@ -15,6 +15,8 @@ import '@fontsource/cabin/400.css';
 import '@fontsource/cabin/700.css';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import Slider from '@mui/material/Slider';
+import Stack from '@mui/material/Stack';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -69,6 +71,7 @@ function Add() {
   const [notes, setNotes] = useState('');
   const [favorite, setFavorite] = useState(false);
   const [toxic, setToxic] = useState(false);
+  const [opacity, setOpacity] = useState(50);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -87,7 +90,7 @@ function Add() {
   }, []);
 
   // CONSOLE LOG showing all selections as they happen:
-  // console.log('SELECTIONS...', ["type:", type, "name:", name, "medium:", medium, "hex:", hex, "brand:", brand, "line:", line, "body:", body, "container:", container, "size:", size, "favorite", favorite, "toxic:", toxic, "notes:", notes]);
+  console.log('SELECTIONS...', ["type:", type, "name:", name, "medium:", medium, "hex:", hex, "brand:", brand, "line:", line, "body:", body, "container:", container, "size:", size, "favorite", favorite, "toxic:", toxic, "notes:", notes, "opacity:", opacity]);
 
   // Toggle for favoriting:
   const handleCheckboxFave = () => {
@@ -105,6 +108,7 @@ function Add() {
     setName('C.P. Cadmium Orange');
     setMedium('Acrylic');
     setBody('Heavy Body');
+    setOpacity(80);
     setBrand('Golden Artist Colors');
     setLine('');
     setSize('2 oz');
@@ -119,6 +123,7 @@ function Add() {
       setName('Cerulean Blue');
       setMedium('Oil');
       setBody('Soft Body');
+      setOpacity(90);
       setBrand('Gamblin');
       setLine('');
       setSize('37 ml');
@@ -149,7 +154,7 @@ function Add() {
     } else {
       dispatch({ 
           type: 'ADD_ITEM',
-          payload: {type, name, hex, medium, brand, body, container, size, notes, favorite, line, toxic, wishlist: false}
+          payload: {type, name, hex, medium, brand, body, container, size, notes, favorite, line, toxic, wishlist: false, opacity}
       });
     // showModal set to true will trigger AddModal with success/failure and nav options:
       setShowModal(true);
@@ -303,6 +308,18 @@ function Add() {
             </Select>
           </FormControl>
           <br /><br />
+
+          {/* SLIDER input for OPACITY */}
+          <Stack spacing={2} direction="row" sx={{ mb: 2, mt: 2 }} alignItems="center">
+            <Typography color="secondary" gutterBottom>Opacity</Typography>
+            <Slider
+              aria-label="Opacity"
+              value={opacity}
+              color="secondary"
+              onChange={(e) => setOpacity(e.target.value)}
+            />
+          </Stack>
+          <br/>
 
           {/* DROPDOWN input for BRAND */}
           <FormControl fullWidth>

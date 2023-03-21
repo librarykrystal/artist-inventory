@@ -41,6 +41,7 @@ function ItemDetails() {
 
   const user = useSelector((store) => store.user);
   const item = useSelector((store) => store.item);
+  let ope = item.opacity * 2; 
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
@@ -53,10 +54,10 @@ function ItemDetails() {
     });
   }, []);
 
-    // Makes each view load scrolled to top
-    useLayoutEffect(() => {
-      window.scrollTo(0, 0)
-    }, []);
+  // Makes each view load scrolled to top
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  }, []);
 
   const faveIt = () => {
     dispatch({ 
@@ -128,13 +129,20 @@ function ItemDetails() {
           <Typography variant="h5" sx={{ fontWeight: 700 }} mt={-2} mb={2} gutterBottom>{item.name}</Typography>
 
           {/* IF TOXIC, show ICON */}
-          { item.toxic == true && <WarningIcon /> }
+          { item.toxic == true && <WarningIcon sx={{ marginBottom: '10px'}} /> }
 
           {/* ITEM BODY and MEDIUM */}
-          <Typography variant="body1" sx={{ fontSize: 18 }} margin={1.5} gutterBottom>{item.body} {item.medium}</Typography>
+          <Typography variant="body1" sx={{ fontSize: 18 }} gutterBottom>{item.body} {item.medium}</Typography>
+
+          {/* BRAND */}
+          <Typography variant="body1" color="secondary" sx={{ fontSize: 18 }} mt={-0.5} gutterBottom>{item.brand}</Typography>
+
+          {/* PRODUCT LINE */}
+          <Typography variant="body1" color="secondary" sx={{ fontSize: 18 }} mt={-0.5} mb={3} gutterBottom>{item.line}</Typography>
 
           {/* CONDITIONAL RENDER — shows block of hex color if there is a hex value entered */}
           {item.hex &&
+          <>
             <div 
               style={{ 
                 backgroundColor: `${item.hex}`,
@@ -143,13 +151,36 @@ function ItemDetails() {
                 width: `80px`
               }}>
             </div>
+            <br/>
+            </>
           }
 
-          {/* BRAND */}
-          <Typography variant="body1" sx={{ fontSize: 18 }} margin={1.5} gutterBottom>{item.brand}</Typography>
-
-          {/* PRODUCT LINE */}
-          <Typography variant="body1" sx={{ fontSize: 18 }} margin={1} gutterBottom>{item.line}</Typography>
+          {/* CONDITIONAL RENDER — shows opacity bar only if there is an integer value in the database */}
+          {item.opacity !== null &&
+            <>
+            {/* OPACITY */}
+              <div style={{ width: '300px', height: '20px', display: 'flex', margin: '20px 0px 15px 0px'}}>
+                <Typography variant="body1" sx={{ fontSize: 18 }} mr={1} mt={-0.5} gutterBottom>Opacity</Typography>
+                {/* Opacity Bar */}
+                <div
+                  style={{
+                    width: '200px',
+                    height: '15px',
+                    backgroundColor: 'white',
+                    border: '2px solid black'
+                  }}>
+                {/* Fill of Opacity Bar */}
+                  <div
+                    style={{
+                      width: `${ope}px`,
+                      height: '15px',
+                      backgroundColor: 'dimGray'
+                    }}>
+                  </div>
+                </div>
+              </div>
+            </>
+          }
 
           {/* SIZE and CONTAINER */}
           <Typography variant="body1" sx={{ fontSize: 18 }} margin={0} gutterBottom>{item.size} {item.container}</Typography>
@@ -170,11 +201,11 @@ function ItemDetails() {
           {/* CONDITIONAL RENDER — clickable heart icon to FAVORITE/UNFAVORITE */}
           { item.favorite == true ?
             <IconButton aria-label="unfavorite" onClick={unfaveIt}>
-              <FavoriteIcon fontSize="large" />
+              <FavoriteIcon sx={{ marginBottom: '10px'}} fontSize="large" />
             </IconButton>
           :
             <IconButton aria-label="favorite" onClick={faveIt}>
-              <FavoriteBorderIcon fontSize="large" />
+              <FavoriteBorderIcon sx={{ marginBottom: '10px'}} fontSize="large" />
             </IconButton>
           }
         </>

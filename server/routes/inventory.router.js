@@ -55,8 +55,8 @@ router.post('/', (req, res) => {
   // only do POST if authenticated:
   if (req.isAuthenticated()){
     const addQuery = `
-    INSERT INTO "inventory" ("user_id", "type", "name", "hex", "medium", "brand", "body", "container", "size", "notes", "favorite", "line", "toxic", "wishlist")
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
+    INSERT INTO "inventory" ("user_id", "type", "name", "hex", "medium", "brand", "body", "container", "size", "notes", "favorite", "line", "toxic", "wishlist", "opacity")
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
     RETURNING "id";`
     pool.query(addQuery, [
       req.user.id,
@@ -72,7 +72,8 @@ router.post('/', (req, res) => {
       req.body.favorite,
       req.body.line,
       req.body.toxic,
-      req.body.wishlist
+      req.body.wishlist,
+      req.body.opacity
     ])
     .then(result => {
       console.log('New item ID:', result.rows[0].id);
@@ -104,7 +105,8 @@ router.put('/', (req, res) => {
     "notes" = $10, 
     "favorite" = $11, 
     "line" = $12,
-    "toxic" = $13
+    "toxic" = $13,
+    "opacity" = $14
     WHERE id = $1;`;
     pool.query(editQuery, [
       req.body.id,
@@ -119,7 +121,8 @@ router.put('/', (req, res) => {
       req.body.notes,
       req.body.favorite,
       req.body.line,
-      req.body.toxic
+      req.body.toxic,
+      req.body.opacity
     ])
     .then((result) => {
         console.log('PUT result:', result);
