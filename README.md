@@ -5,7 +5,8 @@ This app allows users to inventory and wishlist a variety of artist's paint supp
 ## Screenshots
 
 ![Home](src/images/theRundown_home_sm.png)
-![Home](src/images/theRundown_home.png)
+![Details](src/images/theRundown_details_sm.png)
+![Add](src/images/theRundown_add_sm.png)
 
 
 ## Prerequisites
