@@ -2,6 +2,10 @@
 # The RUNDOWN
 This app allows users to inventory and wishlist a variety of artist's paint supplies, such as colors, mediums, and varnishes.  A color picker allows the user to choose a color that represents each listing on the home page, and icons denote materials that are marked toxic or as a favorite.  Each listing is fully editable, and items can be moved back and forth between the wishlist and inventory.  Happy painting!
 
+## Screenshots
+
+![Home](src/images/theRundown_home_sm.png)
+
 ## Prerequisites
 
 This app uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
